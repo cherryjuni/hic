@@ -1,10 +1,18 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1317794008234" ID="ID_819897166" MODIFIED="1317794023515" TEXT="HIC">
-<node CREATED="1317802988593" ID="ID_1796653711" MODIFIED="1317962138765" POSITION="right" TEXT="&#xb300;&#xc678;&#xacc4;">
+<node CREATED="1318480105774" ID="ID_379936048" MODIFIED="1318480111102" POSITION="right" TEXT="&#xd504;&#xb85c;&#xc81d;&#xd2b8;">
+<node CREATED="1318480163336" ID="ID_850517386" MODIFIED="1319067465281" TEXT="4&#xcc28; &#xbc45;&#xd0b9; &#xd655;&#xc7a5;">
+<node CREATED="1318480166586" ID="ID_607964483" MODIFIED="1318480173117" TEXT="&#xbc45;&#xd0b9;&#xc11c;&#xbe44;&#xc2a4; &#xcd94;&#xac00;">
+<node CREATED="1318480173914" ID="ID_615678379" MODIFIED="1318480187133" TEXT="&#xae30;&#xc874; &#xc2e0;&#xd55c;&#xc740;&#xd589; &#xc11c;&#xbe44;&#xc2a4; &#xbd80;&#xc871; &#xbd80;&#xbd84; &#xbcc0;&#xacbd;"/>
+<node CREATED="1318480187774" ID="ID_120606793" MODIFIED="1318480203508" TEXT="&#xc6b0;&#xb9ac;&#xc740;&#xd589; &#xc11c;&#xbe44;&#xc2a4; &#xcd94;&#xac00;"/>
+</node>
+<node CREATED="1318473256578" ID="ID_1792075949" MODIFIED="1318473269312" TEXT="project 20111001 - 20111231">
+<node CREATED="1317802988593" ID="ID_1796653711" MODIFIED="1318481312492" TEXT="&#xb300;&#xc678;&#xacc4;">
 <node CREATED="1317963099406" ID="ID_1023616245" MODIFIED="1317965161843" TEXT="&#xc2dc;&#xc2a4;&#xd15c;">
-<node CREATED="1317963106390" FOLDED="true" ID="ID_880289176" MODIFIED="1317963609531" TEXT="172.20.101.20">
-<node CREATED="1317963134500" FOLDED="true" ID="ID_1281996823" MODIFIED="1317963607609" TEXT="sendDaemon">
+<node CREATED="1317965164859" ID="ID_762675690" MODIFIED="1318466867875" TEXT="outin01">
+<node CREATED="1317963106390" ID="ID_880289176" MODIFIED="1318466895500" TEXT="172.20.101.20">
+<node CREATED="1317963134500" FOLDED="true" ID="ID_1281996823" MODIFIED="1318466176687" TEXT="sendDaemon">
 <node CREATED="1317963122140" ID="ID_1700893119" MODIFIED="1317963257828" TEXT="9100">
 <icon BUILTIN="forward"/>
 <node CREATED="1317963187890" ID="ID_1685653339" MODIFIED="1317963273406" TEXT="30032">
@@ -46,7 +54,7 @@
 </node>
 </node>
 </node>
-<node CREATED="1317963146781" FOLDED="true" ID="ID_1778117958" MODIFIED="1317963608578" TEXT="receiveDaemon">
+<node CREATED="1317963146781" FOLDED="true" ID="ID_1778117958" MODIFIED="1318466182218" TEXT="receiveDaemon">
 <node CREATED="1317963176656" ID="ID_482889643" MODIFIED="1317963378875" TEXT="9800">
 <icon BUILTIN="forward"/>
 <node CREATED="1317963187890" ID="ID_387464882" MODIFIED="1317963382343" TEXT="9800">
@@ -87,16 +95,1101 @@
 </node>
 </node>
 </node>
+<node CREATED="1318466183656" FOLDED="true" ID="ID_317003437" MODIFIED="1318498979446" TEXT="batch shell">
+<node CREATED="1318466213953" ID="ID_1662996492" MODIFIED="1318466217421" TEXT="HIC_APP">
+<node CREATED="1318466218656" FOLDED="true" ID="ID_1829694232" MODIFIED="1318498978258" TEXT="daemon">
+<node CREATED="1318466232140" FOLDED="true" ID="ID_767636675" MODIFIED="1318498977071" TEXT="script_dev">
+<node CREATED="1318470083453" FOLDED="true" ID="ID_1070290258" MODIFIED="1318482101727" TEXT="start">
+<node CREATED="1318466386625" FOLDED="true" ID="ID_654041122" MODIFIED="1318482087633" TEXT="start_kib">
+<node CREATED="1318470080281" ID="ID_518036844" MODIFIED="1318470080281" TEXT="#!/bin/sh"/>
+<node CREATED="1318470080281" ID="ID_1899324957" MODIFIED="1318470080281" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470080281" ID="ID_343062465" MODIFIED="1318470080281" TEXT="send_id=&quot;$(ps -ef | grep 9130)&quot;"/>
+<node CREATED="1318470080281" ID="ID_302513773" MODIFIED="1318470080281" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470080281" MODIFIED="1318470080281" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318470080281" MODIFIED="1318470080281" TEXT="exit;"/>
 </node>
-<node CREATED="1317965164859" FOLDED="true" ID="ID_762675690" MODIFIED="1318231012156" TEXT="batch">
+<node CREATED="1318470080281" ID="ID_226868669" MODIFIED="1318470080281" TEXT="fi;"/>
+<node CREATED="1318470080281" ID="ID_762611603" MODIFIED="1318470080281" TEXT="mv /HIC_APP/daemon/log_dev/kib.log /HIC_APP/daemon/log_dev/kib${prefix}.log"/>
+<node CREATED="1318470080296" ID="ID_1805969507" MODIFIED="1318470080296" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9130 192.168.4.200 50811 &gt;&gt; /HIC_APP/daemon/log_dev/kib.log &amp;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1412869069" MODIFIED="1318470396078" TEXT="start_kibrsvr9300">
+<node CREATED="1318470123703" ID="ID_1501990938" MODIFIED="1318470123703" TEXT="#!/bin/sh"/>
+<node CREATED="1318470123703" ID="ID_913195428" MODIFIED="1318470123703" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470123703" ID="ID_202808279" MODIFIED="1318470123703" TEXT="send_id=&quot;$(ps -ef | grep 9300)&quot;"/>
+<node CREATED="1318470123718" ID="ID_777279927" MODIFIED="1318470123718" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470123718" MODIFIED="1318470123718" TEXT="echo &quot;Kibrsvr9300 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318470123718" ID="ID_1698733321" MODIFIED="1318470123718" TEXT="#    exit;"/>
+<node CREATED="1318470123718" ID="ID_1483102999" MODIFIED="1318470123718" TEXT="fi;"/>
+<node CREATED="1318470123718" ID="ID_1559157530" MODIFIED="1318470123718" TEXT="mv /HIC_APP/daemon/log_dev/kibrsvr.log /HIC_APP/daemon/lo_devg/kibrsvr${prefix}.log"/>
+<node CREATED="1318470123718" ID="ID_490076365" MODIFIED="1318470123718" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9300 172.20.102.11 9300 &gt;&gt; /HIC_APP/daemon/log_dev/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1282013729" MODIFIED="1318470399031" TEXT="start_kibrsvr9310">
+<node CREATED="1318470138796" ID="ID_872719084" MODIFIED="1318470138796" TEXT="#!/bin/sh"/>
+<node CREATED="1318470138796" ID="ID_8701975" MODIFIED="1318470138796" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470138796" ID="ID_1239569338" MODIFIED="1318470138796" TEXT="send_id=&quot;$(ps -ef | grep 9310)&quot;"/>
+<node CREATED="1318470138796" ID="ID_774091554" MODIFIED="1318470138796" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470138796" MODIFIED="1318470138796" TEXT="echo &quot;Kibrsvr9310 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318470138796" ID="ID_1720697085" MODIFIED="1318470138796" TEXT="#    exit;"/>
+<node CREATED="1318470138796" ID="ID_1754269606" MODIFIED="1318470138796" TEXT="fi;"/>
+<node CREATED="1318470138796" ID="ID_1232274081" MODIFIED="1318470138796" TEXT="mv /HIC_APP/daemon/log_dev/kibrsvr.log /HIC_APP/daemon/log_dev/kibrsvr${prefix}.log"/>
+<node CREATED="1318470138796" ID="ID_1994006405" MODIFIED="1318470138796" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9310 172.20.102.11 9300 &gt;&gt; /HIC_APP/daemon/log_dev/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318470161484" FOLDED="true" ID="ID_296600356" MODIFIED="1318481849086" TEXT="start_kis">
+<node CREATED="1318481819789" ID="ID_265857818" MODIFIED="1318481819789" TEXT="#!/bin/sh"/>
+<node CREATED="1318481819789" ID="ID_1407151010" MODIFIED="1318481819789" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318481819805" ID="ID_1950451070" MODIFIED="1318481819805" TEXT="send_id=&quot;$(ps -ef | grep 9110)&quot;"/>
+<node CREATED="1318481819805" ID="ID_68961419" MODIFIED="1318481819805" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318481819805" MODIFIED="1318481819805" TEXT="echo &quot;Kis Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318481819805" MODIFIED="1318481819805" TEXT="exit;"/>
+</node>
+<node CREATED="1318481819805" ID="ID_1669252649" MODIFIED="1318481819805" TEXT="fi;"/>
+<node CREATED="1318481819805" ID="ID_728892966" MODIFIED="1318481819805" TEXT="mv /HIC_APP/daemon/log_dev/kis.log /HIC_APP/daemon/log_dev/kis${prefix}.log"/>
+<node CREATED="1318481819805" ID="ID_464826072" MODIFIED="1318481819805" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9110 210.121.32.250 11051 &gt;&gt; /HIC_APP/daemon/log_dev/kis.log &amp;"/>
+</node>
+<node CREATED="1318470176562" FOLDED="true" ID="ID_822316762" MODIFIED="1318481786992" TEXT="start_nice">
+<node CREATED="1318470217531" ID="ID_872541584" MODIFIED="1318470217531" TEXT="#!/bin/sh"/>
+<node CREATED="1318470217531" ID="ID_1067672765" MODIFIED="1318470217531" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470217531" ID="ID_116466041" MODIFIED="1318470217531" TEXT="#send_id=&quot;$(ps -ef | grep 9100)&quot;"/>
+<node CREATED="1318470217531" ID="ID_1132650732" MODIFIED="1318470217531" TEXT="#if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318470217531" ID="ID_108453645" MODIFIED="1318470217531" TEXT="#    echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318470217531" ID="ID_1995637600" MODIFIED="1318470217531" TEXT="#    exit;"/>
+<node CREATED="1318470217531" ID="ID_1554503419" MODIFIED="1318470217531" TEXT="#fi;"/>
+<node CREATED="1318470217531" ID="ID_988551920" MODIFIED="1318470217531" TEXT="mv /HIC_APP/daemon/log_dev/nice.log /HIC_APP/daemon/log_dev/nice${prefix}.log"/>
+<node CREATED="1318470217531" ID="ID_1686967269" MODIFIED="1318470217531" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9100 150.50.50.51 30032 &gt;&gt; /HIC_APP/daemon/log_dev/nice.log &amp;"/>
+</node>
+<node CREATED="1318470179078" FOLDED="true" ID="ID_898008063" MODIFIED="1318481779164" TEXT="start_nice1f">
+<node CREATED="1318470230640" ID="ID_269924119" MODIFIED="1318470230640" TEXT="#!/bin/sh"/>
+<node CREATED="1318470230640" ID="ID_236351335" MODIFIED="1318470230640" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470230640" ID="ID_827977219" MODIFIED="1318470230640" TEXT="#send_id=&quot;$(ps -ef | grep 9120)&quot;"/>
+<node CREATED="1318470230640" ID="ID_1382649108" MODIFIED="1318470230640" TEXT="#if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318470230640" ID="ID_1066027204" MODIFIED="1318470230640" TEXT="#    echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318470230640" ID="ID_127241477" MODIFIED="1318470230640" TEXT="#    exit;"/>
+<node CREATED="1318470230640" ID="ID_195313618" MODIFIED="1318470230640" TEXT="#fi;"/>
+<node CREATED="1318470230640" ID="ID_1394044390" MODIFIED="1318470230640" TEXT="mv /HIC_APP/daemon/log_dev/nice1f.log /HIC_APP/daemon/log_dev/nice1f${prefix}.log"/>
+<node CREATED="1318470230640" ID="ID_673331046" MODIFIED="1318470230640" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9120 203.234.213.51 28099 &gt;&gt; /HIC_APP/daemon/log_dev/nice1f.log &amp;"/>
+</node>
+</node>
+<node CREATED="1318470095000" FOLDED="true" ID="ID_1762624215" MODIFIED="1318470500859" TEXT="stop">
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1326068947" MODIFIED="1318470468906" TEXT="stop_kib">
+<node CREATED="1318470363296" ID="ID_1466311700" MODIFIED="1318470363296" TEXT="#!/bin/sh"/>
+<node CREATED="1318470363296" ID="ID_1751151612" MODIFIED="1318470363296" TEXT="send_id=&quot;$(ps -ef | grep 9130 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318470363296" ID="ID_1433877576" MODIFIED="1318470363296" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470363296" MODIFIED="1318470363296" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318470363296" MODIFIED="1318470363296" TEXT="echo &quot;Kib Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318470363296" ID="ID_1986501153" MODIFIED="1318470363296" TEXT="else">
+<node CREATED="1318470363296" MODIFIED="1318470363296" TEXT="echo &quot;Already Kib Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318470363296" ID="ID_1055256339" MODIFIED="1318470363296" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1608770424" MODIFIED="1318470467984" TEXT="stop_kibrsvr9300">
+<node CREATED="1318470374406" ID="ID_1332159485" MODIFIED="1318470374406" TEXT="#!/bin/sh"/>
+<node CREATED="1318470374406" ID="ID_412299426" MODIFIED="1318470374406" TEXT="send_id=&quot;$(ps -ef | grep 9300 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318470374406" ID="ID_1856306738" MODIFIED="1318470374406" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470374406" MODIFIED="1318470374406" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318470374406" MODIFIED="1318470374406" TEXT="echo &quot;Kibrsvr9300 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318470374406" ID="ID_1940902093" MODIFIED="1318470374406" TEXT="else">
+<node CREATED="1318470374406" MODIFIED="1318470374406" TEXT="echo &quot;Already Kibrsvr9300 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318470374406" ID="ID_1915972019" MODIFIED="1318470374406" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_380448726" MODIFIED="1318470467156" TEXT="stop_kibrsvr9310">
+<node CREATED="1318470413109" ID="ID_1767508232" MODIFIED="1318470413109" TEXT="#!/bin/sh"/>
+<node CREATED="1318470413109" ID="ID_15616134" MODIFIED="1318470413109" TEXT="send_id=&quot;$(ps -ef | grep 9310 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318470413109" ID="ID_856953146" MODIFIED="1318470413109" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470413109" MODIFIED="1318470413109" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318470413109" MODIFIED="1318470413109" TEXT="echo &quot;Kibrsvr9310 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318470413109" ID="ID_1572491892" MODIFIED="1318470413109" TEXT="else">
+<node CREATED="1318470413109" MODIFIED="1318470413109" TEXT="echo &quot;Already Kibrsvr9310 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318470413109" ID="ID_774001761" MODIFIED="1318470413109" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1205022512" MODIFIED="1318470466156" TEXT="stop_kis">
+<node CREATED="1318470424359" ID="ID_1411956416" MODIFIED="1318470424359" TEXT="#!/bin/sh"/>
+<node CREATED="1318470424359" ID="ID_30066421" MODIFIED="1318470424359" TEXT="send_id=&quot;$(ps -ef | grep 9110 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318470424359" ID="ID_1838599077" MODIFIED="1318470424359" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470424359" MODIFIED="1318470424359" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318470424359" MODIFIED="1318470424359" TEXT="echo &quot;Kis Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318470424359" ID="ID_327040069" MODIFIED="1318470424359" TEXT="else">
+<node CREATED="1318470424359" MODIFIED="1318470424359" TEXT="echo &quot;Already Kis Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318470424359" ID="ID_1595708586" MODIFIED="1318470424359" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1933709892" MODIFIED="1318470465437" TEXT="stop_nice">
+<node CREATED="1318470439437" ID="ID_1787356078" MODIFIED="1318470439437" TEXT="#!/bin/sh"/>
+<node CREATED="1318470439437" ID="ID_522705811" MODIFIED="1318470439437" TEXT="send_id=&quot;$(ps -ef | grep 9100 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318470439437" ID="ID_927535566" MODIFIED="1318470439437" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470439437" MODIFIED="1318470439437" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318470439437" MODIFIED="1318470439437" TEXT="echo &quot;Nice Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318470439437" ID="ID_1343717414" MODIFIED="1318470439437" TEXT="else">
+<node CREATED="1318470439437" MODIFIED="1318470439437" TEXT="echo &quot;Already Nice Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318470439437" ID="ID_1213307093" MODIFIED="1318470439437" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1377282987" MODIFIED="1318470464843" TEXT="stop_nice1f">
+<node CREATED="1318470452796" ID="ID_929281421" MODIFIED="1318470452796" TEXT="#!/bin/sh"/>
+<node CREATED="1318470452796" ID="ID_544293840" MODIFIED="1318470452796" TEXT="send_id=&quot;$(ps -ef | grep 9120 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318470452796" ID="ID_1339514486" MODIFIED="1318470452796" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470452796" MODIFIED="1318470452796" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318470452796" MODIFIED="1318470452796" TEXT="echo &quot;Nice 1f00 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318470452796" ID="ID_1430478565" MODIFIED="1318470452796" TEXT="else">
+<node CREATED="1318470452796" MODIFIED="1318470452796" TEXT="echo &quot;Already Nice 1f00 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318470452812" ID="ID_1623614705" MODIFIED="1318470452812" TEXT="fi;"/>
+</node>
+</node>
+</node>
+<node CREATED="1318466245140" FOLDED="true" ID="ID_558420248" MODIFIED="1318498977571" TEXT="script_opr">
+<node CREATED="1318470505546" FOLDED="true" ID="ID_724027782" MODIFIED="1318498975586" TEXT="start">
+<node CREATED="1318470541531" FOLDED="true" ID="ID_105293796" MODIFIED="1318472831703" TEXT="start_kib">
+<node CREATED="1318470545484" ID="ID_1961663112" MODIFIED="1318470545484" TEXT="#!/bin/sh"/>
+<node CREATED="1318470545484" ID="ID_1329622499" MODIFIED="1318470545484" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470545484" ID="ID_140266440" MODIFIED="1318470545484" TEXT="send_id=&quot;$(ps -ef | grep 9530)&quot;"/>
+<node CREATED="1318470545484" ID="ID_306051081" MODIFIED="1318470545484" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470545484" MODIFIED="1318470545484" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318470545484" ID="ID_1938273659" MODIFIED="1318470545484" TEXT="#    exit;"/>
+<node CREATED="1318470545484" ID="ID_413285894" MODIFIED="1318470545484" TEXT="fi;"/>
+<node CREATED="1318470545484" ID="ID_18147040" MODIFIED="1318470545484" TEXT="mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log"/>
+<node CREATED="1318470545484" ID="ID_1328785015" MODIFIED="1318470545484" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 &gt;&gt; /HIC_APP/daemon/log_opr/kib.log &amp;"/>
+</node>
+<node CREATED="1318470553046" FOLDED="true" ID="ID_954147318" MODIFIED="1318472829000" TEXT="start_kibsvr10800">
+<node CREATED="1318470632500" ID="ID_1498623179" MODIFIED="1318470632500" TEXT="#!/bin/sh"/>
+<node CREATED="1318470632500" ID="ID_724357291" MODIFIED="1318470632500" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318470632500" ID="ID_742631464" MODIFIED="1318470632500" TEXT="send_id=&quot;$(ps -ef | grep 10800)&quot;"/>
+<node CREATED="1318470632500" ID="ID_1996146520" MODIFIED="1318470632500" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318470632500" MODIFIED="1318470632500" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318470632500" ID="ID_1225334142" MODIFIED="1318470632500" TEXT="#    exit;"/>
+<node CREATED="1318470632500" ID="ID_1643738904" MODIFIED="1318470632500" TEXT="fi;"/>
+<node CREATED="1318470632500" ID="ID_1750327316" MODIFIED="1318470632500" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318470632500" ID="ID_89892778" MODIFIED="1318470632500" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318470940828" FOLDED="true" ID="ID_1873152658" MODIFIED="1318472830000" TEXT="start_kibsvr9800">
+<node CREATED="1318472617765" ID="ID_456042250" MODIFIED="1318472617765" TEXT="#!/bin/sh"/>
+<node CREATED="1318472617765" ID="ID_841193926" MODIFIED="1318472617765" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472617765" ID="ID_315184950" MODIFIED="1318472617765" TEXT="send_id=&quot;$(ps -ef | grep 9800)&quot;"/>
+<node CREATED="1318472617765" ID="ID_1196802739" MODIFIED="1318472617765" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472617765" MODIFIED="1318472617765" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472617765" ID="ID_1051004739" MODIFIED="1318472617765" TEXT="#    exit;"/>
+<node CREATED="1318472617765" ID="ID_145084944" MODIFIED="1318472617765" TEXT="fi;"/>
+<node CREATED="1318472617765" ID="ID_1951052512" MODIFIED="1318472617765" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472617765" ID="ID_380671028" MODIFIED="1318472617765" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318470951500" FOLDED="true" ID="ID_60016241" MODIFIED="1318472830875" TEXT="start_kibsvr9810">
+<node CREATED="1318472634250" ID="ID_495313163" MODIFIED="1318472634250" TEXT="#!/bin/sh"/>
+<node CREATED="1318472634250" ID="ID_935784299" MODIFIED="1318472634250" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472634250" ID="ID_93756880" MODIFIED="1318472634250" TEXT="send_id=&quot;$(ps -ef | grep 9810)&quot;"/>
+<node CREATED="1318472634250" ID="ID_683677952" MODIFIED="1318472634250" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472634250" MODIFIED="1318472634250" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472634250" ID="ID_499592261" MODIFIED="1318472634250" TEXT="#    exit;"/>
+<node CREATED="1318472634265" ID="ID_1080689489" MODIFIED="1318472634265" TEXT="fi;"/>
+<node CREATED="1318472634265" ID="ID_1931845133" MODIFIED="1318472634265" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472634265" ID="ID_559251422" MODIFIED="1318472634265" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318470962468" FOLDED="true" ID="ID_1025848615" MODIFIED="1318472832437" TEXT="start_kis">
+<node CREATED="1318472644906" ID="ID_1854915818" MODIFIED="1318472644906" TEXT="#!/bin/sh"/>
+<node CREATED="1318472644906" ID="ID_300508768" MODIFIED="1318472644906" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472644906" ID="ID_1927506279" MODIFIED="1318472644906" TEXT="send_id=&quot;$(ps -ef | grep 9510|grep -v grep)&quot;"/>
+<node CREATED="1318472644906" ID="ID_1051028972" MODIFIED="1318472644906" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472644906" MODIFIED="1318472644906" TEXT="echo &quot;Kis Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472644906" MODIFIED="1318472644906" TEXT="exit;"/>
+</node>
+<node CREATED="1318472644906" ID="ID_1620798502" MODIFIED="1318472644906" TEXT="fi;"/>
+<node CREATED="1318472644921" ID="ID_1250981082" MODIFIED="1318472644921" TEXT="mv /HIC_APP/daemon/log_opr/kis.log /HIC_APP/daemon/log_opr/kis${prefix}.log"/>
+<node CREATED="1318472644921" ID="ID_1664653266" MODIFIED="1318472644921" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9510 210.121.32.250 11050 &gt;&gt; /HIC_APP/daemon/log_opr/kis.log &amp;"/>
+</node>
+<node CREATED="1318470978187" FOLDED="true" ID="ID_1389692432" MODIFIED="1318472833703" TEXT="start_nice">
+<node CREATED="1318472658921" ID="ID_650141720" MODIFIED="1318472658921" TEXT="#!/bin/sh"/>
+<node CREATED="1318472658921" ID="ID_1435078887" MODIFIED="1318472658921" TEXT="#prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472658937" ID="ID_1946851742" MODIFIED="1318472658937" TEXT="#send_id=&quot;$(ps -ef | grep 9500)&quot;"/>
+<node CREATED="1318472658937" ID="ID_1254526737" MODIFIED="1318472658937" TEXT="#if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318472658937" ID="ID_913160734" MODIFIED="1318472658937" TEXT="#    echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472658937" ID="ID_1169442564" MODIFIED="1318472658937" TEXT="#    exit;"/>
+<node CREATED="1318472658937" ID="ID_1816742585" MODIFIED="1318472658937" TEXT="#fi;"/>
+<node CREATED="1318472658937" ID="ID_1849200674" MODIFIED="1318472658937" TEXT="mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log"/>
+<node CREATED="1318472658937" ID="ID_1845529584" MODIFIED="1318472658937" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 &gt; /HIC_APP/daemon/log_opr/nice.log &amp;"/>
+</node>
+<node CREATED="1318472661171" FOLDED="true" ID="ID_144235180" MODIFIED="1318472834546" TEXT="start_nice1f">
+<node CREATED="1318472691890" ID="ID_1273067180" MODIFIED="1318472691890" TEXT="#!/bin/sh"/>
+<node CREATED="1318472691890" ID="ID_885839919" MODIFIED="1318472691890" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472691890" ID="ID_323779529" MODIFIED="1318472691890" TEXT="send_id=&quot;$(ps -ef | grep 9520)&quot;"/>
+<node CREATED="1318472691890" ID="ID_1560261539" MODIFIED="1318472691890" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472691890" MODIFIED="1318472691890" TEXT="echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472691890" ID="ID_1057712976" MODIFIED="1318472691890" TEXT="#    exit;"/>
+<node CREATED="1318472691890" ID="ID_104291432" MODIFIED="1318472691890" TEXT="fi;"/>
+<node CREATED="1318472691890" ID="ID_54309311" MODIFIED="1318472691890" TEXT="mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log"/>
+<node CREATED="1318472691890" ID="ID_323360223" MODIFIED="1318472691890" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 &gt; /HIC_APP/daemon/log_opr/nice1f.log &amp;"/>
+</node>
+<node CREATED="1318472700593" FOLDED="true" ID="ID_832713675" MODIFIED="1318472835890" TEXT="start_was2_kibsvr10800">
+<node CREATED="1318472777750" ID="ID_188685529" MODIFIED="1318472777750" TEXT="#!/bin/sh"/>
+<node CREATED="1318472777750" ID="ID_1336621595" MODIFIED="1318472777750" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472777750" ID="ID_1477783173" MODIFIED="1318472777750" TEXT="send_id=&quot;$(ps -ef | grep 10800)&quot;"/>
+<node CREATED="1318472777750" ID="ID_884581407" MODIFIED="1318472777750" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472777750" MODIFIED="1318472777750" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472777750" ID="ID_1254771323" MODIFIED="1318472777750" TEXT="#    exit;"/>
+<node CREATED="1318472777750" ID="ID_1057586741" MODIFIED="1318472777750" TEXT="fi;"/>
+<node CREATED="1318472777750" ID="ID_1844808818" MODIFIED="1318472777750" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472777750" ID="ID_1011401106" MODIFIED="1318472777750" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318472727500" FOLDED="true" ID="ID_628502035" MODIFIED="1318472836734" TEXT="start_was2_kibsvr9800">
+<node CREATED="1318472789859" ID="ID_221513764" MODIFIED="1318472789859" TEXT="#!/bin/sh"/>
+<node CREATED="1318472789859" ID="ID_592102974" MODIFIED="1318472789859" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472789859" ID="ID_1573997835" MODIFIED="1318472789859" TEXT="send_id=&quot;$(ps -ef | grep 9800)&quot;"/>
+<node CREATED="1318472789859" ID="ID_1275250579" MODIFIED="1318472789859" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472789859" MODIFIED="1318472789859" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472789859" ID="ID_490477671" MODIFIED="1318472789859" TEXT="#    exit;"/>
+<node CREATED="1318472789859" ID="ID_1381234698" MODIFIED="1318472789859" TEXT="fi;"/>
+<node CREATED="1318472789859" ID="ID_909503451" MODIFIED="1318472789859" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472789859" ID="ID_4618664" MODIFIED="1318472789859" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318472736218" FOLDED="true" ID="ID_1742531415" MODIFIED="1318472837718" TEXT="start_was2_kibsvr9810">
+<node CREATED="1318472799171" ID="ID_959669514" MODIFIED="1318472799171" TEXT="#!/bin/sh"/>
+<node CREATED="1318472799171" ID="ID_731996479" MODIFIED="1318472799171" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472799171" ID="ID_1910595995" MODIFIED="1318472799171" TEXT="send_id=&quot;$(ps -ef | grep 9810)&quot;"/>
+<node CREATED="1318472799171" ID="ID_588985138" MODIFIED="1318472799171" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472799171" MODIFIED="1318472799171" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472799171" ID="ID_131930593" MODIFIED="1318472799171" TEXT="#    exit;"/>
+<node CREATED="1318472799171" ID="ID_1562791593" MODIFIED="1318472799171" TEXT="fi;"/>
+<node CREATED="1318472799171" ID="ID_388081355" MODIFIED="1318472799171" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472799171" ID="ID_1169554779" MODIFIED="1318472799171" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318472749468" FOLDED="true" ID="ID_1898900949" MODIFIED="1318472824265" TEXT="startall_was1">
+<node CREATED="1318472809406" ID="ID_796001046" MODIFIED="1318472809406" TEXT="#!/bin/sh"/>
+<node CREATED="1318472809406" ID="ID_1982360377" MODIFIED="1318472809406" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472809406" ID="ID_1562661101" MODIFIED="1318472809406" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472809406" ID="ID_1826034623" MODIFIED="1318472809406" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472809406" MODIFIED="1318472809406" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472809406" MODIFIED="1318472809406" TEXT="exit;"/>
+</node>
+<node CREATED="1318472809406" ID="ID_1735831882" MODIFIED="1318472809406" TEXT="fi;"/>
+<node CREATED="1318472809406" ID="ID_1333813608" MODIFIED="1318472809406" TEXT="echo &quot;${send_id}&quot;"/>
+<node CREATED="1318472809406" ID="ID_201567095" MODIFIED="1318472809406" TEXT="mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log"/>
+<node CREATED="1318472809406" ID="ID_28662573" MODIFIED="1318472809406" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 &gt;&gt; /HIC_APP/daemon/log_opr/kib.log &amp;"/>
+<node CREATED="1318472809406" ID="ID_1721881710" MODIFIED="1318472809406" TEXT="send_id0=&quot;$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472809406" ID="ID_613719645" MODIFIED="1318472809406" TEXT="if [ ! &quot;${send_id0}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472809406" MODIFIED="1318472809406" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472809406" MODIFIED="1318472809406" TEXT="exit;"/>
+</node>
+<node CREATED="1318472809406" ID="ID_848015754" MODIFIED="1318472809406" TEXT="fi;"/>
+<node CREATED="1318472809406" ID="ID_1738766877" MODIFIED="1318472809406" TEXT="echo &quot;Kibrsvr10800 Daemon start &quot;"/>
+<node CREATED="1318472809406" ID="ID_1133694889" MODIFIED="1318472809406" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472809421" ID="ID_1138444742" MODIFIED="1318472809421" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318472809421" ID="ID_1381087540" MODIFIED="1318472809421" TEXT="send_id2=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472809421" ID="ID_1833514163" MODIFIED="1318472809421" TEXT="if [ ! &quot;${send_id2}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472809421" MODIFIED="1318472809421" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472809421" MODIFIED="1318472809421" TEXT="exit;"/>
+</node>
+<node CREATED="1318472809421" ID="ID_512503825" MODIFIED="1318472809421" TEXT="fi;"/>
+<node CREATED="1318472809421" ID="ID_48229943" MODIFIED="1318472809421" TEXT="echo &quot;Kibrsvr9800 Daemon start &quot;"/>
+<node CREATED="1318472809421" ID="ID_1101021720" MODIFIED="1318472809421" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472809421" ID="ID_1820127622" MODIFIED="1318472809421" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318472809421" ID="ID_911894876" MODIFIED="1318472809421" TEXT="send_id3=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472809421" ID="ID_1712540559" MODIFIED="1318472809421" TEXT="if [ ! &quot;${send_id3}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472809421" MODIFIED="1318472809421" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472809421" ID="ID_1146066215" MODIFIED="1318472809421" TEXT="#    exit;"/>
+<node CREATED="1318472809421" ID="ID_158914516" MODIFIED="1318472809421" TEXT="fi;"/>
+<node CREATED="1318472809421" ID="ID_1026202919" MODIFIED="1318472809421" TEXT="echo &quot;Kibrsvr9810 Daemon start &quot;"/>
+<node CREATED="1318472809421" ID="ID_461548921" MODIFIED="1318472809421" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472809421" ID="ID_170811094" MODIFIED="1318472809421" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318472809421" ID="ID_1434078435" MODIFIED="1318472809421" TEXT="#send_id4=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472809421" ID="ID_1987504142" MODIFIED="1318472809421" TEXT="#if [ ! &quot;${send_id4}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318472809421" ID="ID_1411182554" MODIFIED="1318472809421" TEXT="#    echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472809421" ID="ID_1696219183" MODIFIED="1318472809421" TEXT="#    exit;"/>
+<node CREATED="1318472809421" ID="ID_725614684" MODIFIED="1318472809421" TEXT="#fi;"/>
+<node CREATED="1318472809421" ID="ID_1587231896" MODIFIED="1318472809421" TEXT="echo &quot;Nice Daemon start &quot;"/>
+<node CREATED="1318472809421" ID="ID_1137354811" MODIFIED="1318472809421" TEXT="#mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log"/>
+<node CREATED="1318472809421" ID="ID_233299838" MODIFIED="1318472809421" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 &gt;&gt; /HIC_APP/daemon/log_opr/nice.log &amp;"/>
+<node CREATED="1318472809421" ID="ID_533629042" MODIFIED="1318472809421" TEXT="#send_id5=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472809421" ID="ID_275661076" MODIFIED="1318472809421" TEXT="#if [ ! &quot;${send_id5}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318472809421" ID="ID_1523734802" MODIFIED="1318472809421" TEXT="#    echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472809421" ID="ID_1478310184" MODIFIED="1318472809421" TEXT="#    exit;"/>
+<node CREATED="1318472809421" ID="ID_1950695435" MODIFIED="1318472809421" TEXT="#fi;"/>
+<node CREATED="1318472809421" ID="ID_914445485" MODIFIED="1318472809421" TEXT="echo &quot;Nice 1F00 Daemon start &quot;"/>
+<node CREATED="1318472809421" ID="ID_153258429" MODIFIED="1318472809421" TEXT="#mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log"/>
+<node CREATED="1318472809421" ID="ID_566088062" MODIFIED="1318472809421" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 &gt;&gt; /HIC_APP/daemon/log_opr/nice1f.log &amp;"/>
+</node>
+<node CREATED="1318472760046" FOLDED="true" ID="ID_1835569509" MODIFIED="1318472821234" TEXT="startall_was2">
+<node CREATED="1318472819531" ID="ID_1598609417" MODIFIED="1318472819531" TEXT="#!/bin/sh"/>
+<node CREATED="1318472819531" ID="ID_1883550998" MODIFIED="1318472819531" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318472819531" ID="ID_1150058945" MODIFIED="1318472819531" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472819531" ID="ID_1867903243" MODIFIED="1318472819531" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472819531" MODIFIED="1318472819531" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472819531" MODIFIED="1318472819531" TEXT="exit;"/>
+</node>
+<node CREATED="1318472819531" ID="ID_466181770" MODIFIED="1318472819531" TEXT="fi;"/>
+<node CREATED="1318472819531" ID="ID_508033352" MODIFIED="1318472819531" TEXT="echo &quot;${send_id}&quot;"/>
+<node CREATED="1318472819531" ID="ID_295957736" MODIFIED="1318472819531" TEXT="mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log"/>
+<node CREATED="1318472819531" ID="ID_1825697635" MODIFIED="1318472819531" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 &gt;&gt; /HIC_APP/daemon/log_opr/kib.log &amp;"/>
+<node CREATED="1318472819531" ID="ID_20981381" MODIFIED="1318472819531" TEXT="send_id0=&quot;$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472819531" ID="ID_1547600346" MODIFIED="1318472819531" TEXT="if [ ! &quot;${send_id0}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472819531" MODIFIED="1318472819531" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472819531" MODIFIED="1318472819531" TEXT="exit;"/>
+</node>
+<node CREATED="1318472819531" ID="ID_910580144" MODIFIED="1318472819531" TEXT="fi;"/>
+<node CREATED="1318472819531" ID="ID_1174934224" MODIFIED="1318472819531" TEXT="echo &quot;Kibrsvr10800 Daemon start &quot;"/>
+<node CREATED="1318472819531" ID="ID_1462667087" MODIFIED="1318472819531" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472819531" ID="ID_903728989" MODIFIED="1318472819531" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318472819531" ID="ID_617777570" MODIFIED="1318472819531" TEXT="send_id2=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472819531" ID="ID_789151551" MODIFIED="1318472819531" TEXT="if [ ! &quot;${send_id2}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472819531" MODIFIED="1318472819531" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472819531" MODIFIED="1318472819531" TEXT="exit;"/>
+</node>
+<node CREATED="1318472819531" ID="ID_1106367034" MODIFIED="1318472819531" TEXT="fi;"/>
+<node CREATED="1318472819531" ID="ID_1495573588" MODIFIED="1318472819531" TEXT="echo &quot;Kibrsvr9800 Daemon start &quot;"/>
+<node CREATED="1318472819531" ID="ID_1802556611" MODIFIED="1318472819531" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472819531" ID="ID_1348659660" MODIFIED="1318472819531" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318472819546" ID="ID_718651480" MODIFIED="1318472819546" TEXT="send_id3=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472819546" ID="ID_1604848851" MODIFIED="1318472819546" TEXT="if [ ! &quot;${send_id3}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472819546" MODIFIED="1318472819546" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318472819546" ID="ID_749443620" MODIFIED="1318472819546" TEXT="#    exit;"/>
+<node CREATED="1318472819546" ID="ID_190888541" MODIFIED="1318472819546" TEXT="fi;"/>
+<node CREATED="1318472819546" ID="ID_653985202" MODIFIED="1318472819546" TEXT="echo &quot;Kibrsvr9810 Daemon start &quot;"/>
+<node CREATED="1318472819546" ID="ID_1497864084" MODIFIED="1318472819546" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318472819546" ID="ID_619281570" MODIFIED="1318472819546" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318472819546" ID="ID_1519852910" MODIFIED="1318472819546" TEXT="#send_id4=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472819546" ID="ID_1036796534" MODIFIED="1318472819546" TEXT="#if [ ! &quot;${send_id4}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318472819546" ID="ID_1162311311" MODIFIED="1318472819546" TEXT="#    echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472819546" ID="ID_1471920454" MODIFIED="1318472819546" TEXT="#    exit;"/>
+<node CREATED="1318472819546" ID="ID_1803028638" MODIFIED="1318472819546" TEXT="#fi;"/>
+<node CREATED="1318472819546" ID="ID_1671404461" MODIFIED="1318472819546" TEXT="echo &quot;Nice Daemon start &quot;"/>
+<node CREATED="1318472819546" ID="ID_773266157" MODIFIED="1318472819546" TEXT="#mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log"/>
+<node CREATED="1318472819546" ID="ID_814316143" MODIFIED="1318472819546" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 &gt;&gt; /HIC_APP/daemon/log_opr/nice.log &amp;"/>
+<node CREATED="1318472819546" ID="ID_1126043827" MODIFIED="1318472819546" TEXT="#send_id5=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318472819546" ID="ID_797852708" MODIFIED="1318472819546" TEXT="#if [ ! &quot;${send_id5}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318472819546" ID="ID_1908483758" MODIFIED="1318472819546" TEXT="#    echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318472819546" ID="ID_375946872" MODIFIED="1318472819546" TEXT="#    exit;"/>
+<node CREATED="1318472819546" ID="ID_13507529" MODIFIED="1318472819546" TEXT="#fi;"/>
+<node CREATED="1318472819546" ID="ID_1891973038" MODIFIED="1318472819546" TEXT="echo &quot;Nice 1F00 Daemon start &quot;"/>
+<node CREATED="1318472819546" ID="ID_1824270721" MODIFIED="1318472819546" TEXT="#mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log"/>
+<node CREATED="1318472819546" ID="ID_1204495333" MODIFIED="1318472819546" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 &gt;&gt; /HIC_APP/daemon/log_opr/nice1f.log &amp;"/>
+</node>
+</node>
+<node CREATED="1318470507218" FOLDED="true" ID="ID_1741440898" MODIFIED="1318473030859" TEXT="stop">
+<node CREATED="1318472913171" FOLDED="true" ID="ID_1826125129" MODIFIED="1318473028781" TEXT="stop_kib">
+<node CREATED="1318472926781" ID="ID_582509041" MODIFIED="1318472926781" TEXT="#!/bin/sh"/>
+<node CREATED="1318472926781" ID="ID_438633630" MODIFIED="1318472926781" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318472926781" ID="ID_745064471" MODIFIED="1318472926781" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472926781" MODIFIED="1318472926781" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318472926781" MODIFIED="1318472926781" TEXT="echo &quot;Kib Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318472926781" ID="ID_136406364" MODIFIED="1318472926781" TEXT="else">
+<node CREATED="1318472926781" MODIFIED="1318472926781" TEXT="echo &quot;Already Kib Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318472926781" ID="ID_1464768860" MODIFIED="1318472926781" TEXT="fi;"/>
+</node>
+<node CREATED="1318472937296" FOLDED="true" ID="ID_667464137" MODIFIED="1318473026859" TEXT="stop_kibsvr9800">
+<node CREATED="1318472982687" ID="ID_1700699840" MODIFIED="1318472982687" TEXT="#!/bin/sh"/>
+<node CREATED="1318472982687" ID="ID_401338247" MODIFIED="1318472982687" TEXT="send_id=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318472982687" ID="ID_1492979043" MODIFIED="1318472982687" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472982687" MODIFIED="1318472982687" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318472982687" MODIFIED="1318472982687" TEXT="echo &quot;Kibrsvr9800 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318472982687" ID="ID_971786315" MODIFIED="1318472982687" TEXT="else">
+<node CREATED="1318472982687" MODIFIED="1318472982687" TEXT="echo &quot;Already Kibrsvr9800 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318472982687" ID="ID_326118546" MODIFIED="1318472982687" TEXT="fi;"/>
+</node>
+<node CREATED="1318472943390" FOLDED="true" ID="ID_1571289910" MODIFIED="1318473026171" TEXT="stop_kibsvr9810">
+<node CREATED="1318472990156" ID="ID_1713527585" MODIFIED="1318472990156" TEXT="#!/bin/sh"/>
+<node CREATED="1318472990156" ID="ID_52542110" MODIFIED="1318472990156" TEXT="send_id=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318472990156" ID="ID_1645601466" MODIFIED="1318472990156" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472990156" MODIFIED="1318472990156" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318472990156" MODIFIED="1318472990156" TEXT="echo &quot;Kibrsvr9810 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318472990156" ID="ID_62702250" MODIFIED="1318472990156" TEXT="else">
+<node CREATED="1318472990156" MODIFIED="1318472990156" TEXT="echo &quot;Already Kibrsvr9810 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318472990156" ID="ID_399861195" MODIFIED="1318472990156" TEXT="fi;"/>
+</node>
+<node CREATED="1318472953062" FOLDED="true" ID="ID_1858993271" MODIFIED="1318473027640" TEXT="stop_kis">
+<node CREATED="1318472997296" ID="ID_1205650041" MODIFIED="1318472997296" TEXT="#!/bin/sh"/>
+<node CREATED="1318472997296" ID="ID_1780344173" MODIFIED="1318472997296" TEXT="send_id=&quot;$(ps -ef | grep 9510 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318472997296" ID="ID_923031507" MODIFIED="1318472997296" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318472997296" MODIFIED="1318472997296" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318472997296" MODIFIED="1318472997296" TEXT="echo &quot;Kis Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318472997296" ID="ID_1495222830" MODIFIED="1318472997296" TEXT="else">
+<node CREATED="1318472997296" MODIFIED="1318472997296" TEXT="echo &quot;Already Kis Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318472997296" ID="ID_1336285268" MODIFIED="1318472997296" TEXT="fi;"/>
+</node>
+<node CREATED="1318472957953" FOLDED="true" ID="ID_1471833165" MODIFIED="1318473029718" TEXT="stop_nice">
+<node CREATED="1318473006218" ID="ID_565035749" MODIFIED="1318473006218" TEXT="#!/bin/sh"/>
+<node CREATED="1318473006218" ID="ID_1463372596" MODIFIED="1318473006218" TEXT="send_id=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473006218" ID="ID_1455673458" MODIFIED="1318473006218" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318473006218" MODIFIED="1318473006218" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318473006218" MODIFIED="1318473006218" TEXT="echo &quot;Nice Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318473006218" ID="ID_309457450" MODIFIED="1318473006218" TEXT="else">
+<node CREATED="1318473006218" MODIFIED="1318473006218" TEXT="echo &quot;Already Nice Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318473006218" ID="ID_311217870" MODIFIED="1318473006218" TEXT="fi;"/>
+</node>
+<node CREATED="1318472963562" FOLDED="true" ID="ID_1373489573" MODIFIED="1318473023500" TEXT="stop_nice1f">
+<node CREATED="1318473014281" ID="ID_16469298" MODIFIED="1318473014281" TEXT="#!/bin/sh"/>
+<node CREATED="1318473014281" ID="ID_411022809" MODIFIED="1318473014281" TEXT="send_id=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473014281" ID="ID_670266507" MODIFIED="1318473014281" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318473014281" MODIFIED="1318473014281" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318473014281" MODIFIED="1318473014281" TEXT="echo &quot;Nice 1f00 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318473014281" ID="ID_1778258798" MODIFIED="1318473014281" TEXT="else">
+<node CREATED="1318473014281" MODIFIED="1318473014281" TEXT="echo &quot;Already Nice 1f00 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318473014281" ID="ID_258452739" MODIFIED="1318473014281" TEXT="fi;"/>
+</node>
+<node CREATED="1318472970859" FOLDED="true" ID="ID_1606435447" MODIFIED="1318473024828" TEXT="stop_all">
+<node CREATED="1318473021921" ID="ID_362523784" MODIFIED="1318473021921" TEXT="#!/bin/sh"/>
+<node CREATED="1318473021921" ID="ID_517202992" MODIFIED="1318473021921" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473021921" ID="ID_1802286289" MODIFIED="1318473021921" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Kib Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1123046758" MODIFIED="1318473021921" TEXT="else">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Already Kib Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1597839168" MODIFIED="1318473021921" TEXT="fi;"/>
+<node CREATED="1318473021921" ID="ID_844937085" MODIFIED="1318473021921" TEXT="send_id1=&quot;$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473021921" ID="ID_482238086" MODIFIED="1318473021921" TEXT="if [ ! &quot;${send_id1}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="kill -9 ${send_id1};"/>
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Kibrsvr10800 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_34045982" MODIFIED="1318473021921" TEXT="else">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Already Kibrsvr10800 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1076138306" MODIFIED="1318473021921" TEXT="fi;"/>
+<node CREATED="1318473021921" ID="ID_837110586" MODIFIED="1318473021921" TEXT="send_id2=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473021921" ID="ID_1141296446" MODIFIED="1318473021921" TEXT="if [ ! &quot;${send_id2}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="kill -9 ${send_id2};"/>
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Kibrsvr9800 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1682426861" MODIFIED="1318473021921" TEXT="else">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Already Kibrsvr9800 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1806444844" MODIFIED="1318473021921" TEXT="fi;"/>
+<node CREATED="1318473021921" ID="ID_54888247" MODIFIED="1318473021921" TEXT="send_id3=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473021921" ID="ID_1272317569" MODIFIED="1318473021921" TEXT="if [ ! &quot;${send_id3}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="kill -9 ${send_id3};"/>
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Kibrsvr9810 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1954393761" MODIFIED="1318473021921" TEXT="else">
+<node CREATED="1318473021921" MODIFIED="1318473021921" TEXT="echo &quot;Already Kibrsvr9810 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318473021921" ID="ID_1071949208" MODIFIED="1318473021921" TEXT="fi;"/>
+<node CREATED="1318473021921" ID="ID_17384613" MODIFIED="1318473021921" TEXT="#send_id4=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473021921" ID="ID_9531689" MODIFIED="1318473021921" TEXT="#if [ ! &quot;${send_id4}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318473021921" ID="ID_1524963011" MODIFIED="1318473021921" TEXT="#        kill -9 ${send_id4};"/>
+<node CREATED="1318473021921" ID="ID_581477831" MODIFIED="1318473021921" TEXT="#        echo &quot;Nice Daemon Down !!&quot;;"/>
+<node CREATED="1318473021921" ID="ID_372528855" MODIFIED="1318473021921" TEXT="#else"/>
+<node CREATED="1318473021921" ID="ID_289913478" MODIFIED="1318473021921" TEXT="#        echo &quot;Already Nice Daemon Down!!&quot;"/>
+<node CREATED="1318473021921" ID="ID_587506369" MODIFIED="1318473021921" TEXT="#fi;"/>
+<node CREATED="1318473021921" ID="ID_1053496630" MODIFIED="1318473021921" TEXT="#send_id5=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318473021921" ID="ID_241686576" MODIFIED="1318473021921" TEXT="#if [ ! &quot;${send_id5}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318473021921" ID="ID_1774522004" MODIFIED="1318473021921" TEXT="#        kill -9 ${send_id5};"/>
+<node CREATED="1318473021921" ID="ID_1562890735" MODIFIED="1318473021921" TEXT="#        echo &quot;Nice 1f00 Daemon Down !!&quot;;"/>
+<node CREATED="1318473021921" ID="ID_1017775283" MODIFIED="1318473021921" TEXT="#else"/>
+<node CREATED="1318473021921" ID="ID_1731928257" MODIFIED="1318473021921" TEXT="#        echo &quot;Already Nice 1f00 Daemon Down!!&quot;"/>
+<node CREATED="1318473021921" ID="ID_1352731422" MODIFIED="1318473021921" TEXT="#fi;"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318469801421" ID="ID_370613666" MODIFIED="1318469824750" TEXT="HIC_APP/daemon/script_dev"/>
+<node CREATED="1318469825828" ID="ID_1989101243" MODIFIED="1318469829734" TEXT="HIC_APP/daemon/script_opr"/>
+</node>
+<node CREATED="1318481888602" FOLDED="true" ID="ID_1956401070" MODIFIED="1319067479625" TEXT="KIBNET&#xc5d0;&#xc11c; &#xbcf4;&#xc774;&#xb294; &#xc678;&#xbd80; IP">
+<node CREATED="1318466798203" ID="ID_164936342" MODIFIED="1318498992492" TEXT="222.122.34.50">
+<node CREATED="1318481993961" ID="ID_817410577" MODIFIED="1318481995711" TEXT="&#xac1c;&#xbc1c;">
+<node CREATED="1318481998461" ID="ID_1357927767" MODIFIED="1318482004602" TEXT="9300">
+<node CREATED="1318482029055" ID="ID_1845958498" MODIFIED="1318482031977" TEXT="&#xc2e4;&#xc2dc;&#xac04;&#xacc4;&#xc88c;"/>
+</node>
+<node CREATED="1318482005086" ID="ID_1050137037" MODIFIED="1318482007524" TEXT="9310">
+<node CREATED="1318482033071" ID="ID_455517459" MODIFIED="1318482039008" TEXT="&#xac00;&#xc0c1;&#xacc4;&#xc88c;"/>
+</node>
+</node>
+<node CREATED="1318481995946" ID="ID_1994093255" MODIFIED="1318481997133" TEXT="&#xb9ac;&#xc5bc;">
+<node CREATED="1318482009102" ID="ID_1451201719" MODIFIED="1318482011664" TEXT="9810">
+<node CREATED="1318482020961" ID="ID_1605773694" MODIFIED="1318482027539" TEXT="&#xc2e4;&#xc2dc;&#xac04;&#xacc4;&#xc88c;"/>
+</node>
+<node CREATED="1318482012133" ID="ID_1123900987" MODIFIED="1318482015399" TEXT="10800">
+<node CREATED="1318482016258" ID="ID_268567058" MODIFIED="1318482019914" TEXT="&#xac00;&#xc0c1;&#xacc4;&#xc88c;"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318466791046" ID="ID_1362299753" MODIFIED="1318481908524" TEXT="KIBNET">
+<node CREATED="1318481930430" ID="ID_436543509" MODIFIED="1318481983196" TEXT="&#xac1c;&#xbc1c;">
+<node CREATED="1318481910649" ID="ID_1333674154" MODIFIED="1318481971696" TEXT="192.168.4.200">
+<node CREATED="1318481984586" ID="ID_1057832672" MODIFIED="1318481986571" TEXT="50811"/>
+</node>
+</node>
+<node CREATED="1318481937649" ID="ID_1220210550" MODIFIED="1318481940992" TEXT="&#xb9ac;&#xc5bc;">
+<node CREATED="1318481955352" ID="ID_526988567" MODIFIED="1318481967617" TEXT="192.168.4.100">
+<node CREATED="1318481987821" ID="ID_1684517533" MODIFIED="1318481989836" TEXT="50811"/>
+</node>
+</node>
+</node>
+<node CREATED="1318481831102" ID="ID_206756147" MODIFIED="1318481834555" TEXT="KIS">
+<node CREATED="1318481835742" ID="ID_733679612" MODIFIED="1318481843602" TEXT="210.121.32.250">
+<node CREATED="1318481843602" ID="ID_1277762972" MODIFIED="1318481846852" TEXT="11051"/>
+</node>
+</node>
+<node CREATED="1318481707930" ID="ID_944591928" MODIFIED="1318481712555" TEXT="NICE">
+<node CREATED="1318481727258" ID="ID_1807708577" MODIFIED="1318481736008" TEXT="150.50.50.51">
+<node CREATED="1318481766321" ID="ID_476778272" MODIFIED="1318481785414" TEXT="30032"/>
+</node>
+<node CREATED="1318481736446" ID="ID_1568298634" MODIFIED="1318481741133" TEXT="1F">
+<node CREATED="1318481742008" ID="ID_464162120" MODIFIED="1318481761789" TEXT="203.234.213.51">
+<node CREATED="1318481774774" ID="ID_1042939852" MODIFIED="1318481777680" TEXT="28099"/>
+</node>
+</node>
+</node>
 <node CREATED="1317965172734" ID="ID_1486684013" MODIFIED="1317965180953" TEXT="java -Dbatch.home=/HIC_APP/batch com.cabis.batch.a.cn.dv.ACNDV0201 hicdb zuser hiczusr26 2011-10-07"/>
 </node>
-<node CREATED="1318224852843" ID="ID_975575833" MODIFIED="1318230893812" TEXT="was01">
-<node CREATED="1318224866890" ID="ID_1367019541" MODIFIED="1318224873359" TEXT="172.20.101.41">
-<node CREATED="1318224875359" ID="ID_621085351" MODIFIED="1318224882296" TEXT="jeus">
-<node CREATED="1318224887625" ID="ID_1027490741" MODIFIED="1318224899718" TEXT="hi~was091#"/>
+<node CREATED="1318466869078" ID="ID_1598426569" MODIFIED="1318466872421" TEXT="outin02">
+<node CREATED="1318466874875" FOLDED="true" ID="ID_667579247" MODIFIED="1319067527765" TEXT="172.20.101.21">
+<node CREATED="1318466905312" ID="ID_854271644" MODIFIED="1318466913781" TEXT="hisocket / hi~socket091#"/>
+<node CREATED="1318467580781" ID="ID_479857466" MODIFIED="1318467587656" TEXT="batch shell">
+<node CREATED="1318466213953" ID="ID_1822809425" MODIFIED="1318466217421" TEXT="HIC_APP">
+<node CREATED="1318466218656" ID="ID_815848748" MODIFIED="1318466222359" TEXT="daemon">
+<node CREATED="1318466232140" ID="ID_503793367" MODIFIED="1318472860875" TEXT="script_dev">
+<node CREATED="1318469849765" FOLDED="true" ID="ID_74369520" MODIFIED="1318472859296" TEXT="start">
+<node CREATED="1318466386625" FOLDED="true" ID="ID_255574958" MODIFIED="1318468174031" TEXT="start_kib">
+<node CREATED="1318467749406" ID="ID_231959652" MODIFIED="1318467749406" TEXT="#!/bin/sh"/>
+<node CREATED="1318467749406" ID="ID_493281106" MODIFIED="1318467749406" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318467749406" ID="ID_1550144181" MODIFIED="1318467749406" TEXT="send_id=&quot;$(ps -ef | grep 9130)&quot;"/>
+<node CREATED="1318467749406" ID="ID_72102306" MODIFIED="1318467749406" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318467749406" MODIFIED="1318467749406" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318467749406" MODIFIED="1318467749406" TEXT="exit;"/>
+</node>
+<node CREATED="1318467749406" ID="ID_846671388" MODIFIED="1318467749406" TEXT="fi;"/>
+<node CREATED="1318467749406" ID="ID_1891121338" MODIFIED="1318467749406" TEXT="mv /HIC_APP/daemon/log_dev/kib.log /HIC_APP/daemon/log_dev/kib${prefix}.log"/>
+<node CREATED="1318467749406" ID="ID_749507927" MODIFIED="1318467749406" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9130 192.168.4.200 50811 &gt;&gt; /HIC_APP/daemon/log_dev/kib.log &amp;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1646208158" MODIFIED="1318468173171" TEXT="start_kibrsvr9300">
+<node CREATED="1318467772531" ID="ID_302245959" MODIFIED="1318467772531" TEXT="#!/bin/sh"/>
+<node CREATED="1318467772531" ID="ID_362149315" MODIFIED="1318467772531" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318467772531" ID="ID_400837713" MODIFIED="1318467772531" TEXT="send_id=&quot;$(ps -ef | grep 9300)&quot;"/>
+<node CREATED="1318467772531" ID="ID_1759979861" MODIFIED="1318467772531" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318467772531" MODIFIED="1318467772531" TEXT="echo &quot;Kibrsvr9300 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318467772531" ID="ID_1244013815" MODIFIED="1318467772531" TEXT="#    exit;"/>
+<node CREATED="1318467772531" ID="ID_529047150" MODIFIED="1318467772531" TEXT="fi;"/>
+<node CREATED="1318467772531" ID="ID_1698752888" MODIFIED="1318467772531" TEXT="mv /HIC_APP/daemon/log_dev/kibrsvr.log /HIC_APP/daemon/lo_devg/kibrsvr${prefix}.log"/>
+<node CREATED="1318467772531" ID="ID_602990154" MODIFIED="1318467772531" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9300 172.20.102.11 9300 &gt;&gt; /HIC_APP/daemon/log_dev/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1352763231" MODIFIED="1318468171531" TEXT="start_kibrsvr9310">
+<node CREATED="1318467791875" ID="ID_1298744084" MODIFIED="1318467791875" TEXT="#!/bin/sh"/>
+<node CREATED="1318467791875" ID="ID_107294428" MODIFIED="1318467791875" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318467791875" ID="ID_990359505" MODIFIED="1318467791875" TEXT="send_id=&quot;$(ps -ef | grep 9310)&quot;"/>
+<node CREATED="1318467791875" ID="ID_1162923940" MODIFIED="1318467791875" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318467791875" ID="ID_1416168627" MODIFIED="1318467791875" TEXT="echo &quot;Kibrsvr9310 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318467791875" ID="ID_1352125655" MODIFIED="1318467791875" TEXT="#    exit;"/>
+<node CREATED="1318467791875" ID="ID_1292500863" MODIFIED="1318467791875" TEXT="fi;"/>
+<node CREATED="1318467791875" ID="ID_502460483" MODIFIED="1318467791875" TEXT="mv /HIC_APP/daemon/log_dev/kibrsvr.log /HIC_APP/daemon/log_dev/kibrsvr${prefix}.log"/>
+<node CREATED="1318467791875" ID="ID_991362304" MODIFIED="1318467853093" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9310 172.20.102.11 9300 &gt;&gt; /HIC_APP/daemon/log_dev/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318467911125" FOLDED="true" ID="ID_1550633690" MODIFIED="1318468170593" TEXT="start_kis">
+<node CREATED="1318467916734" ID="ID_1201291550" MODIFIED="1318467916734" TEXT="#!/bin/sh"/>
+<node CREATED="1318467916750" ID="ID_1856288856" MODIFIED="1318467916750" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318467916750" ID="ID_1567238347" MODIFIED="1318467916750" TEXT="send_id=&quot;$(ps -ef | grep 9110)&quot;"/>
+<node CREATED="1318467916750" ID="ID_1384308300" MODIFIED="1318467916750" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318467916750" ID="ID_154619797" MODIFIED="1318467916750" TEXT="echo &quot;Kis Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318467916750" MODIFIED="1318467916750" TEXT="exit;"/>
+</node>
+<node CREATED="1318467916750" ID="ID_1639839580" MODIFIED="1318467916750" TEXT="fi;"/>
+<node CREATED="1318467916750" ID="ID_1953675262" MODIFIED="1318467916750" TEXT="mv /HIC_APP/daemon/log_dev/kis.log /HIC_APP/daemon/log_dev/kis${prefix}.log"/>
+<node CREATED="1318467916750" ID="ID_1992824025" MODIFIED="1318467916750" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9110 210.121.32.250 11051 &gt;&gt; /HIC_APP/daemon/log_dev/kis.log &amp;"/>
+</node>
+<node CREATED="1318468019812" FOLDED="true" ID="ID_1468143139" MODIFIED="1318468169781" TEXT="start_nice">
+<node CREATED="1318468025328" ID="ID_1317987175" MODIFIED="1318468025328" TEXT="#!/bin/sh"/>
+<node CREATED="1318468025328" ID="ID_123606655" MODIFIED="1318468025328" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468025328" ID="ID_76431370" MODIFIED="1318468025328" TEXT="send_id=&quot;$(ps -ef | grep 9100)&quot;"/>
+<node CREATED="1318468025328" ID="ID_1852349694" MODIFIED="1318468025328" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468025328" MODIFIED="1318468025328" TEXT="echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318468025328" MODIFIED="1318468025328" TEXT="exit;"/>
+</node>
+<node CREATED="1318468025328" ID="ID_1752010072" MODIFIED="1318468025328" TEXT="fi;"/>
+<node CREATED="1318468025328" ID="ID_1659571022" MODIFIED="1318468025328" TEXT="mv /HIC_APP/daemon/log_dev/nice.log /HIC_APP/daemon/log_dev/nice${prefix}.log"/>
+<node CREATED="1318468025328" ID="ID_1567320714" MODIFIED="1318468025328" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9100 150.50.50.51 30032 &gt;&gt; /HIC_APP/daemon/log_dev/nice.log &amp;"/>
+</node>
+<node CREATED="1318468085953" FOLDED="true" ID="ID_1568520890" MODIFIED="1318472857890" TEXT="start_nice1f">
+<node CREATED="1318468091468" ID="ID_847804753" MODIFIED="1318468091468" TEXT="#!/bin/sh"/>
+<node CREATED="1318468091468" ID="ID_106528217" MODIFIED="1318468091468" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468091468" ID="ID_1116916334" MODIFIED="1318468091468" TEXT="send_id=&quot;$(ps -ef | grep 9120)&quot;"/>
+<node CREATED="1318468091468" ID="ID_354712502" MODIFIED="1318468091468" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468091468" MODIFIED="1318468091468" TEXT="echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318468091468" MODIFIED="1318468091468" TEXT="exit;"/>
+</node>
+<node CREATED="1318468091468" ID="ID_1917416126" MODIFIED="1318468091468" TEXT="fi;"/>
+<node CREATED="1318468091468" ID="ID_310767455" MODIFIED="1318468091468" TEXT="mv /HIC_APP/daemon/log_dev/nice1f.log /HIC_APP/daemon/log_dev/nice1f${prefix}.log"/>
+<node CREATED="1318468091468" ID="ID_1106042083" MODIFIED="1318468091468" TEXT="nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9120 203.234.213.51 28099 &gt;&gt; /HIC_APP/daemon/log_dev/nice1f.log &amp;"/>
 </node>
 </node>
+<node CREATED="1318469947343" FOLDED="true" ID="ID_1254226888" MODIFIED="1318472871421" TEXT="stop">
+<node CREATED="1318466386625" FOLDED="true" ID="ID_911945527" MODIFIED="1318468563734" TEXT="stop_kib">
+<node CREATED="1318468199312" ID="ID_703051419" MODIFIED="1318468199312" TEXT="#!/bin/sh"/>
+<node CREATED="1318468199312" ID="ID_1662041335" MODIFIED="1318468199312" TEXT="send_id=&quot;$(ps -ef | grep 9130 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318468199312" ID="ID_22807252" MODIFIED="1318468199312" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468199312" MODIFIED="1318468199312" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318468199312" MODIFIED="1318468199312" TEXT="echo &quot;Kib Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318468199312" ID="ID_945712431" MODIFIED="1318468199312" TEXT="else">
+<node CREATED="1318468199312" MODIFIED="1318468199312" TEXT="echo &quot;Already Kib Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318468199312" ID="ID_691143835" MODIFIED="1318468199312" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_555127047" MODIFIED="1318468564609" TEXT="stop_kibrsvr9300">
+<node CREATED="1318468208937" ID="ID_604887492" MODIFIED="1318468208937" TEXT="#!/bin/sh"/>
+<node CREATED="1318468208937" ID="ID_739107006" MODIFIED="1318468208937" TEXT="send_id=&quot;$(ps -ef | grep 9300 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318468208937" ID="ID_484910256" MODIFIED="1318468208937" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468208937" MODIFIED="1318468208937" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318468208937" MODIFIED="1318468208937" TEXT="echo &quot;Kibrsvr9300 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318468208937" ID="ID_1512287405" MODIFIED="1318468208937" TEXT="else">
+<node CREATED="1318468208937" MODIFIED="1318468208937" TEXT="echo &quot;Already Kibrsvr9300 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318468208937" ID="ID_53694966" MODIFIED="1318468208937" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_687621209" MODIFIED="1318468565187" TEXT="stop_kibrsvr9310">
+<node CREATED="1318468219421" ID="ID_56423787" MODIFIED="1318468219421" TEXT="#!/bin/sh"/>
+<node CREATED="1318468219421" ID="ID_812812670" MODIFIED="1318468219421" TEXT="send_id=&quot;$(ps -ef | grep 9310 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318468219421" ID="ID_591091111" MODIFIED="1318468219421" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468219421" MODIFIED="1318468219421" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318468219421" MODIFIED="1318468219421" TEXT="echo &quot;Kibrsvr9310 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318468219421" ID="ID_1226287368" MODIFIED="1318468219421" TEXT="else">
+<node CREATED="1318468219421" MODIFIED="1318468219421" TEXT="echo &quot;Already Kibrsvr9310 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318468219421" ID="ID_474755597" MODIFIED="1318468219421" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1666171482" MODIFIED="1318468565750" TEXT="stop_kis">
+<node CREATED="1318468231000" ID="ID_1456822579" MODIFIED="1318468231000" TEXT="#!/bin/sh"/>
+<node CREATED="1318468231000" ID="ID_1147164899" MODIFIED="1318468231000" TEXT="send_id=&quot;$(ps -ef | grep 9110 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318468231000" ID="ID_714868289" MODIFIED="1318468231000" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468231000" MODIFIED="1318468231000" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318468231000" MODIFIED="1318468231000" TEXT="echo &quot;Kis Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318468231000" ID="ID_1427030151" MODIFIED="1318468231000" TEXT="else">
+<node CREATED="1318468231000" MODIFIED="1318468231000" TEXT="echo &quot;Already Kis Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318468231000" ID="ID_1555712725" MODIFIED="1318468231000" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_138324934" MODIFIED="1318468566328" TEXT="stop_nice">
+<node CREATED="1318468267265" ID="ID_573273735" MODIFIED="1318468267265" TEXT="#!/bin/sh"/>
+<node CREATED="1318468267265" ID="ID_1052931385" MODIFIED="1318468267265" TEXT="send_id=&quot;$(ps -ef | grep 9100 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318468267265" ID="ID_951890110" MODIFIED="1318468267265" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468267265" MODIFIED="1318468267265" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318468267265" MODIFIED="1318468267265" TEXT="echo &quot;Nice Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318468267265" ID="ID_587253427" MODIFIED="1318468267265" TEXT="else">
+<node CREATED="1318468267265" MODIFIED="1318468267265" TEXT="echo &quot;Already Nice Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318468267265" ID="ID_1240459894" MODIFIED="1318468267265" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1672918302" MODIFIED="1318468567281" TEXT="stop_nice1f">
+<node CREATED="1318468276906" ID="ID_1136830616" MODIFIED="1318468276906" TEXT="#!/bin/sh"/>
+<node CREATED="1318468276906" ID="ID_1459368245" MODIFIED="1318468276906" TEXT="send_id=&quot;$(ps -ef | grep 9120 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318468276906" ID="ID_882662397" MODIFIED="1318468276906" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468276906" MODIFIED="1318468276906" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318468276906" MODIFIED="1318468276906" TEXT="echo &quot;Nice 1f00 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318468276906" ID="ID_68790138" MODIFIED="1318468276906" TEXT="else">
+<node CREATED="1318468276906" MODIFIED="1318468276906" TEXT="echo &quot;Already Nice 1f00 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318468276906" ID="ID_285796086" MODIFIED="1318468276906" TEXT="fi;"/>
+</node>
+</node>
+</node>
+<node CREATED="1318466245140" ID="ID_1734763720" MODIFIED="1318466252625" TEXT="script_opr">
+<node CREATED="1318469775718" FOLDED="true" ID="ID_1101416521" MODIFIED="1318472867062" TEXT="start">
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1842412187" MODIFIED="1318469762156" TEXT="start_kib">
+<node CREATED="1318468668781" ID="ID_1058948161" MODIFIED="1318468668781" TEXT="#!/bin/sh"/>
+<node CREATED="1318468668781" ID="ID_1526141943" MODIFIED="1318468668781" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468668781" ID="ID_498812816" MODIFIED="1318468668781" TEXT="send_id=&quot;$(ps -ef | grep 9530)&quot;"/>
+<node CREATED="1318468668781" ID="ID_983498214" MODIFIED="1318468668781" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468668781" MODIFIED="1318468668781" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318468668781" MODIFIED="1318468668781" TEXT="exit;"/>
+</node>
+<node CREATED="1318468668781" ID="ID_694515730" MODIFIED="1318468668781" TEXT="fi;"/>
+<node CREATED="1318468668781" ID="ID_88312264" MODIFIED="1318468668781" TEXT="mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log"/>
+<node CREATED="1318468668781" ID="ID_420554846" MODIFIED="1318468668781" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 &gt;&gt; /HIC_APP/daemon/log_opr/kib.log &amp;"/>
+</node>
+<node CREATED="1318468693875" FOLDED="true" ID="ID_1957350378" MODIFIED="1318469763046" TEXT="start_kib10800">
+<node CREATED="1318468702125" ID="ID_1550659057" MODIFIED="1318468702125" TEXT="#!/bin/sh"/>
+<node CREATED="1318468702125" ID="ID_877348845" MODIFIED="1318468702125" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468702125" ID="ID_290900907" MODIFIED="1318468702125" TEXT="send_id=&quot;$(ps -ef | grep 10800)&quot;"/>
+<node CREATED="1318468702125" ID="ID_1172389386" MODIFIED="1318468702125" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468702125" MODIFIED="1318468702125" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318468702125" ID="ID_608424283" MODIFIED="1318468702125" TEXT="#    exit;"/>
+<node CREATED="1318468702125" ID="ID_1697512656" MODIFIED="1318468702125" TEXT="fi;"/>
+<node CREATED="1318468702125" ID="ID_1940579733" MODIFIED="1318468702125" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318468702125" ID="ID_525319496" MODIFIED="1318468702125" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1226554777" MODIFIED="1318469764500" TEXT="start_kibrsvr9800">
+<node CREATED="1318468726468" ID="ID_717372092" MODIFIED="1318468726468" TEXT="#!/bin/sh"/>
+<node CREATED="1318468726468" ID="ID_1002603170" MODIFIED="1318468726468" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468726468" ID="ID_1674589379" MODIFIED="1318468726468" TEXT="send_id=&quot;$(ps -ef | grep 9800)&quot;"/>
+<node CREATED="1318468726468" ID="ID_1745251984" MODIFIED="1318468726468" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468726468" MODIFIED="1318468726468" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318468726468" ID="ID_1865345737" MODIFIED="1318468726468" TEXT="#    exit;"/>
+<node CREATED="1318468726468" ID="ID_1566703788" MODIFIED="1318468726468" TEXT="fi;"/>
+<node CREATED="1318468726468" ID="ID_942825041" MODIFIED="1318468726468" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318468726468" ID="ID_1349914973" MODIFIED="1318468726468" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_320743890" MODIFIED="1318469765671" TEXT="start_kibrsvr9810">
+<node CREATED="1318468741328" ID="ID_1418944894" MODIFIED="1318468741328" TEXT="#!/bin/sh"/>
+<node CREATED="1318468741328" ID="ID_836407237" MODIFIED="1318468741328" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468741328" ID="ID_369909334" MODIFIED="1318468741328" TEXT="send_id=&quot;$(ps -ef | grep 9810)&quot;"/>
+<node CREATED="1318468741328" ID="ID_1126295163" MODIFIED="1318468741328" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468741328" MODIFIED="1318468741328" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318468741328" ID="ID_1772464815" MODIFIED="1318468741328" TEXT="#    exit;"/>
+<node CREATED="1318468741328" ID="ID_2782172" MODIFIED="1318468741328" TEXT="fi;"/>
+<node CREATED="1318468741328" ID="ID_292632334" MODIFIED="1318468741328" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318468741343" ID="ID_1013580007" MODIFIED="1318468741343" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318467911125" FOLDED="true" ID="ID_466820107" MODIFIED="1318469766437" TEXT="start_kis">
+<node CREATED="1318468931171" ID="ID_451926605" MODIFIED="1318468931171" TEXT="#!/bin/sh"/>
+<node CREATED="1318468931171" ID="ID_342105269" MODIFIED="1318468931171" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468931171" ID="ID_672671913" MODIFIED="1318468931171" TEXT="send_id=&quot;$(ps -ef | grep 9510)&quot;"/>
+<node CREATED="1318468931171" ID="ID_668369618" MODIFIED="1318468931171" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468931171" MODIFIED="1318468931171" TEXT="echo &quot;Kis Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318468931171" MODIFIED="1318468931171" TEXT="exit;"/>
+</node>
+<node CREATED="1318468931171" ID="ID_1017921457" MODIFIED="1318468931171" TEXT="fi;"/>
+<node CREATED="1318468931171" ID="ID_777542575" MODIFIED="1318468931171" TEXT="mv /HIC_APP/daemon/log_opr/kis.log /HIC_APP/daemon/log_opr/kis${prefix}.log"/>
+<node CREATED="1318468931171" ID="ID_1746036932" MODIFIED="1318468931171" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9510 210.121.32.250 11050 &gt;&gt; /HIC_APP/daemon/log_opr/kis.log &amp;"/>
+</node>
+<node CREATED="1318468019812" FOLDED="true" ID="ID_1283911715" MODIFIED="1318469767859" TEXT="start_nice">
+<node CREATED="1318468941765" ID="ID_1267551163" MODIFIED="1318468941765" TEXT="#!/bin/sh"/>
+<node CREATED="1318468941765" ID="ID_1875279045" MODIFIED="1318468941765" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468941765" ID="ID_5539854" MODIFIED="1318468941765" TEXT="send_id=&quot;$(ps -ef | grep 9500)&quot;"/>
+<node CREATED="1318468941765" ID="ID_667722974" MODIFIED="1318468941765" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468941765" MODIFIED="1318468941765" TEXT="echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318468941765" MODIFIED="1318468941765" TEXT="exit;"/>
+</node>
+<node CREATED="1318468941765" ID="ID_1704836777" MODIFIED="1318468941765" TEXT="fi;"/>
+<node CREATED="1318468941765" ID="ID_1698308237" MODIFIED="1318468941765" TEXT="mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log"/>
+<node CREATED="1318468941765" ID="ID_1419100865" MODIFIED="1318468941765" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 &gt; /HIC_APP/daemon/log_opr/nice.log &amp;"/>
+</node>
+<node CREATED="1318468085953" FOLDED="true" ID="ID_1950757267" MODIFIED="1318472865750" TEXT="start_nice1f">
+<node CREATED="1318468969796" ID="ID_522218552" MODIFIED="1318468969796" TEXT="#!/bin/sh"/>
+<node CREATED="1318468969796" ID="ID_1909809169" MODIFIED="1318468969796" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318468969796" ID="ID_215987577" MODIFIED="1318468969796" TEXT="send_id=&quot;$(ps -ef | grep 9520)&quot;"/>
+<node CREATED="1318468969812" ID="ID_165493791" MODIFIED="1318468969812" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318468969812" MODIFIED="1318468969812" TEXT="echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318468969812" MODIFIED="1318468969812" TEXT="exit;"/>
+</node>
+<node CREATED="1318468969812" ID="ID_1058125928" MODIFIED="1318468969812" TEXT="fi;"/>
+<node CREATED="1318468969812" ID="ID_1462244000" MODIFIED="1318468969812" TEXT="mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log"/>
+<node CREATED="1318468969812" ID="ID_985740837" MODIFIED="1318468969812" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 &gt; /HIC_APP/daemon/log_opr/nice1f.log &amp;"/>
+</node>
+<node CREATED="1318469002593" FOLDED="true" ID="ID_1114069182" MODIFIED="1318469769703" TEXT="start_was2_kibsvr10800">
+<node CREATED="1318469048046" ID="ID_1805173396" MODIFIED="1318469048046" TEXT="#!/bin/sh"/>
+<node CREATED="1318469048046" ID="ID_130142919" MODIFIED="1318469048046" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318469048046" ID="ID_668413698" MODIFIED="1318469048046" TEXT="send_id=&quot;$(ps -ef | grep 10800)&quot;"/>
+<node CREATED="1318469048046" ID="ID_621429247" MODIFIED="1318469048046" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469048046" MODIFIED="1318469048046" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318469048046" ID="ID_511133529" MODIFIED="1318469048046" TEXT="#    exit;"/>
+<node CREATED="1318469048046" ID="ID_1822383042" MODIFIED="1318469048046" TEXT="fi;"/>
+<node CREATED="1318469048046" ID="ID_187175749" MODIFIED="1318469048046" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469048046" ID="ID_1079130191" MODIFIED="1318469048046" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318469049921" FOLDED="true" ID="ID_430736578" MODIFIED="1318469770375" TEXT="start_was2_kibsvr9800">
+<node CREATED="1318469091625" ID="ID_1140030628" MODIFIED="1318469091625" TEXT="#!/bin/sh"/>
+<node CREATED="1318469091625" ID="ID_1639937328" MODIFIED="1318469091625" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318469091625" ID="ID_1679107557" MODIFIED="1318469091625" TEXT="send_id=&quot;$(ps -ef | grep 9800)&quot;"/>
+<node CREATED="1318469091625" ID="ID_894716027" MODIFIED="1318469091625" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469091625" MODIFIED="1318469091625" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318469091625" ID="ID_750005348" MODIFIED="1318469091625" TEXT="#    exit;"/>
+<node CREATED="1318469091625" ID="ID_949668769" MODIFIED="1318469091625" TEXT="fi;"/>
+<node CREATED="1318469091625" ID="ID_1213655955" MODIFIED="1318469091625" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469091625" ID="ID_1406270659" MODIFIED="1318469091625" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318469072187" FOLDED="true" ID="ID_1118733143" MODIFIED="1318469771562" TEXT="start_was2_kibsvr9810">
+<node CREATED="1318469103781" ID="ID_1528046080" MODIFIED="1318469103781" TEXT="#!/bin/sh"/>
+<node CREATED="1318469103781" ID="ID_879841995" MODIFIED="1318469103781" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318469103781" ID="ID_69347442" MODIFIED="1318469103781" TEXT="send_id=&quot;$(ps -ef | grep 9810)&quot;"/>
+<node CREATED="1318469103781" ID="ID_1650558416" MODIFIED="1318469103781" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469103781" MODIFIED="1318469103781" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318469103781" ID="ID_476646498" MODIFIED="1318469103781" TEXT="#    exit;"/>
+<node CREATED="1318469103781" ID="ID_588293305" MODIFIED="1318469103781" TEXT="fi;"/>
+<node CREATED="1318469103781" ID="ID_745951012" MODIFIED="1318469103781" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469103781" ID="ID_1475134344" MODIFIED="1318469103781" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+</node>
+<node CREATED="1318469159843" FOLDED="true" ID="ID_280287297" MODIFIED="1318469612781" TEXT="startall_was1">
+<node CREATED="1318469192484" ID="ID_348526463" MODIFIED="1318469192484" TEXT="#!/bin/sh"/>
+<node CREATED="1318469192484" ID="ID_314532834" MODIFIED="1318469192484" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318469192484" ID="ID_1657214161" MODIFIED="1318469192484" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469192484" ID="ID_766410871" MODIFIED="1318469192484" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469192484" MODIFIED="1318469192484" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469192484" MODIFIED="1318469192484" TEXT="exit;"/>
+</node>
+<node CREATED="1318469192484" ID="ID_227639375" MODIFIED="1318469192484" TEXT="fi;"/>
+<node CREATED="1318469192484" ID="ID_560875227" MODIFIED="1318469192484" TEXT="echo &quot;${send_id}&quot;"/>
+<node CREATED="1318469192484" ID="ID_1967075897" MODIFIED="1318469192484" TEXT="mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log"/>
+<node CREATED="1318469192484" ID="ID_290506181" MODIFIED="1318469192484" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 &gt;&gt; /HIC_APP/daemon/log_opr/kib.log &amp;"/>
+<node CREATED="1318469192500" ID="ID_1160701939" MODIFIED="1318469192500" TEXT="send_id0=&quot;$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469192500" ID="ID_1560393633" MODIFIED="1318469192500" TEXT="if [ ! &quot;${send_id0}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469192500" MODIFIED="1318469192500" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469192500" MODIFIED="1318469192500" TEXT="exit;"/>
+</node>
+<node CREATED="1318469192500" ID="ID_904262134" MODIFIED="1318469192500" TEXT="fi;"/>
+<node CREATED="1318469192500" ID="ID_889738339" MODIFIED="1318469192500" TEXT="echo &quot;Kibrsvr10800 Daemon start &quot;"/>
+<node CREATED="1318469192500" ID="ID_1863485613" MODIFIED="1318469192500" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469192500" ID="ID_1229442089" MODIFIED="1318469192500" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318469192500" ID="ID_854932531" MODIFIED="1318469192500" TEXT="send_id2=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469192500" ID="ID_542148131" MODIFIED="1318469192500" TEXT="if [ ! &quot;${send_id2}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469192500" MODIFIED="1318469192500" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469192500" MODIFIED="1318469192500" TEXT="exit;"/>
+</node>
+<node CREATED="1318469192500" ID="ID_1345153100" MODIFIED="1318469192500" TEXT="fi;"/>
+<node CREATED="1318469192500" ID="ID_449178666" MODIFIED="1318469192500" TEXT="echo &quot;Kibrsvr9800 Daemon start &quot;"/>
+<node CREATED="1318469192500" ID="ID_274866806" MODIFIED="1318469192500" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469192500" ID="ID_887148472" MODIFIED="1318469192500" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318469192500" ID="ID_1519305420" MODIFIED="1318469192500" TEXT="send_id3=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469192500" ID="ID_257599008" MODIFIED="1318469192500" TEXT="if [ ! &quot;${send_id3}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469192500" MODIFIED="1318469192500" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318469192500" ID="ID_1432736501" MODIFIED="1318469192500" TEXT="#    exit;"/>
+<node CREATED="1318469192500" ID="ID_1240547308" MODIFIED="1318469192500" TEXT="fi;"/>
+<node CREATED="1318469192500" ID="ID_1783654920" MODIFIED="1318469192500" TEXT="echo &quot;Kibrsvr9810 Daemon start &quot;"/>
+<node CREATED="1318469192500" ID="ID_1156891263" MODIFIED="1318469192500" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469192500" ID="ID_1640476896" MODIFIED="1318469192500" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.41 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318469192500" ID="ID_1053905704" MODIFIED="1318469192500" TEXT="#send_id4=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469192500" ID="ID_1772986389" MODIFIED="1318469192500" TEXT="#if [ ! &quot;${send_id4}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318469192500" ID="ID_1987254275" MODIFIED="1318469192500" TEXT="#    echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469192500" ID="ID_1233413960" MODIFIED="1318469192500" TEXT="#    exit;"/>
+<node CREATED="1318469192500" ID="ID_252116283" MODIFIED="1318469192500" TEXT="#fi;"/>
+<node CREATED="1318469192500" ID="ID_845419302" MODIFIED="1318469192500" TEXT="echo &quot;Nice Daemon start &quot;"/>
+<node CREATED="1318469192500" ID="ID_1898119339" MODIFIED="1318469192500" TEXT="#mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log"/>
+<node CREATED="1318469192500" ID="ID_1082845777" MODIFIED="1318469192500" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 &gt;&gt; /HIC_APP/daemon/log_opr/nice.log &amp;"/>
+<node CREATED="1318469192500" ID="ID_712276881" MODIFIED="1318469192500" TEXT="#send_id5=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469192500" ID="ID_1452868267" MODIFIED="1318469192500" TEXT="#if [ ! &quot;${send_id5}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318469192500" ID="ID_886025501" MODIFIED="1318469192500" TEXT="#    echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469192500" ID="ID_464133228" MODIFIED="1318469192500" TEXT="#    exit;"/>
+<node CREATED="1318469192500" ID="ID_322855476" MODIFIED="1318469192500" TEXT="#fi;"/>
+<node CREATED="1318469192515" ID="ID_1970297688" MODIFIED="1318469192515" TEXT="echo &quot;Nice 1F00 Daemon start &quot;"/>
+<node CREATED="1318469192515" ID="ID_98861331" MODIFIED="1318469192515" TEXT="#mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log"/>
+<node CREATED="1318469192515" ID="ID_1059529168" MODIFIED="1318469192515" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 &gt;&gt; /HIC_APP/daemon/log_opr/nice1f.log &amp;"/>
+</node>
+<node CREATED="1318469172000" FOLDED="true" ID="ID_887698473" MODIFIED="1318469619609" TEXT="startall_was2">
+<node CREATED="1318469206468" ID="ID_807889443" MODIFIED="1318469206468" TEXT="#!/bin/sh"/>
+<node CREATED="1318469206468" ID="ID_1350768335" MODIFIED="1318469206468" TEXT="prefix=`date &apos;+%Y%m%d_%H%M&apos;`"/>
+<node CREATED="1318469206468" ID="ID_398314480" MODIFIED="1318469206468" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469206468" ID="ID_863901370" MODIFIED="1318469206468" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469206468" MODIFIED="1318469206468" TEXT="echo &quot;Kib Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469206468" MODIFIED="1318469206468" TEXT="exit;"/>
+</node>
+<node CREATED="1318469206468" ID="ID_1221976382" MODIFIED="1318469206468" TEXT="fi;"/>
+<node CREATED="1318469206468" ID="ID_1105632356" MODIFIED="1318469206468" TEXT="echo &quot;${send_id}&quot;"/>
+<node CREATED="1318469206468" ID="ID_262301063" MODIFIED="1318469206468" TEXT="mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log"/>
+<node CREATED="1318469206468" ID="ID_1930484682" MODIFIED="1318469206468" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 &gt;&gt; /HIC_APP/daemon/log_opr/kib.log &amp;"/>
+<node CREATED="1318469206468" ID="ID_38724350" MODIFIED="1318469206468" TEXT="send_id0=&quot;$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469206468" ID="ID_1992587365" MODIFIED="1318469206468" TEXT="if [ ! &quot;${send_id0}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469206468" MODIFIED="1318469206468" TEXT="echo &quot;Kibrsvr10800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469206468" MODIFIED="1318469206468" TEXT="exit;"/>
+</node>
+<node CREATED="1318469206468" ID="ID_1515227897" MODIFIED="1318469206468" TEXT="fi;"/>
+<node CREATED="1318469206468" ID="ID_1920081973" MODIFIED="1318469206468" TEXT="echo &quot;Kibrsvr10800 Daemon start &quot;"/>
+<node CREATED="1318469206468" ID="ID_1074417454" MODIFIED="1318469206468" TEXT="mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469206468" ID="ID_883172571" MODIFIED="1318469206468" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318469206468" ID="ID_1657993329" MODIFIED="1318469206468" TEXT="send_id2=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469206468" ID="ID_103469774" MODIFIED="1318469206468" TEXT="if [ ! &quot;${send_id2}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469206468" MODIFIED="1318469206468" TEXT="echo &quot;Kibrsvr9800 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469206468" MODIFIED="1318469206468" TEXT="exit;"/>
+</node>
+<node CREATED="1318469206468" ID="ID_939062401" MODIFIED="1318469206468" TEXT="fi;"/>
+<node CREATED="1318469206468" ID="ID_384548980" MODIFIED="1318469206468" TEXT="echo &quot;Kibrsvr9800 Daemon start &quot;"/>
+<node CREATED="1318469206468" ID="ID_95321354" MODIFIED="1318469206468" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469206468" ID="ID_1687644048" MODIFIED="1318469206468" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318469206484" ID="ID_1345587942" MODIFIED="1318469206484" TEXT="send_id3=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469206484" ID="ID_1903161160" MODIFIED="1318469206484" TEXT="if [ ! &quot;${send_id3}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469206484" MODIFIED="1318469206484" TEXT="echo &quot;Kibrsvr9810 Daemon Already Start!!!!!&quot;;"/>
+</node>
+<node CREATED="1318469206484" ID="ID_1414164152" MODIFIED="1318469206484" TEXT="#    exit;"/>
+<node CREATED="1318469206484" ID="ID_245057316" MODIFIED="1318469206484" TEXT="fi;"/>
+<node CREATED="1318469206484" ID="ID_1194266983" MODIFIED="1318469206484" TEXT="echo &quot;Kibrsvr9810 Daemon start &quot;"/>
+<node CREATED="1318469206484" ID="ID_208931802" MODIFIED="1318469206484" TEXT="#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log"/>
+<node CREATED="1318469206484" ID="ID_108347967" MODIFIED="1318469206484" TEXT="nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.42 9800 &gt;&gt; /HIC_APP/daemon/log_opr/kibrsvr.log &amp;"/>
+<node CREATED="1318469206484" ID="ID_1697475695" MODIFIED="1318469206484" TEXT="#send_id4=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469206484" ID="ID_1111646426" MODIFIED="1318469206484" TEXT="#if [ ! &quot;${send_id4}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318469206484" ID="ID_1140167645" MODIFIED="1318469206484" TEXT="#    echo &quot;Nice Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469206484" ID="ID_274497093" MODIFIED="1318469206484" TEXT="#    exit;"/>
+<node CREATED="1318469206484" ID="ID_1025061356" MODIFIED="1318469206484" TEXT="#fi;"/>
+<node CREATED="1318469206484" ID="ID_1600352939" MODIFIED="1318469206484" TEXT="echo &quot;Nice Daemon start &quot;"/>
+<node CREATED="1318469206484" ID="ID_1413825970" MODIFIED="1318469206484" TEXT="#mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log"/>
+<node CREATED="1318469206484" ID="ID_1219617860" MODIFIED="1318469206484" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 &gt;&gt; /HIC_APP/daemon/log_opr/nice.log &amp;"/>
+<node CREATED="1318469206484" ID="ID_447884477" MODIFIED="1318469206484" TEXT="#send_id5=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;"/>
+<node CREATED="1318469206484" ID="ID_1354506268" MODIFIED="1318469206484" TEXT="#if [ ! &quot;${send_id5}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318469206484" ID="ID_152722303" MODIFIED="1318469206484" TEXT="#    echo &quot;Nice 1F00 Daemon Already Start!!!!!&quot;;"/>
+<node CREATED="1318469206484" ID="ID_1122825882" MODIFIED="1318469206484" TEXT="#    exit;"/>
+<node CREATED="1318469206484" ID="ID_851865170" MODIFIED="1318469206484" TEXT="#fi;"/>
+<node CREATED="1318469206484" ID="ID_1602704300" MODIFIED="1318469206484" TEXT="echo &quot;Nice 1F00 Daemon start &quot;"/>
+<node CREATED="1318469206484" ID="ID_1061166568" MODIFIED="1318469206484" TEXT="#mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log"/>
+<node CREATED="1318469206484" ID="ID_125668797" MODIFIED="1318469206484" TEXT="#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 &gt;&gt; /HIC_APP/daemon/log_opr/nice1f.log &amp;"/>
+</node>
+</node>
+<node CREATED="1318469748937" FOLDED="true" ID="ID_528840146" MODIFIED="1318472874125" TEXT="stop">
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1357828509" MODIFIED="1318469744406" TEXT="stop_kib">
+<node CREATED="1318469652015" ID="ID_224669334" MODIFIED="1318469652015" TEXT="#!/bin/sh"/>
+<node CREATED="1318469652015" ID="ID_411543661" MODIFIED="1318469652015" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469652015" ID="ID_1998409357" MODIFIED="1318469652015" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469652015" MODIFIED="1318469652015" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469652015" MODIFIED="1318469652015" TEXT="echo &quot;Kib Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469652015" ID="ID_1576059247" MODIFIED="1318469652015" TEXT="else">
+<node CREATED="1318469652015" MODIFIED="1318469652015" TEXT="echo &quot;Already Kib Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469652015" ID="ID_102679664" MODIFIED="1318469652015" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1474615370" MODIFIED="1318469743140" TEXT="stop_kibrsvr9800">
+<node CREATED="1318469667703" ID="ID_1009473888" MODIFIED="1318469667703" TEXT="#!/bin/sh"/>
+<node CREATED="1318469667703" ID="ID_305722306" MODIFIED="1318469667703" TEXT="send_id=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469667703" ID="ID_923629338" MODIFIED="1318469667703" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469667703" MODIFIED="1318469667703" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469667703" MODIFIED="1318469667703" TEXT="echo &quot;Kibrsvr9800 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469667703" ID="ID_964538100" MODIFIED="1318469667703" TEXT="else">
+<node CREATED="1318469667703" MODIFIED="1318469667703" TEXT="echo &quot;Already Kibrsvr9800 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469667703" ID="ID_1724349572" MODIFIED="1318469667703" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1401575533" MODIFIED="1318469742359" TEXT="stop_kibrsvr9810">
+<node CREATED="1318469680250" ID="ID_178875780" MODIFIED="1318469680250" TEXT="#!/bin/sh"/>
+<node CREATED="1318469680250" ID="ID_1863703516" MODIFIED="1318469680250" TEXT="send_id=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469680250" ID="ID_1235203896" MODIFIED="1318469680250" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469680265" MODIFIED="1318469680265" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469680265" MODIFIED="1318469680265" TEXT="echo &quot;Kibrsvr9810 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469680265" ID="ID_351564314" MODIFIED="1318469680265" TEXT="else">
+<node CREATED="1318469680265" MODIFIED="1318469680265" TEXT="echo &quot;Already Kibrsvr9810 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469680265" ID="ID_246759549" MODIFIED="1318469680265" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_920980836" MODIFIED="1318469741125" TEXT="stop_kis">
+<node CREATED="1318469698250" ID="ID_563746534" MODIFIED="1318469698250" TEXT="#!/bin/sh"/>
+<node CREATED="1318469698250" ID="ID_566700398" MODIFIED="1318469698250" TEXT="send_id=&quot;$(ps -ef | grep 9510 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469698250" ID="ID_115578554" MODIFIED="1318469698250" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469698250" MODIFIED="1318469698250" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469698250" MODIFIED="1318469698250" TEXT="echo &quot;Kis Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469698250" ID="ID_855895358" MODIFIED="1318469698250" TEXT="else">
+<node CREATED="1318469698250" MODIFIED="1318469698250" TEXT="echo &quot;Already Kis Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469698265" ID="ID_967963127" MODIFIED="1318469698265" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_384238283" MODIFIED="1318469740281" TEXT="stop_nice">
+<node CREATED="1318469711843" ID="ID_185810440" MODIFIED="1318469711843" TEXT="#!/bin/sh"/>
+<node CREATED="1318469711843" ID="ID_1822912382" MODIFIED="1318469711843" TEXT="send_id=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469711843" ID="ID_1883961974" MODIFIED="1318469711843" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469711843" MODIFIED="1318469711843" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469711843" MODIFIED="1318469711843" TEXT="echo &quot;Nice Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469711843" ID="ID_1782304092" MODIFIED="1318469711843" TEXT="else">
+<node CREATED="1318469711843" MODIFIED="1318469711843" TEXT="echo &quot;Already Nice Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469711843" ID="ID_431408128" MODIFIED="1318469711843" TEXT="fi;"/>
+</node>
+<node CREATED="1318466386625" FOLDED="true" ID="ID_1032261223" MODIFIED="1318469739562" TEXT="stop_nice1f">
+<node CREATED="1318469719765" ID="ID_677985144" MODIFIED="1318469719765" TEXT="#!/bin/sh"/>
+<node CREATED="1318469719765" ID="ID_498652914" MODIFIED="1318469719765" TEXT="send_id=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469719765" ID="ID_1796727339" MODIFIED="1318469719765" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469719765" MODIFIED="1318469719765" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469719765" MODIFIED="1318469719765" TEXT="echo &quot;Nice 1f00 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469719765" ID="ID_1854468386" MODIFIED="1318469719765" TEXT="else">
+<node CREATED="1318469719765" MODIFIED="1318469719765" TEXT="echo &quot;Already Nice 1f00 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469719765" ID="ID_651692508" MODIFIED="1318469719765" TEXT="fi;"/>
+</node>
+<node CREATED="1318469721140" FOLDED="true" ID="ID_944388327" MODIFIED="1318469738203" TEXT="stopall">
+<node CREATED="1318469734578" ID="ID_274092232" MODIFIED="1318469734578" TEXT="#!/bin/sh"/>
+<node CREATED="1318469734578" ID="ID_310532961" MODIFIED="1318469734578" TEXT="send_id=&quot;$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469734578" ID="ID_106807644" MODIFIED="1318469734578" TEXT="if [ ! &quot;${send_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469734578" MODIFIED="1318469734578" TEXT="kill -9 ${send_id};"/>
+<node CREATED="1318469734578" MODIFIED="1318469734578" TEXT="echo &quot;Kib Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469734578" ID="ID_344582111" MODIFIED="1318469734578" TEXT="else">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Already Kib Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_1476416900" MODIFIED="1318469734593" TEXT="fi;"/>
+<node CREATED="1318469734593" ID="ID_470412755" MODIFIED="1318469734593" TEXT="send_id1=&quot;$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469734593" ID="ID_1064569489" MODIFIED="1318469734593" TEXT="if [ ! &quot;${send_id1}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="kill -9 ${send_id1};"/>
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Kibrsvr10800 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_1383267134" MODIFIED="1318469734593" TEXT="else">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Already Kibrsvr10800 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_1490347359" MODIFIED="1318469734593" TEXT="fi;"/>
+<node CREATED="1318469734593" ID="ID_150074192" MODIFIED="1318469734593" TEXT="send_id2=&quot;$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469734593" ID="ID_518008724" MODIFIED="1318469734593" TEXT="if [ ! &quot;${send_id2}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="kill -9 ${send_id2};"/>
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Kibrsvr9800 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_1784952689" MODIFIED="1318469734593" TEXT="else">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Already Kibrsvr9800 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_978523374" MODIFIED="1318469734593" TEXT="fi;"/>
+<node CREATED="1318469734593" ID="ID_128774306" MODIFIED="1318469734593" TEXT="send_id3=&quot;$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469734593" ID="ID_1723605677" MODIFIED="1318469734593" TEXT="if [ ! &quot;${send_id3}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="kill -9 ${send_id3};"/>
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Kibrsvr9810 Daemon Down !!&quot;;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_1645466546" MODIFIED="1318469734593" TEXT="else">
+<node CREATED="1318469734593" MODIFIED="1318469734593" TEXT="echo &quot;Already Kibrsvr9810 Daemon Down!!&quot;"/>
+</node>
+<node CREATED="1318469734593" ID="ID_1181797208" MODIFIED="1318469734593" TEXT="fi;"/>
+<node CREATED="1318469734593" ID="ID_1757653097" MODIFIED="1318469734593" TEXT="#send_id4=&quot;$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469734593" ID="ID_1042546211" MODIFIED="1318469734593" TEXT="#if [ ! &quot;${send_id4}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318469734593" ID="ID_735941241" MODIFIED="1318469734593" TEXT="#        kill -9 ${send_id4};"/>
+<node CREATED="1318469734593" ID="ID_360866682" MODIFIED="1318469734593" TEXT="#        echo &quot;Nice Daemon Down !!&quot;;"/>
+<node CREATED="1318469734593" ID="ID_1922122382" MODIFIED="1318469734593" TEXT="#else"/>
+<node CREATED="1318469734593" ID="ID_339898162" MODIFIED="1318469734593" TEXT="#        echo &quot;Already Nice Daemon Down!!&quot;"/>
+<node CREATED="1318469734593" ID="ID_1849276034" MODIFIED="1318469734593" TEXT="#fi;"/>
+<node CREATED="1318469734593" ID="ID_1832910123" MODIFIED="1318469734593" TEXT="#send_id5=&quot;$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)&quot;;"/>
+<node CREATED="1318469734593" ID="ID_1113600354" MODIFIED="1318469734593" TEXT="#if [ ! &quot;${send_id5}&quot; = &quot;&quot; ]; then"/>
+<node CREATED="1318469734593" ID="ID_795581979" MODIFIED="1318469734593" TEXT="#        kill -9 ${send_id5};"/>
+<node CREATED="1318469734593" ID="ID_726269559" MODIFIED="1318469734593" TEXT="#        echo &quot;Nice 1f00 Daemon Down !!&quot;;"/>
+<node CREATED="1318469734593" ID="ID_782196889" MODIFIED="1318469734593" TEXT="#else"/>
+<node CREATED="1318469734593" ID="ID_1859259986" MODIFIED="1318469734593" TEXT="#        echo &quot;Already Nice 1f00 Daemon Down!!&quot;"/>
+<node CREATED="1318469734593" ID="ID_1797080405" MODIFIED="1318469734593" TEXT="#fi;"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318469801421" ID="ID_422824417" MODIFIED="1318469824750" TEXT="HIC_APP/daemon/script_dev"/>
+<node CREATED="1318469825828" ID="ID_591426143" MODIFIED="1318469829734" TEXT="HIC_APP/daemon/script_opr"/>
+</node>
+</node>
+</node>
+<node CREATED="1318224852843" ID="ID_975575833" MODIFIED="1318498950477" TEXT="was01">
 <node CREATED="1318230898046" FOLDED="true" ID="ID_827595327" MODIFIED="1318310798906" TEXT="crontab -l">
 <node CREATED="1318230908921" ID="ID_1702269549" MODIFIED="1318230908921" TEXT="#was1#"/>
 <node CREATED="1318230908921" ID="ID_1880327678" MODIFIED="1318230908921" TEXT="2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,00 8-21 * * * /HIC_APP/batch/shell/ACNDV0201.sh &gt; /HIC_APP/batch/shell/ACNDV0201.out 2&gt;&amp;1"/>
@@ -159,8 +1252,8 @@
 <node CREATED="1318230908937" ID="ID_1977423506" MODIFIED="1318230908937" TEXT="#was2# insert Datamart_CNSL_PHONE"/>
 <node CREATED="1318230908937" ID="ID_549919407" MODIFIED="1318230908937" TEXT="#was2# 03,08,13,18,23,28,33,38,43,48,53,58 8-22 * * * /HIC_APP/batch/shell/AMTCL0101.sh &gt; /HIC_APP/batch/shell/AMTCL0101.out 2&gt;&amp;1"/>
 </node>
-<node CREATED="1318230949171" ID="ID_1179654770" MODIFIED="1318230950500" TEXT="batch">
-<node CREATED="1318224700921" FOLDED="true" ID="ID_1941566934" MODIFIED="1318312985421" TEXT="ACNPL0301.sh">
+<node CREATED="1318230949171" ID="ID_1179654770" MODIFIED="1318481409805" TEXT="batch">
+<node CREATED="1318224700921" FOLDED="true" ID="ID_1941566934" MODIFIED="1318481676055" TEXT="ACNPL0301.sh">
 <node CREATED="1318227401031" ID="ID_383945197" MODIFIED="1318227404781" TEXT="&#xbd84;&#xc11d;">
 <node CREATED="1318228139078" ID="ID_529380489" MODIFIED="1318228142453" TEXT="crontab">
 <node CREATED="1318228144000" ID="ID_831009693" MODIFIED="1318228144000" TEXT="20 06 * * * /HIC_APP/batch/shell/BCMNI0301.sh"/>
@@ -422,8 +1515,7 @@
       WHERE
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <node CREATED="1318312969093" ID="ID_1493532323" MODIFIED="1318312969140">
 <richcontent TYPE="NODE"><html>
   <head>
@@ -443,7 +1535,7 @@
 </node>
 <node CREATED="1318227863281" ID="ID_1943751732" MODIFIED="1318227871359" TEXT="java">
 <node CREATED="1318227879562" ID="ID_1464676092" MODIFIED="1318227890468" TEXT="ACNPL0301">
-<node CREATED="1318229840828" ID="ID_484224119" MODIFIED="1318229842796" TEXT="BC">
+<node CREATED="1318229840828" FOLDED="true" ID="ID_484224119" MODIFIED="1318481673180" TEXT="BC">
 <node CREATED="1318229853281" ID="ID_1027444545" MODIFIED="1318229854468" TEXT="EXAMAPRV_BC = &quot;com.cabis.bc.a.ja.jb.ExamAprvBC&quot;"/>
 <node CREATED="1318229862781" ID="ID_857498909" MODIFIED="1318229863718" TEXT="CNSL_BC = &quot;com.cabis.bc.a.cn.cn.CnslBC&quot;"/>
 <node CREATED="1318229871531" ID="ID_799984001" MODIFIED="1318229872609" TEXT="LOAN_BC = &quot;com.cabis.bc.a.lo.lm.LoanBC&quot;"/>
@@ -457,9 +1549,10 @@
 <node CREATED="1318230246453" ID="ID_1557214308" MODIFIED="1318230246453" TEXT=""/>
 </node>
 </node>
+<node CREATED="1318481660774" ID="ID_1578604136" MODIFIED="1318481663242" TEXT="&#xc601;&#xc5c5;"/>
 </node>
 </node>
-<node CREATED="1318311099375" ID="ID_1846821457" MODIFIED="1318313174281" TEXT="SLNPM0301.sh">
+<node CREATED="1318311099375" ID="ID_1846821457" MODIFIED="1318915727968" TEXT="SLNPM0301.sh">
 <icon BUILTIN="idea"/>
 <node CREATED="1318312534750" ID="ID_1153165115" MODIFIED="1318312537796" TEXT="&#xbd84;&#xc11d;">
 <node CREATED="1318312546343" ID="ID_542052360" MODIFIED="1318312551031" TEXT="crontab"/>
@@ -480,12 +1573,38 @@
 </node>
 <node CREATED="1318312555765" ID="ID_863361342" MODIFIED="1318312557000" TEXT="java">
 <node CREATED="1318312579750" ID="ID_1716141996" MODIFIED="1318312598546" TEXT="com.cabis.batch.a.lo.ma"/>
-<node CREATED="1318312599062" ID="ID_1312061046" MODIFIED="1318312607265" TEXT="SLNPM0301"/>
+<node CREATED="1318312599062" ID="ID_1312061046" MODIFIED="1318312607265" TEXT="SLNPM0301">
+<node CREATED="1318915734234" ID="ID_1216323350" MODIFIED="1318915737484" TEXT="&#xae30;&#xbcf8;&#xd750;&#xb984;">
+<node CREATED="1318915741000" ID="ID_1946098437" MODIFIED="1318915758296" TEXT="&#xc758;&#xc0ac;&#xcf54;&#xb4dc;">
+<node CREATED="1318915762109" ID="ID_731075406" MODIFIED="1318915772687" TEXT="&#xb300;&#xcd9c;&#xc2e4;&#xc2dc;&#xac04; &#xc9c0;&#xae09;&#xb300;&#xc0c1; &#xac00;&#xc838;&#xc624;&#xae30;"/>
+<node CREATED="1318915773031" ID="ID_698042509" MODIFIED="1318915820890" TEXT="&#xc9c0;&#xae09;&#xc885;&#xb958;&#xbcc4; &#xc804;&#xcc98;&#xb9ac; &#xc791;&#xc5c5;">
+<node CREATED="1318916094296" ID="ID_337296628" MODIFIED="1318916143625" TEXT="&#xc9c0;&#xae09;&#xc0c1;&#xd0dc; &#xbcc0;&#xacbd;"/>
+</node>
+<node CREATED="1318916024484" ID="ID_585077326" MODIFIED="1318916030796" TEXT="&#xc9c0;&#xae09;&#xcc98;&#xb9ac;">
+<node CREATED="1318915832500" ID="ID_880300816" MODIFIED="1318915837671" TEXT="&#xc0c1;&#xd638;&#xbc30;&#xd0c0;&#xc801;">
+<node CREATED="1318915820890" ID="ID_9462109" MODIFIED="1318915857171" TEXT="&#xb300;&#xcd9c;&#xae08;&#xc9c0;&#xae09;&#xae08;&#xc561; &#xac80;&#xd1a0;">
+<node CREATED="1318915861171" ID="ID_413047861" MODIFIED="1318915874656" TEXT="&#xb300;&#xcd9c;&#xae08;&#xc9c0;&#xae09;&#xae08;&#xc561; &#xac80;&#xd1a0;"/>
+</node>
+<node CREATED="1318915842484" ID="ID_1352381258" MODIFIED="1318915853125" TEXT="&#xd310;&#xcd09;&#xc218;&#xc218;&#xb8cc;&#xc9c0;&#xae09; &#xac80;&#xd1a0;">
+<node CREATED="1318915876250" ID="ID_1158481271" MODIFIED="1318915933687" TEXT="&#xd310;&#xcd09;&#xc218;&#xc218;&#xb8cc;&#xc9c0;&#xae09;&#xae08;&#xc561; &#xac80;&#xd1a0;"/>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318915759046" ID="ID_400641023" MODIFIED="1318915760609" TEXT="&#xd504;&#xb85c;&#xadf8;&#xb7a8;"/>
+</node>
+</node>
+</node>
+<node CREATED="1319010031671" ID="ID_648774272" MODIFIED="1319010045875" TEXT="&#xd1b5;&#xc2e0;&#xb2f4;&#xb2f9; &#xd074;&#xb798;&#xc2a4;">
+<node CREATED="1319010045906" ID="ID_1014985584" MODIFIED="1319010052328" TEXT="framework">
+<node CREATED="1319010054046" ID="ID_597575361" MODIFIED="1319010067796" TEXT="GramExecutor.java"/>
+<node CREATED="1319010068343" ID="ID_1560015655" MODIFIED="1319010072859" TEXT="SendObj.java"/>
+</node>
 </node>
 </node>
 <node CREATED="1318313061515" ID="ID_201279605" MODIFIED="1318313070109" TEXT="&#xc9c0;&#xae09;&#xbc30;&#xce58;"/>
 </node>
-<node CREATED="1318230438343" FOLDED="true" ID="ID_377551344" MODIFIED="1318313074468" TEXT="ACNDV0201">
+<node CREATED="1318230438343" FOLDED="true" ID="ID_377551344" MODIFIED="1318481668492" TEXT="ACNDV0201">
 <node CREATED="1318230447640" ID="ID_606163589" MODIFIED="1318230452078" TEXT="&#xbd84;&#xc11d;">
 <node CREATED="1318230453796" ID="ID_93747509" MODIFIED="1318230459468" TEXT="crontab"/>
 <node CREATED="1318230459781" ID="ID_19222895" MODIFIED="1318230461328" TEXT="config"/>
@@ -496,9 +1615,304 @@
 </node>
 </node>
 </node>
+<node CREATED="1318466538453" FOLDED="true" ID="ID_986317896" MODIFIED="1318498970367" TEXT="batch shell">
+<node CREATED="1318466213953" FOLDED="true" ID="ID_935561141" MODIFIED="1318498969742" TEXT="HIC_APP">
+<node CREATED="1318466218656" FOLDED="true" ID="ID_1382786171" MODIFIED="1318498969102" TEXT="daemon">
+<node CREATED="1318466232140" FOLDED="true" ID="ID_1387627832" MODIFIED="1318498968602" TEXT="script">
+<node CREATED="1318466603734" FOLDED="true" ID="ID_1614557929" MODIFIED="1318498967227" TEXT="start_kibd">
+<node CREATED="1318466655406" ID="ID_1299600618" MODIFIED="1318466655406" TEXT="#daemon env profile call"/>
+<node CREATED="1318466655406" ID="ID_547995923" MODIFIED="1318466655406" TEXT="DAEMON_HOME=/HIC_APP/daemon"/>
+<node CREATED="1318466655406" ID="ID_1586976233" MODIFIED="1318466655406" TEXT="export DAEMON_HOME"/>
+<node CREATED="1318466655406" ID="ID_1426402927" MODIFIED="1318466655406" TEXT=". $DAEMON_HOME/script/daemon.profile"/>
+<node CREATED="1318466655406" ID="ID_129709846" MODIFIED="1318466655406" TEXT="LOG_DATE=`date +&quot;%Y%m%d&quot;`"/>
+<node CREATED="1318466655406" ID="ID_741636405" MODIFIED="1318466655406" TEXT="nohup java rsvr.KibReceiver 9800 hicdb zuser hiczusr26 &gt;&gt; $DAEMON_HOME/log/ReceiverSocket_$LOG_DATE.log &amp;"/>
+</node>
+<node CREATED="1318466609187" FOLDED="true" ID="ID_640589453" MODIFIED="1318498967992" TEXT="stop_kibd">
+<node CREATED="1318466664687" ID="ID_448106710" MODIFIED="1318466664687" TEXT="#!/bin/sh"/>
+<node CREATED="1318466664687" ID="ID_472862449" MODIFIED="1318466664687" TEXT="kib_id=&quot;$(ps -ef | grep 9800 |grep -v grep | grep -v db2agent |cut -c10-16)&quot;"/>
+<node CREATED="1318466664687" ID="ID_609081405" MODIFIED="1318466664687" TEXT="if [ ! &quot;${kib_id}&quot; = &quot;&quot; ]; then">
+<node CREATED="1318466664687" MODIFIED="1318466664687" TEXT="kill -9  ${kib_id};"/>
+<node CREATED="1318466664687" ID="ID_1397942617" MODIFIED="1318466664687" TEXT="echo &quot;KibReceiver Server Down !!!&quot;"/>
+</node>
+<node CREATED="1318466664687" ID="ID_308411866" MODIFIED="1318466664687" TEXT="else">
+<node CREATED="1318466664687" ID="ID_1274625915" MODIFIED="1318466664687" TEXT="echo &quot;Already KibReceiver Server Down !!!&quot;"/>
+</node>
+<node CREATED="1318466664687" ID="ID_1974240795" MODIFIED="1318466664687" TEXT="fi"/>
+</node>
+</node>
+</node>
+</node>
+</node>
 </node>
 </node>
 <node CREATED="1317963612468" ID="ID_1188916635" MODIFIED="1317963617515" TEXT="&#xc11c;&#xbe44;&#xc2a4;"/>
+</node>
+</node>
+<node CREATED="1319092691781" ID="ID_1015977576" MODIFIED="1319092740375" TEXT="&#xc77c;&#xc815;">
+<node CREATED="1318481067789" FOLDED="true" ID="ID_924342190" MODIFIED="1319067375687" TEXT="21">
+<node CREATED="1319067371000" ID="ID_1123825983" MODIFIED="1319067372312" TEXT="&#xc624;&#xc804;"/>
+<node CREATED="1319067372578" ID="ID_270274209" MODIFIED="1319067374125" TEXT="&#xc624;&#xd6c4;"/>
+</node>
+<node CREATED="1318473274796" ID="ID_1853682471" MODIFIED="1319092743765" TEXT="&#xc9c4;&#xd589;&#xc0ac;&#xd56d;">
+<node CREATED="1318473308718" ID="ID_186069719" MODIFIED="1318473318546" TEXT="2011">
+<node CREATED="1318473322312" ID="ID_590579308" MODIFIED="1318473324125" TEXT="10">
+<node CREATED="1318473325921" FOLDED="true" ID="ID_1481602787" MODIFIED="1318915575265" TEXT="1&#xc8fc;">
+<node CREATED="1318473357078" ID="ID_1962829149" MODIFIED="1318473389078" TEXT="1 &#xd1a0;&#xc694;&#xc77c;"/>
+</node>
+<node CREATED="1318473352968" FOLDED="true" ID="ID_381317065" MODIFIED="1318480047289" TEXT="2&#xc8fc;">
+<node CREATED="1318473392453" FOLDED="true" ID="ID_1635652667" MODIFIED="1318479920196" TEXT="3">
+<node CREATED="1318473407421" ID="ID_1128609628" MODIFIED="1318473413562" TEXT="&#xac1c;&#xcc9c;&#xc808;"/>
+</node>
+<node CREATED="1318473404484" FOLDED="true" ID="ID_470270273" MODIFIED="1318479921180" TEXT="4">
+<node CREATED="1318479880008" ID="ID_1321202670" MODIFIED="1318479887274" TEXT="&#xc2dc;&#xc2a4;&#xd15c; &#xd658;&#xacbd; &#xc124;&#xc815;"/>
+</node>
+<node CREATED="1318473416781" FOLDED="true" ID="ID_468300616" MODIFIED="1318479942055" TEXT="5">
+<node CREATED="1318479889071" ID="ID_1332309570" MODIFIED="1318479907008" TEXT="&#xc2dc;&#xc2a4;&#xd15c; &#xc11c;&#xbc84; &#xc811;&#xc18d;"/>
+<node CREATED="1318479907414" ID="ID_1112890282" MODIFIED="1318479916242" TEXT="&#xd544;&#xc694; &#xc2dc;&#xc2a4;&#xd15c; &#xb4f1; &#xc124;&#xce58;"/>
+</node>
+<node CREATED="1318473419781" FOLDED="true" ID="ID_1397657991" MODIFIED="1318479942602" TEXT="6">
+<node CREATED="1318479926055" ID="ID_1201639216" MODIFIED="1318479931946" TEXT="&#xc2dc;&#xc2a4;&#xd15c; &#xac80;&#xd1a0;"/>
+<node CREATED="1318479932211" ID="ID_8617663" MODIFIED="1318479940352" TEXT="&#xb300;&#xc678;&#xacc4; &#xc815;&#xbcf4; &#xd655;&#xc778;"/>
+</node>
+<node CREATED="1318473422406" ID="ID_1227949174" MODIFIED="1318473423625" TEXT="7">
+<node CREATED="1318473425984" ID="ID_1676926105" MODIFIED="1318473429625" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1318473430765" FOLDED="true" ID="ID_577967545" MODIFIED="1318480046055" TEXT="KIBNET &#xd68c;&#xc758;">
+<node CREATED="1318479995102" ID="ID_1195438127" MODIFIED="1318479996289" TEXT="&#xc2dc;&#xac04;">
+<node CREATED="1318473439109" ID="ID_1714376396" MODIFIED="1318473450062" TEXT="15:00 ~ 16:00"/>
+</node>
+<node CREATED="1318473451937" ID="ID_1716353816" MODIFIED="1318473455921" TEXT="&#xcc38;&#xc11d;&#xc790;">
+<node CREATED="1318473457109" ID="ID_761842996" MODIFIED="1318473467281" TEXT="&#xd558;&#xc774;&#xce90;&#xd53c;&#xd0c8;">
+<node CREATED="1318473472625" ID="ID_1893541922" MODIFIED="1318473501218" TEXT="&#xc591;&#xc218;&#xd55c; &#xbd80;&#xc7a5;"/>
+<node CREATED="1318473476078" ID="ID_689535036" MODIFIED="1318473498312" TEXT="&#xae40;&#xc601;&#xd638; &#xacfc;&#xc7a5;"/>
+</node>
+<node CREATED="1318473467593" ID="ID_1001139722" MODIFIED="1318473471218" TEXT="KIBNET">
+<node CREATED="1318473479187" ID="ID_1825479045" MODIFIED="1318473494937" TEXT="&#xc774;&#xb3d9;&#xc740; &#xd300;&#xc7a5;"/>
+<node CREATED="1318473502656" ID="ID_748516898" MODIFIED="1318473508546" TEXT="&#xae40;&#xc120;&#xd654; &#xb9e4;&#xb2c8;&#xc800;"/>
+</node>
+</node>
+<node CREATED="1318473510453" ID="ID_612814536" MODIFIED="1318473512765" TEXT="&#xb0b4;&#xc6a9;">
+<node CREATED="1318473513843" ID="ID_1658942623" MODIFIED="1318473535890" TEXT="&#xc11c;&#xbe44;&#xc2a4; &#xc0ac;&#xd56d; &#xacf5;&#xc720;"/>
+<node CREATED="1318473536187" ID="ID_1742950710" MODIFIED="1318473541453" TEXT="&#xc11c;&#xbe44;&#xc2a4; &#xc804;&#xbb38; &#xc124;&#xba85;"/>
+<node CREATED="1318473541828" ID="ID_649181793" MODIFIED="1318473564843" TEXT="&#xd558;&#xc774;&#xce90;&#xd53c;&#xd0c8; - KIBNET &#xc804;&#xc1a1; &#xc124;&#xba85;"/>
+<node CREATED="1318473565359" ID="ID_1356619499" MODIFIED="1318473574687" TEXT="IT &#xb2f4;&#xb2f9;&#xc790; &#xc9c0;&#xc815;">
+<node CREATED="1318479955805" ID="ID_1870494488" MODIFIED="1318479979227" TEXT="&#xae40;&#xc885;&#xc6d0; &#xb9e4;&#xb2c8;&#xc800;"/>
+<node CREATED="1318479946774" ID="ID_1313646522" MODIFIED="1318479984899" TEXT="&#xbc18;&#xc7ac;&#xbc94; &#xc0ac;&#xc6d0;"/>
+</node>
+<node CREATED="1318480030930" ID="ID_888916996" MODIFIED="1318480043977" TEXT="&#xc6b0;&#xb9ac;&#xc740;&#xd589; &#xc785;&#xae08;&#xbd88;&#xb2a5; &#xb4f1; &#xac80;&#xd1a0;"/>
+</node>
+<node CREATED="1318480004492" ID="ID_904537600" MODIFIED="1318480006836" TEXT="&#xacb0;&#xc815;">
+<node CREATED="1318480007711" ID="ID_1713967593" MODIFIED="1318480026242" TEXT="&#xc804;&#xbb38; &#xc804;&#xc1a1; &#xc774;&#xba54;&#xc77c; &#xbcf4;&#xb0b4; &#xc8fc;&#xae30;&#xb85c; &#xd568;"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318479664711" FOLDED="true" ID="ID_1045211046" MODIFIED="1318915574203" TEXT="3&#xc8fc;">
+<node CREATED="1318479674305" FOLDED="true" ID="ID_575356442" MODIFIED="1318480050586" TEXT="10">
+<node CREATED="1318479848055" ID="ID_587772961" MODIFIED="1318479864961" TEXT="&#xbc45;&#xd0b9; &#xc11c;&#xbe44;&#xc2a4; &#xc5c5;&#xbb34; &#xac80;&#xd1a0;"/>
+</node>
+<node CREATED="1318479677461" FOLDED="true" ID="ID_20607149" MODIFIED="1318480051227" TEXT="11">
+<node CREATED="1318479866602" ID="ID_1457946791" MODIFIED="1318479876102" TEXT="&#xbc45;&#xd0b9; &#xc11c;&#xbe44;&#xc2a4; UML &#xc791;&#xc5c5;"/>
+</node>
+<node CREATED="1318479678664" FOLDED="true" ID="ID_531706788" MODIFIED="1318480091149" TEXT="12">
+<node CREATED="1318479815336" ID="ID_564323454" MODIFIED="1318479842367" TEXT="KISNET IT&#xd300; &#xbc18;&#xc7ac;&#xbc94;&#xacfc; &#xc774;&#xba54;&#xc77c;&#xb85c; &#xd3ec;&#xd2b8; &#xd655;&#xc778;"/>
+<node CREATED="1318480069492" ID="ID_138373906" MODIFIED="1318480088336" TEXT="&#xbc45;&#xd0b9;&#xc11c;&#xbe44;&#xc2a4; UML &#xc561;&#xd2f0;&#xbe44;&#xd2f0; &#xb2e4;&#xc774;&#xc5b4;&#xadf8;&#xb7a8; &#xc791;&#xc131;"/>
+</node>
+<node CREATED="1318479679852" FOLDED="true" ID="ID_324169991" MODIFIED="1318915317703" TEXT="13">
+<node CREATED="1318479684899" FOLDED="true" ID="ID_983252462" MODIFIED="1318915316687" TEXT="&#xc624;&#xc804;">
+<node CREATED="1318479696664" ID="ID_634330682" MODIFIED="1318479703117" TEXT="&#xb300;&#xc678;&#xacc4;">
+<node CREATED="1318479704555" ID="ID_1325096609" MODIFIED="1318479724477" TEXT="HIC_APP/daemon/script_dev">
+<node CREATED="1318479725805" ID="ID_718375630" MODIFIED="1318479735805" TEXT="start_kis">
+<node CREATED="1318479736867" ID="ID_466547137" MODIFIED="1318479746789" TEXT="&#xb0b4;&#xc6a9; &#xc5c6;&#xc74c;"/>
+<node CREATED="1318479747117" ID="ID_1044461392" MODIFIED="1318479756477" TEXT="&#xb9c8;&#xc9c0;&#xb9c9; &#xbcc0;&#xacbd;&#xc77c; 20110518"/>
+<node CREATED="1318479756930" ID="ID_572560527" MODIFIED="1318479762102" TEXT="&#xbcf5;&#xad6c;&#xd568;"/>
+<node CREATED="1318479762696" ID="ID_647088525" MODIFIED="1318479780899" TEXT="&#xb300;&#xc678;&#xacc4;2&#xbc88;&#xc5d0;&#xc11c; &#xac19;&#xc740; &#xd30c;&#xc77c;&#xc744; &#xadf8;&#xb300;&#xb85c; &#xbcf5;&#xc0ac;"/>
+</node>
+</node>
+</node>
+<node CREATED="1318479786367" ID="ID_344865397" MODIFIED="1318479812180" TEXT="&#xb300;&#xc678;&#xacc4; &#xd3ec;&#xd2b8; &#xc815;&#xb9ac;"/>
+</node>
+<node CREATED="1318480063805" ID="ID_1011451723" MODIFIED="1318480065789" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1318915310234" ID="ID_643068063" MODIFIED="1318915314687" TEXT="&#xc720;&#xc2a4;&#xcf00;&#xc774;&#xc2a4; &#xc791;&#xc131;"/>
+</node>
+</node>
+<node CREATED="1318479681524" FOLDED="true" ID="ID_1605599306" MODIFIED="1318915320500" TEXT="14">
+<node CREATED="1318480056867" ID="ID_1918472343" MODIFIED="1318480058602" TEXT="&#xc624;&#xc804;">
+<node CREATED="1318915274875" ID="ID_1746770050" MODIFIED="1318915287046" TEXT="&#xc720;&#xc2a4;&#xcf00;&#xc774;&#xc2a4; &#xc815;&#xb9ac;">
+<node CREATED="1318915290140" ID="ID_711323304" MODIFIED="1318915307328" TEXT="&#xae30;&#xbcf8;&#xd750;&#xb984; &#xc791;&#xc131;"/>
+</node>
+</node>
+<node CREATED="1318480058930" ID="ID_467511568" MODIFIED="1318480060086" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1318915026500" ID="ID_181498648" MODIFIED="1318915046484" TEXT="&#xc804;&#xbb38; &#xc561;&#xd2f0;&#xbe44;&#xd2f0; &#xb2e4;&#xc774;&#xc5b4;&#xadf8;&#xb7a8; 1&#xcc28;&#xc644;&#xb8cc;"/>
+</node>
+</node>
+</node>
+<node CREATED="1318481054102" ID="ID_1522244805" MODIFIED="1318914996109" TEXT="4&#xc8fc;">
+<node CREATED="1318481062555" FOLDED="true" ID="ID_909410035" MODIFIED="1318915631109" TEXT="17">
+<node CREATED="1318915000359" ID="ID_1339494635" MODIFIED="1318915004281" TEXT="&#xc624;&#xc804;">
+<node CREATED="1318915215828" ID="ID_1850260660" MODIFIED="1318915247859" TEXT="getPayObjList() &#xc561;&#xd2f0;&#xbe44;&#xd2f0;&#xb2e4;&#xc774;&#xc5b4;&#xadf8;&#xb7a8; &#xc791;&#xc131;"/>
+<node CREATED="1318915248406" ID="ID_1439621309" MODIFIED="1318915271171" TEXT="updatePayObjList() &#xc561;&#xd2f0;&#xbe44;&#xd2f0;&#xb2e4;&#xc774;&#xc5b4;&#xadf8;&#xb7a8; &#xc791;&#xc131;"/>
+</node>
+<node CREATED="1318915004500" ID="ID_23665667" MODIFIED="1318915007031" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1318915089953" ID="ID_1625324344" MODIFIED="1318915133750" TEXT="SLNPM0301 &#xbd84;&#xc11d;">
+<node CREATED="1318915142437" ID="ID_369243185" MODIFIED="1318915163265" TEXT="&#xc561;&#xd2f0;&#xbe44;&#xd2f0;&#xb2e4;&#xc5b4;&#xadf8;&#xb7a8; &#xc791;&#xc131;"/>
+</node>
+<node CREATED="1318915584437" ID="ID_1634387115" MODIFIED="1318915586453" TEXT="&#xd68c;&#xc758;">
+<node CREATED="1318915050500" ID="ID_1211816186" MODIFIED="1318915566812" TEXT="&#xc804;&#xbb38; &#xc561;&#xd2f0;&#xbe44;&#xd2f0;&#xb2e4;&#xc774;&#xc5b4;&#xadf8;&#xb7a8; &#xd68c;&#xc758;">
+<icon BUILTIN="idea"/>
+<node CREATED="1318915323500" ID="ID_881642509" MODIFIED="1318915402484" TEXT="&#xc77c;1&#xac74;&#xbc30;&#xce58;&#xcc98;&#xb9ac;">
+<icon BUILTIN="button_cancel"/>
+</node>
+<node CREATED="1318915515187" ID="ID_1929962391" MODIFIED="1318915554109" TEXT="&#xac70;&#xb798;&#xba85;&#xc138; &#xd1b5;&#xc9c0; &#xcc98;&#xb9ac;">
+<icon BUILTIN="button_cancel"/>
+</node>
+<node CREATED="1318915364921" ID="ID_836483964" MODIFIED="1318915561640" TEXT="&#xc785;&#xae08;&#xbd88;&#xb2a5; &#xcc98;&#xb9ac;">
+<icon BUILTIN="full-1"/>
+</node>
+<node CREATED="1318915407265" ID="ID_1513011007" MODIFIED="1318915472531" TEXT="&#xc6b0;&#xb9ac;&#xc740;&#xd589; &#xc5c5;&#xbb34; &#xcc98;&#xb9ac;">
+<node CREATED="1318915473484" ID="ID_1418506495" MODIFIED="1318915478906" TEXT="&#xbaa8;&#xacc4;&#xc88c; &#xc5ec;&#xb7ec;&#xac1c;"/>
+<node CREATED="1318915479296" ID="ID_1413318257" MODIFIED="1318915492218" TEXT="&#xd0c0;&#xd589;&#xc785;&#xae08;&#xc2dc; &#xc6b0;&#xb9ac;&#xc740;&#xd589; &#xc6b0;&#xc120;&#xc21c;&#xc704;"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318481064149" FOLDED="true" ID="ID_1927715201" MODIFIED="1319010002515" TEXT="18">
+<node CREATED="1318915137078" FOLDED="true" ID="ID_1740530255" MODIFIED="1318982031421" TEXT="&#xc624;&#xc804;">
+<node CREATED="1318915089953" FOLDED="true" ID="ID_645114581" MODIFIED="1318982030625" TEXT="SLNPM0301 &#xbd84;&#xc11d;">
+<node CREATED="1318915142437" ID="ID_1719750749" MODIFIED="1318915163265" TEXT="&#xc561;&#xd2f0;&#xbe44;&#xd2f0;&#xb2e4;&#xc5b4;&#xadf8;&#xb7a8; &#xc791;&#xc131;"/>
+<node CREATED="1318915171250" ID="ID_323227037" MODIFIED="1318915178218" TEXT="&#xc804;&#xbb38; &#xc0dd;&#xc131; &#xd30c;&#xd2b8; &#xc815;&#xb9ac;"/>
+</node>
+</node>
+<node CREATED="1318915138843" ID="ID_1007377576" MODIFIED="1318915139921" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1318915603890" FOLDED="true" ID="ID_543554201" MODIFIED="1318982030031" TEXT="SLNPM0301 &#xbd84;&#xc11d;">
+<node CREATED="1318915615312" ID="ID_1784955280" MODIFIED="1318915623437" TEXT="&#xc804;&#xbb38;&#xc0dd;&#xc131;&#xd30c;&#xd2b8;&#xc815;&#xb9ac; &#xacc4;&#xc18d;"/>
+</node>
+<node CREATED="1318981296781" ID="ID_1288534549" MODIFIED="1318981299734" TEXT="&#xd68c;&#xc758;">
+<node CREATED="1318984320875" ID="ID_1820665119" LINK="starteam2svn.mm" MODIFIED="1318984320875" TEXT="starteam -&gt; SVN &#xc774;&#xc804;"/>
+</node>
+</node>
+</node>
+<node CREATED="1318481065555" FOLDED="true" ID="ID_72605233" MODIFIED="1319067359796" TEXT="19">
+<node CREATED="1318981266031" ID="ID_712499853" MODIFIED="1318981269203" TEXT="&#xc624;&#xc804;">
+<node CREATED="1318981275468" ID="ID_339094635" MODIFIED="1318981292953" TEXT="starteam -&gt; SVN &#xc774;&#xc804;"/>
+<node CREATED="1319067328781" ID="ID_499285686" MODIFIED="1319067353921" TEXT="SLNPM0301"/>
+</node>
+<node CREATED="1318981269437" ID="ID_855477445" MODIFIED="1318981271281" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1319067354984" ID="ID_5701947" MODIFIED="1319067354984" TEXT="SLNPM0301"/>
+</node>
+</node>
+<node CREATED="1318481066571" ID="ID_1498921448" MODIFIED="1318481067461" TEXT="20">
+<node CREATED="1319067362968" ID="ID_1832319445" MODIFIED="1319067366875" TEXT="&#xc624;&#xc804;">
+<node CREATED="1319067377515" ID="ID_1479095899" MODIFIED="1319067377515" TEXT="SLNPM0301"/>
+</node>
+<node CREATED="1319067367265" ID="ID_1962203174" MODIFIED="1319067369093" TEXT="&#xc624;&#xd6c4;">
+<node CREATED="1319092549765" ID="ID_51700467" MODIFIED="1319092652515" TEXT="&#xc218;&#xcde8;&#xc870;&#xd68c;">
+<node CREATED="1319092654281" ID="ID_1171998866" MODIFIED="1319092665078" TEXT="CmsRecvGramCC">
+<node CREATED="1319092668328" ID="ID_1784118584" MODIFIED="1319092672875" TEXT="DB &#xcffc;&#xb9ac; &#xc218;&#xc9d1;"/>
+</node>
+<node CREATED="1319092748453" ID="ID_1652444553" MODIFIED="1319092761531" TEXT="WAS1 - 41"/>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318481056789" FOLDED="true" ID="ID_1852343995" MODIFIED="1318481234914" TEXT="5&#xc8fc;">
+<node CREATED="1318481071571" ID="ID_1462061872" MODIFIED="1318481074430" TEXT="24"/>
+<node CREATED="1318481074727" ID="ID_983121979" MODIFIED="1318481075633" TEXT="25"/>
+<node CREATED="1318481075946" ID="ID_1613605254" MODIFIED="1318481076680" TEXT="26"/>
+<node CREATED="1318481076992" ID="ID_1846421152" MODIFIED="1318481078008" TEXT="27"/>
+<node CREATED="1318481078352" ID="ID_705218515" MODIFIED="1318481081055" TEXT="28"/>
+</node>
+</node>
+<node CREATED="1318481087977" FOLDED="true" ID="ID_550544364" MODIFIED="1318481239352" TEXT="11">
+<node CREATED="1318481091242" FOLDED="true" ID="ID_1638162458" MODIFIED="1318481234180" TEXT="1&#xc8fc;">
+<node CREATED="1318481093899" ID="ID_727414325" MODIFIED="1318481096477" TEXT="31"/>
+<node CREATED="1318481096805" ID="ID_1256319696" MODIFIED="1318481097508" TEXT="1"/>
+<node CREATED="1318481097977" ID="ID_368679506" MODIFIED="1318481098539" TEXT="2"/>
+<node CREATED="1318481098946" ID="ID_90585609" MODIFIED="1318481099742" TEXT="3"/>
+<node CREATED="1318481100086" ID="ID_1820993334" MODIFIED="1318481100602" TEXT="4"/>
+</node>
+<node CREATED="1318481103508" ID="ID_1311031987" MODIFIED="1318481104992" TEXT="2&#xc8fc;">
+<node CREATED="1318481122446" ID="ID_448465083" MODIFIED="1318481123696" TEXT="7"/>
+</node>
+<node CREATED="1318481105414" ID="ID_779924574" MODIFIED="1318481110539" TEXT="3&#xc8fc;">
+<node CREATED="1318481126602" ID="ID_921190458" MODIFIED="1318481127867" TEXT="14"/>
+</node>
+<node CREATED="1318481110852" ID="ID_1393235734" MODIFIED="1318481113852" TEXT="4&#xc8fc;">
+<node CREATED="1318481129258" ID="ID_1567228567" MODIFIED="1318481130102" TEXT="21"/>
+</node>
+<node CREATED="1318481142883" ID="ID_982696198" MODIFIED="1318481144071" TEXT="5&#xc8fc;">
+<node CREATED="1318481145805" ID="ID_1171602768" MODIFIED="1318481147242" TEXT="28"/>
+</node>
+</node>
+<node CREATED="1318481149336" FOLDED="true" ID="ID_1135188149" MODIFIED="1318481229805" TEXT="12">
+<node CREATED="1318481152289" ID="ID_1904312005" MODIFIED="1318481155383" TEXT="1&#xc8fc;"/>
+<node CREATED="1318481156664" ID="ID_994485343" MODIFIED="1318481160399" TEXT="2&#xc8fc;">
+<node CREATED="1318481176446" ID="ID_797086097" MODIFIED="1318481178899" TEXT="5"/>
+</node>
+<node CREATED="1318481180492" ID="ID_13969420" MODIFIED="1318481182352" TEXT="3&#xc8fc;">
+<node CREATED="1318481195461" ID="ID_562827779" MODIFIED="1318481197758" TEXT="12"/>
+</node>
+<node CREATED="1318481182727" ID="ID_364262867" MODIFIED="1318481185196" TEXT="4&#xc8fc;">
+<node CREATED="1318481199821" ID="ID_118676144" MODIFIED="1318481200789" TEXT="19"/>
+</node>
+<node CREATED="1318481201977" FOLDED="true" ID="ID_1734628507" MODIFIED="1318481226961" TEXT="5&#xc8fc;">
+<node CREATED="1318481204664" ID="ID_645959866" MODIFIED="1318481206571" TEXT="26"/>
+<node CREATED="1318481213961" ID="ID_717485215" MODIFIED="1318481215680" TEXT="27"/>
+<node CREATED="1318481216008" ID="ID_1326624996" MODIFIED="1318481217008" TEXT="28"/>
+<node CREATED="1318481217305" ID="ID_1602538483" MODIFIED="1318481219399" TEXT="29"/>
+<node CREATED="1318481219883" ID="ID_1281937312" MODIFIED="1318481222774" TEXT="30"/>
+</node>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1318480221086" ID="ID_827191788" MODIFIED="1318480224399" TEXT="&#xbbf8;&#xbbf8;">
+<node CREATED="1318480225477" ID="ID_193437166" MODIFIED="1318480227258" TEXT="&#xb2c8;&#xb2c8;">
+<node CREATED="1318480227258" ID="ID_1421998693" MODIFIED="1318480227258" TEXT=""/>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1319067404890" FOLDED="true" ID="ID_1768630569" MODIFIED="1319092533500" POSITION="left" TEXT="&#xd504;&#xb85c;&#xc81d;&#xd2b8; &#xc885;&#xb8cc;">
+<node CREATED="1318480112602" FOLDED="true" ID="ID_542491633" MODIFIED="1319067430687" TEXT="1&#xcc28;">
+<node CREATED="1318480116399" ID="ID_1028113090" MODIFIED="1318480121164" TEXT="HiPlus"/>
+</node>
+<node CREATED="1318480122852" FOLDED="true" ID="ID_1663461649" MODIFIED="1319067401062" TEXT="2&#xcc28;">
+<node CREATED="1318480126727" ID="ID_1362574873" MODIFIED="1318480129789" TEXT="IFRS"/>
+</node>
+<node CREATED="1318480133836" FOLDED="true" ID="ID_1352081289" MODIFIED="1319067399125" TEXT="3&#xcc28;">
+<node CREATED="1318480137727" ID="ID_1467541999" MODIFIED="1318480162149" TEXT="IFRS / HiPlus &#xc2dc;&#xc2a4;&#xd15c; &#xc720;&#xc9c0;&#xbcf4;&#xc218;"/>
+</node>
+<node CREATED="1319067413234" FOLDED="true" ID="ID_1647386101" MODIFIED="1319092531828" TEXT="&#xd658;&#xacbd;&#xc124;&#xc815;">
+<node CREATED="1319067496156" ID="ID_1258034285" MODIFIED="1319067502796" TEXT="&#xb300;&#xc678;&#xacc4;"/>
+<node CREATED="1319067503109" FOLDED="true" ID="ID_722232293" MODIFIED="1319067557234" TEXT="WAS">
+<node CREATED="1319067538281" FOLDED="true" ID="ID_744295661" MODIFIED="1319067555671" TEXT="1">
+<node CREATED="1318224866890" ID="ID_1367019541" MODIFIED="1318224873359" TEXT="172.20.101.41">
+<node CREATED="1318224875359" ID="ID_621085351" MODIFIED="1318224882296" TEXT="jeus">
+<node CREATED="1318224887625" ID="ID_1027490741" MODIFIED="1318224899718" TEXT="hi~was091#"/>
+</node>
+</node>
+</node>
+<node CREATED="1319067540703" FOLDED="true" ID="ID_168735058" MODIFIED="1319067556187" TEXT="2">
+<node CREATED="1318224866890" ID="ID_1036070459" MODIFIED="1319067552703" TEXT="172.20.101.42">
+<node CREATED="1318224875359" ID="ID_72263706" MODIFIED="1318224882296" TEXT="jeus">
+<node CREATED="1318224887625" ID="ID_1568982152" MODIFIED="1318224899718" TEXT="hi~was091#"/>
+</node>
+</node>
+</node>
+</node>
+<node CREATED="1319067507921" ID="ID_748511854" MODIFIED="1319067511593" TEXT="FileServer"/>
+<node CREATED="1319067512203" ID="ID_1971469808" MODIFIED="1319067516296" TEXT="Printer"/>
+<node CREATED="1319067518875" ID="ID_246415635" MODIFIED="1319067521859" TEXT="IFRS"/>
+<node CREATED="1319092347921" FOLDED="true" ID="ID_1074516159" MODIFIED="1319092531078" TEXT="DB">
+<node CREATED="1319092519718" FOLDED="true" ID="ID_640122200" MODIFIED="1319092529906" TEXT="&#xac1c;&#xbc1c;">
+<node CREATED="1319092352187" FOLDED="true" ID="ID_366112154" MODIFIED="1319092529015" TEXT="oracle">
+<node CREATED="1319092360015" ID="ID_512378518" MODIFIED="1319092491921" TEXT="system / dev#system$41"/>
+</node>
+</node>
+</node>
+</node>
 </node>
 </node>
 </map>
