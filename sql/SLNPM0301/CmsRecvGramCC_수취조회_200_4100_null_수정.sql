@@ -7,9 +7,11 @@ SELECT  NVL(LOAN_NO,' ')       LOAN_NO
      WHERE
        IMG_ACNT_NO      = ?                      /* :입금내역.계좌번호  */
        AND IMG_ACNT_BANK_CD = '0'||?             /* :입금내역.은행_코드 */
+       AND LOAN_STAT_CD IN ('22', '29')             /* 대출 중인 계좌 */
        AND LOAN_LAST_FG     = '1'
        ;
 --------------------------------------------------
+-- 예 - 대출중 계좌
 SELECT  NVL(LOAN_NO,' ')       LOAN_NO
        ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
        ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
@@ -18,6 +20,78 @@ SELECT  NVL(LOAN_NO,' ')       LOAN_NO
        IMG_ACNT_NO          = '56201551042002'  /* :입금내역.계좌번호  */
        AND IMG_ACNT_BANK_CD = '026'             /* :입금내역.은행_코드 */
        AND LOAN_LAST_FG     = '1'
+;
+-- 예 - 대출종료 계좌
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+      FROM  AUSER.ALOT_LOAN_BASE
+     WHERE
+       IMG_ACNT_NO          = '56201551042002'  /* :입금내역.계좌번호  */
+       AND IMG_ACNT_BANK_CD = '026'             /* :입금내역.은행_코드 */
+       AND LOAN_LAST_FG     = '1'
+;
+
+-- 
+-- 예 - 대출실행 계좌 찾기
+-- LOAN_NO    IMG_ACNT_NO
+--08060400007 56201554000203
+--08060500002 56201554000240
+--08060400010 56201554000237
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,IMG_ACNT_NO
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+      FROM  AUSER.ALOT_LOAN_BASE
+     WHERE
+--       IMG_ACNT_NO      = ?                      /* :입금내역.계좌번호  */
+--       AND IMG_ACNT_BANK_CD = '0'||?             /* :입금내역.은행_코드 */
+--       AND 
+       LOAN_LAST_FG     = '1'
+       AND LOAN_STAT_CD IN ('22', '29')             /* 대출 중인 계좌 */
+       ;
+       
+-- 예 - 대출종료 계좌 찾기
+--LOAN_NO     IMG_ACNT_NO
+--08052900006 56201553000020
+--08053000003 56201552000032
+--08053000001 56201554000025
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,IMG_ACNT_NO
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+      FROM  AUSER.ALOT_LOAN_BASE
+     WHERE
+--       IMG_ACNT_NO      = ?                      /* :입금내역.계좌번호  */
+--       AND IMG_ACNT_BANK_CD = '0'||?             /* :입금내역.은행_코드 */
+--       AND 
+       LOAN_LAST_FG     = '1'
+       AND LOAN_STAT_CD NOT IN ('22', '29')             /* 대출 중인 계좌 */
+       ;
+
+-- 대출중 여러건 확인
+-- LOAN_NO    IMG_ACNT_NO
+--08060400007 56201554000203
+--08060500002 56201554000240
+--08060400010 56201554000237
+select loan_no, count(*)
+from auser.alot_loan_base
+--where LOAN_NO IN ('08060400007', '08060500002', '08060400010') AND loan_last_fg = '1'
+where IMG_ACNT_NO IN ('56201554000203', '56201554000240', '56201554000237') AND loan_last_fg = '1'
+group by loan_no
+--having count(*) > 1
+;
+-- 대출종료 여러건 확인
+--LOAN_NO     IMG_ACNT_NO
+--08052900006 56201553000020
+--08053000003 56201552000032
+--08053000001 56201554000025
+select loan_no, count(*)
+from auser.alot_loan_base
+--where LOAN_NO IN ('08052900006', '08053000003', '08053000001') AND loan_last_fg = '1'
+where IMG_ACNT_NO IN ('56201553000020', '56201552000032', '56201554000025') AND loan_last_fg = '1'
+group by loan_no
+--having count(*) > 1
 ;
 --------------------------------------------------
 -- 마지막 코드 여러건 찾기
