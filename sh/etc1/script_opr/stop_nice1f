@@ -1,0 +1,10 @@
+#!/bin/sh
+
+send_id="$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)";
+
+if [ ! "${send_id}" = "" ]; then
+	kill -9 ${send_id};
+	echo "Nice 1f00 Daemon Down !!";
+else 
+	echo "Already Nice 1f00 Daemon Down!!"
+fi;

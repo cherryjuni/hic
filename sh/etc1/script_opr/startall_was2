@@ -1,0 +1,75 @@
+#!/bin/sh
+
+prefix=`date '+%Y%m%d_%H%M'`
+
+send_id="$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)"
+
+if [ ! "${send_id}" = "" ]; then
+    echo "Kib Daemon Already Start!!!!!";
+    exit;
+fi;
+
+echo "${send_id}"
+
+mv /HIC_APP/daemon/log_opr/kib.log /HIC_APP/daemon/log_opr/kib${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9530 192.168.4.100 50811 >> /HIC_APP/daemon/log_opr/kib.log &
+
+send_id0="$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)"
+
+if [ ! "${send_id0}" = "" ]; then
+    echo "Kibrsvr10800 Daemon Already Start!!!!!";
+    exit;
+fi;
+
+echo "Kibrsvr10800 Daemon start "
+
+mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 10800 172.20.101.42 9800 >> /HIC_APP/daemon/log_opr/kibrsvr.log &
+
+send_id2="$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)"
+
+if [ ! "${send_id2}" = "" ]; then
+    echo "Kibrsvr9800 Daemon Already Start!!!!!";
+    exit;
+fi;
+
+echo "Kibrsvr9800 Daemon start "
+
+#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9800 172.20.101.42 9800 >> /HIC_APP/daemon/log_opr/kibrsvr.log &
+
+send_id3="$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)"
+
+if [ ! "${send_id3}" = "" ]; then
+    echo "Kibrsvr9810 Daemon Already Start!!!!!";
+#    exit;
+fi;
+
+echo "Kibrsvr9810 Daemon start "
+
+#mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.42 9800 >> /HIC_APP/daemon/log_opr/kibrsvr.log &
+
+#send_id4="$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)"
+
+#if [ ! "${send_id4}" = "" ]; then
+#    echo "Nice Daemon Already Start!!!!!";
+#    exit;
+#fi;
+
+echo "Nice Daemon start "
+
+#mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log
+#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 >> /HIC_APP/daemon/log_opr/nice.log &
+
+#send_id5="$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)"
+
+#if [ ! "${send_id5}" = "" ]; then
+#    echo "Nice 1F00 Daemon Already Start!!!!!";
+#    exit;
+#fi;
+
+echo "Nice 1F00 Daemon start "
+
+#mv /HIC_APP/daemon/log_opr/nice1f.log /HIC_APP/daemon/log_opr/nice1f${prefix}.log
+#nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9520 203.234.213.51 28100 >> /HIC_APP/daemon/log_opr/nice1f.log &

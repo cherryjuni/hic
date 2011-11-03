@@ -1,0 +1,13 @@
+#!/bin/sh
+
+prefix=`date '+%Y%m%d_%H%M'`
+
+send_id="$(ps -ef | grep 9810)"
+
+if [ ! "${send_id}" = "" ]; then
+    echo "Kibrsvr9810 Daemon Already Start!!!!!";
+#    exit;
+fi;
+
+mv /HIC_APP/daemon/log_opr/kibrsvr.log /HIC_APP/daemon/log_opr/kibrsvr${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class rsvr.ReceiveDaemon 9810 172.20.101.42 9800 >> /HIC_APP/daemon/log_opr/kibrsvr.log &

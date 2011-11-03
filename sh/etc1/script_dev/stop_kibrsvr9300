@@ -1,0 +1,10 @@
+#!/bin/sh
+
+send_id="$(ps -ef | grep 9300 |grep -v grep|grep -v db2agent|cut -c10-16)";
+
+if [ ! "${send_id}" = "" ]; then
+	kill -9 ${send_id};
+	echo "Kibrsvr9300 Daemon Down !!";
+else 
+	echo "Already Kibrsvr9300 Daemon Down!!"
+fi;

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+#prefix=`date '+%Y%m%d_%H%M'`
+
+#send_id="$(ps -ef | grep 9500)"
+
+#if [ ! "${send_id}" = "" ]; then
+#    echo "Nice Daemon Already Start!!!!!";
+#    exit;
+#fi;
+
+mv /HIC_APP/daemon/log_opr/nice.log /HIC_APP/daemon/log_opr/nice${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9500 150.50.50.51 30022 > /HIC_APP/daemon/log_opr/nice.log &

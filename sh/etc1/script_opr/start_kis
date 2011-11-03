@@ -1,0 +1,13 @@
+#!/bin/sh
+
+prefix=`date '+%Y%m%d_%H%M'`
+
+send_id="$(ps -ef | grep 9510|grep -v grep)"
+
+if [ ! "${send_id}" = "" ]; then
+    echo "Kis Daemon Already Start!!!!!";
+    exit;
+fi;
+
+mv /HIC_APP/daemon/log_opr/kis.log /HIC_APP/daemon/log_opr/kis${prefix}.log
+nohup java -Xmx256m -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9510 210.121.32.250 11050 >> /HIC_APP/daemon/log_opr/kis.log &
