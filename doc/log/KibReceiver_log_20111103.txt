@@ -1,0 +1,659 @@
+[원격수신전문-----------------------------------------------]
+[0554055000092003290300006000008880120010  302001100   2011110315463102096622020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000]  [554]
+[---------------------------------------------------------][554]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0120
+attr[8]   : 010  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 1100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 154631
+attr[15]  : 0209662
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 0
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000000
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[1100] 입금전문수신
+2011-11-03 15:46:12.288 SyncCall.call Start
+2011-11-03 15:46:12.288 SyncCall.call Check 1
+2011-11-03 15:46:12.288 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+2011-11-03 15:46:12.288 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02001100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880120010  302001100   2011110315463102096622020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+DEBUG [CmsRecvGramCC.java:68] - CMS입금 요청VO-->[============ com.cabis.sc.b.cp.cm.IamtGram ============
+        #2#trAmt|0000000099996| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201550486180  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000026|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|                |        #13#pswd|        |      #14#oamtAcntNm|강기주　　          |    #15#prFeeAmt|00000|
+        #16#cashBuy|000|        #17#chkBuy|00|  #18#chkNo1|00000000|    #19#chkIssuInfo1|000000|        #20#chkKindNo1|00|
+        #21#chkNo2|00000000|    #22#chkIssuInfo2|000000|        #23#chkKindNo2|00|      #24#chkNo3|00000000|    #25#chkIssuInfo3|000000|
+        #26#chkKindNo3|00|      #27#chkNo4|00000000|    #28#chkIssuInfo4|000000|        #29#chkKindNo4|00|      #30#chkNo5|00000000|
+        #31#chkIssuInfo5|000000|        #32#chkKindNo5|00|      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|00000|
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+DEBUG [CmsRecvGramCC.java:73] - 입금처리 시작
+=== accept waiting ===
+DEBUG [CmsRecvGramDao.java:126] - >> 거래기관 조회
+DEBUG [CmsRecvGramDao.java:134] - cmsIamtDescVO.getRcptTpCd() = C1
+DEBUG [CmsRecvGramDao.java:135] - cmsIamtDescVO.getBankCd() = 26
+DEBUG [CmsRecvGramCC.java:231] - 지점코드[0120], 단말코드[010  
+DEBUG [CmsRecvGramCC.java:235] - 입금 시작
+DEBUG [CmsRecvGramCC.java:324] - 입금요청정보 >> [============ com.cabis.sc.b.cp.cm.CmsIamtDescVO ============
+        #1#trOrgCd|C1004|       #2#trNo|201111030209662|        #3#trDt|2011-11-03|     #4#trSnum|209662|       #5#rcptTpCd|C1|
+        #6#bankCd|26|   #7#trAmt|99996.0|       #8#acntNo|56201550486180|       #9#depoOwnNo||  #10#depoOwnnm|강기주　　|
+        #11#iamtRsltCd|000|     #12#recvDt|2011-11-03|  #13#recvTm|154559|      #14#setlFg|0|   #15#setlNo|0|
+        #16#cnclFg|0|   #17#orgTrDt||   #18#orgTrSnum|0|        #19#cnclDt||    #20#cnclRecvDt||
+        #21#cnclRecvTm||        #22#cnclSetlFg|0|       #23#cnclSetlNo|0|       #24#loanNo||    #25#loanSeq||
+        #26#mngDeptCd|330000|   #27#unCnfmFg||  #28#procDt|2011-11-03|  #29#procTm|154559|      #30#procEmpNo|System|
+        #31#bankBrnchCd|0120|   #32#trmnCd|010  |
+]
+DEBUG [CmsRecvGramDao.java:206] - >> CMS 원거래 조회
+DEBUG [CmsRecvGramCC.java:338] - 대출정보 조회 Start
+DEBUG [CmsRecvGramDao.java:282] - >> CMS 대출정보 조회 ----- 20111025 -----
+DEBUG [CmsRecvGramDao.java:293] - acntNo56201550486180
+DEBUG [CmsRecvGramDao.java:294] - bankCd26
+DEBUG [CmsRecvGramDao.java:297] - SEARCH_LOAN_FOR_CMScom.cabis.sc.b.util.LoggableStatement@2db02db0
+DEBUG [CmsRecvGramCC.java:340] - 대출정보 조회 End
+DEBUG [CmsRecvGramCC.java:346] - 계좌번호 화인 Start
+DEBUG [CmsRecvGramCC.java:364] - 계좌번호 화인 End
+DEBUG [CmsRecvGramDao.java:325] - >> CMS 거래 등록
+DEBUG [LoggableStatement.java:290] - 수행시간 - 2, 변경건수 : 1
+DEBUG [CmsRecvGramCC.java:383] - returnCode000
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:551] - CMS입금 응답전문-->21R02001100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880120010  3021011000002011110315463102096622020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02001100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880120010  3021011000002011110315463102096622020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
+=== accepted ===
+Connection gain complete. 
+[원격수신전문-----------------------------------------------]
+[0585055000092003290300006000008880040010  302004100   2011110320111102096872020032903601032903                                                                                                                           20001347  0 3                                                      000447              0000000100000 00000000000000000000000000200329030056201550207156                      0000008800123456789012            박정현              00000                     0000000         00000000   000000  01111031546300000000                                                            ]  [585]
+[---------------------------------------------------------][585]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0040
+attr[8]   : 010  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 4100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 201111
+attr[15]  : 0209687
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 3
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000447
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[4100] 입금전문수신
+2011-11-03 15:46:15.286 SyncCall.call Start
+2011-11-03 15:46:15.286 SyncCall.call Check 1
+2011-11-03 15:46:15.286 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+2011-11-03 15:46:15.286 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02004100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880040010  302004100   2011110320111102096872020032903601032903                                                                                                                           20001347  0 3                                                      000447              0000000100000 00000000000000000000000000200329030056201550207156                      0000008800123456789012            박정현              00000                     0000000         00000000   000000  01111031546300000000                                                            
+DEBUG [CmsRecvGramCC.java:95] - CMS수취인 조회  요청VO-->[============ com.cabis.sc.b.cp.cm.CustGram ============
+        #2#trAmt|0000000100000| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201550207156  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000088|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|123456789012    |        #13#pswd|        |      #14#oamtAcntNm|박정현              |    #15#prFeeAmt|00000|
+        #16#cashBuy|   |        #17#chkBuy|  |  #18#chkNo1|        |    #19#chkIssuInfo1|      |        #20#chkKindNo1|  |
+        #21#chkNo2|0000000 |    #22#chkIssuInfo2|      |        #23#chkKindNo2|  |      #24#chkNo3|00000000|    #25#chkIssuInfo3|   000|
+        #26#chkKindNo3|00|      #27#chkNo4|0  01111|    #28#chkIssuInfo4|031546|        #29#chkKindNo4|30|      #30#chkNo5|0000000 |
+        #31#chkIssuInfo5|      |        #32#chkKindNo5|  |      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|     |
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+DEBUG [CmsRecvGramCC.java:98] - chk000000000000
+DEBUG [CmsRecvGramCC.java:101] - chk111111111111111
+DEBUG [CmsRecvGramCC.java:190] - chk...............................1
+DEBUG [CmsRecvGramCC.java:192] - chk...............................1:88
+DEBUG [CmsRecvGramDao.java:166] - >> 가상계좌의 고객명 조회
+DEBUG [CmsRecvGramCC.java:199] - chk...............................2
+DEBUG [CmsRecvGramCC.java:103] - 22225555552222222222222
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:671] - CMS입금 응답전문-->21R02004100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880040010  3021041000002011110320111102096872020032903601032903                                                                                                                           20001347  0 3              정상                                    000447              0000000100000 00000000000000000000000000200329030056201550207156  박정현-하이         0000008800123456789012            박정현              00000000000000000000000000000000000000000000000000000000000  01111031546300000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02004100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880040010  3021041000002011110320111102096872020032903601032903                                                                                                                           20001347  0 3              정상                                    000447              0000000100000 00000000000000000000000000200329030056201550207156  박정현-하이         0000008800123456789012            박정현              00000000000000000000000000000000000000000000000000000000000  01111031546300000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
+=== accept waiting ===
+=== accepted ===
+Connection gain complete. 
+[원격수신전문-----------------------------------------------]
+[0554055000092003290300006000008880267860  302001100   2011110315463402096902020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000098945 00000000000000000000000000200329030056201550413080                      0000002600                        정현숙              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000]  [554]
+[---------------------------------------------------------][554]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0267
+attr[8]   : 860  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 1100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 154634
+attr[15]  : 0209690
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 0
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000000
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[1100] 입금전문수신
+2011-11-03 15:46:15.641 SyncCall.call Start
+2011-11-03 15:46:15.641 SyncCall.call Check 1
+2011-11-03 15:46:15.641 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+2011-11-03 15:46:15.641 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02001100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880267860  302001100   2011110315463402096902020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000098945 00000000000000000000000000200329030056201550413080                      0000002600                        정현숙              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+DEBUG [CmsRecvGramCC.java:68] - CMS입금 요청VO-->[============ com.cabis.sc.b.cp.cm.IamtGram ============
+        #2#trAmt|0000000098945| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201550413080  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000026|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|                |        #13#pswd|        |      #14#oamtAcntNm|정현숙              |    #15#prFeeAmt|00000|
+        #16#cashBuy|000|        #17#chkBuy|00|  #18#chkNo1|00000000|    #19#chkIssuInfo1|000000|        #20#chkKindNo1|00|
+        #21#chkNo2|00000000|    #22#chkIssuInfo2|000000|        #23#chkKindNo2|00|      #24#chkNo3|00000000|    #25#chkIssuInfo3|000000|
+        #26#chkKindNo3|00|      #27#chkNo4|00000000|    #28#chkIssuInfo4|000000|        #29#chkKindNo4|00|      #30#chkNo5|00000000|
+        #31#chkIssuInfo5|000000|        #32#chkKindNo5|00|      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|00000|
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+DEBUG [CmsRecvGramCC.java:73] - 입금처리 시작
+DEBUG [CmsRecvGramDao.java:126] - >> 거래기관 조회
+DEBUG [CmsRecvGramDao.java:134] - cmsIamtDescVO.getRcptTpCd() = C1
+DEBUG [CmsRecvGramDao.java:135] - cmsIamtDescVO.getBankCd() = 26
+=== accept waiting ===
+DEBUG [CmsRecvGramCC.java:231] - 지점코드[0267], 단말코드[860  
+DEBUG [CmsRecvGramCC.java:235] - 입금 시작
+DEBUG [CmsRecvGramCC.java:324] - 입금요청정보 >> [============ com.cabis.sc.b.cp.cm.CmsIamtDescVO ============
+        #1#trOrgCd|C1004|       #2#trNo|201111030209690|        #3#trDt|2011-11-03|     #4#trSnum|209690|       #5#rcptTpCd|C1|
+        #6#bankCd|26|   #7#trAmt|98945.0|       #8#acntNo|56201550413080|       #9#depoOwnNo||  #10#depoOwnnm|정현숙|
+        #11#iamtRsltCd|000|     #12#recvDt|2011-11-03|  #13#recvTm|154602|      #14#setlFg|0|   #15#setlNo|0|
+        #16#cnclFg|0|   #17#orgTrDt||   #18#orgTrSnum|0|        #19#cnclDt||    #20#cnclRecvDt||
+        #21#cnclRecvTm||        #22#cnclSetlFg|0|       #23#cnclSetlNo|0|       #24#loanNo||    #25#loanSeq||
+        #26#mngDeptCd|330000|   #27#unCnfmFg||  #28#procDt|2011-11-03|  #29#procTm|154602|      #30#procEmpNo|System|
+        #31#bankBrnchCd|0267|   #32#trmnCd|860  |
+]
+DEBUG [CmsRecvGramDao.java:206] - >> CMS 원거래 조회
+DEBUG [CmsRecvGramCC.java:338] - 대출정보 조회 Start
+DEBUG [CmsRecvGramDao.java:282] - >> CMS 대출정보 조회 ----- 20111025 -----
+DEBUG [CmsRecvGramDao.java:293] - acntNo56201550413080
+DEBUG [CmsRecvGramDao.java:294] - bankCd26
+DEBUG [CmsRecvGramDao.java:297] - SEARCH_LOAN_FOR_CMScom.cabis.sc.b.util.LoggableStatement@302c302c
+DEBUG [CmsRecvGramCC.java:340] - 대출정보 조회 End
+DEBUG [CmsRecvGramCC.java:346] - 계좌번호 화인 Start
+DEBUG [CmsRecvGramCC.java:364] - 계좌번호 화인 End
+DEBUG [CmsRecvGramDao.java:325] - >> CMS 거래 등록
+DEBUG [LoggableStatement.java:290] - 수행시간 - 7, 변경건수 : 1
+DEBUG [CmsRecvGramCC.java:383] - returnCode000
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:551] - CMS입금 응답전문-->21R02001100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880267860  3021011000002011110315463402096902020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000098945 00000000000000000000000000200329030056201550413080                      0000002600                        정현숙              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02001100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880267860  3021011000002011110315463402096902020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000098945 00000000000000000000000000200329030056201550413080                      0000002600                        정현숙              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
+=== accepted ===
+Connection gain complete. 
+[원격수신전문-----------------------------------------------]
+[0554055000092003290300006000008880040010  302001100   2011110315465802098512020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000100000 00000000000000000000000000200329030056201550207156                      0000002600                        박정현              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000]  [554]
+[---------------------------------------------------------][554]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0040
+attr[8]   : 010  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 1100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 154658
+attr[15]  : 0209851
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 0
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000000
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[1100] 입금전문수신
+2011-11-03 15:46:39.032 SyncCall.call Start
+2011-11-03 15:46:39.032 SyncCall.call Check 1
+2011-11-03 15:46:39.032 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+2011-11-03 15:46:39.032 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02001100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880040010  302001100   2011110315465802098512020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000100000 00000000000000000000000000200329030056201550207156                      0000002600                        박정현              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+DEBUG [CmsRecvGramCC.java:68] - CMS입금 요청VO-->[============ com.cabis.sc.b.cp.cm.IamtGram ============
+        #2#trAmt|0000000100000| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201550207156  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000026|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|                |        #13#pswd|        |      #14#oamtAcntNm|박정현              |    #15#prFeeAmt|00000|
+        #16#cashBuy|000|        #17#chkBuy|00|  #18#chkNo1|00000000|    #19#chkIssuInfo1|000000|        #20#chkKindNo1|00|
+        #21#chkNo2|00000000|    #22#chkIssuInfo2|000000|        #23#chkKindNo2|00|      #24#chkNo3|00000000|    #25#chkIssuInfo3|000000|
+        #26#chkKindNo3|00|      #27#chkNo4|00000000|    #28#chkIssuInfo4|000000|        #29#chkKindNo4|00|      #30#chkNo5|00000000|
+        #31#chkIssuInfo5|000000|        #32#chkKindNo5|00|      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|00000|
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+DEBUG [CmsRecvGramCC.java:73] - 입금처리 시작
+DEBUG [CmsRecvGramDao.java:126] - >> 거래기관 조회
+DEBUG [CmsRecvGramDao.java:134] - cmsIamtDescVO.getRcptTpCd() = C1
+DEBUG [CmsRecvGramDao.java:135] - cmsIamtDescVO.getBankCd() = 26
+=== accept waiting ===
+DEBUG [CmsRecvGramCC.java:231] - 지점코드[0040], 단말코드[010  
+DEBUG [CmsRecvGramCC.java:235] - 입금 시작
+DEBUG [CmsRecvGramCC.java:324] - 입금요청정보 >> [============ com.cabis.sc.b.cp.cm.CmsIamtDescVO ============
+        #1#trOrgCd|C1004|       #2#trNo|201111030209851|        #3#trDt|2011-11-03|     #4#trSnum|209851|       #5#rcptTpCd|C1|
+        #6#bankCd|26|   #7#trAmt|100000.0|      #8#acntNo|56201550207156|       #9#depoOwnNo||  #10#depoOwnnm|박정현|
+        #11#iamtRsltCd|000|     #12#recvDt|2011-11-03|  #13#recvTm|154625|      #14#setlFg|0|   #15#setlNo|0|
+        #16#cnclFg|0|   #17#orgTrDt||   #18#orgTrSnum|0|        #19#cnclDt||    #20#cnclRecvDt||
+        #21#cnclRecvTm||        #22#cnclSetlFg|0|       #23#cnclSetlNo|0|       #24#loanNo||    #25#loanSeq||
+        #26#mngDeptCd|330000|   #27#unCnfmFg||  #28#procDt|2011-11-03|  #29#procTm|154625|      #30#procEmpNo|System|
+        #31#bankBrnchCd|0040|   #32#trmnCd|010  |
+]
+DEBUG [CmsRecvGramDao.java:206] - >> CMS 원거래 조회
+DEBUG [CmsRecvGramCC.java:338] - 대출정보 조회 Start
+DEBUG [CmsRecvGramDao.java:282] - >> CMS 대출정보 조회 ----- 20111025 -----
+DEBUG [CmsRecvGramDao.java:293] - acntNo56201550207156
+DEBUG [CmsRecvGramDao.java:294] - bankCd26
+DEBUG [CmsRecvGramDao.java:297] - SEARCH_LOAN_FOR_CMScom.cabis.sc.b.util.LoggableStatement@70357035
+DEBUG [CmsRecvGramCC.java:340] - 대출정보 조회 End
+DEBUG [CmsRecvGramCC.java:346] - 계좌번호 화인 Start
+DEBUG [CmsRecvGramCC.java:364] - 계좌번호 화인 End
+DEBUG [CmsRecvGramDao.java:325] - >> CMS 거래 등록
+DEBUG [LoggableStatement.java:290] - 수행시간 - 14, 변경건수 : 1
+DEBUG [CmsRecvGramCC.java:383] - returnCode000
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:551] - CMS입금 응답전문-->21R02001100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880040010  3021011000002011110315465802098512020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000100000 00000000000000000000000000200329030056201550207156                      0000002600                        박정현              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02001100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880040010  3021011000002011110315465802098512020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000100000 00000000000000000000000000200329030056201550207156                      0000002600                        박정현              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
+=== accepted ===
+Connection gain complete. 
+[원격수신전문-----------------------------------------------]
+[0585055000092003290300006000008880230010  302004100   2011110320111102100152020032903601032903                                                                                                                           20001347  0 3                                                      000448              0000000095946 00000000000000000000000000200329030056201550462949                      0000008800123456789012            강인선              00000                     0000000         00000000   000000  01111031547100000000                                                            ]  [585]
+[---------------------------------------------------------][585]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0230
+attr[8]   : 010  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 4100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 201111
+attr[15]  : 0210015
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 3
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000448
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[4100] 입금전문수신
+2011-11-03 15:46:59.602 SyncCall.call Start
+2011-11-03 15:46:59.602 SyncCall.call Check 1
+2011-11-03 15:46:59.602 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+2011-11-03 15:46:59.603 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02004100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880230010  302004100   2011110320111102100152020032903601032903                                                                                                                           20001347  0 3                                                      000448              0000000095946 00000000000000000000000000200329030056201550462949                      0000008800123456789012            강인선              00000                     0000000         00000000   000000  01111031547100000000                                                            
+DEBUG [CmsRecvGramCC.java:95] - CMS수취인 조회  요청VO-->[============ com.cabis.sc.b.cp.cm.CustGram ============
+        #2#trAmt|0000000095946| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201550462949  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000088|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|123456789012    |        #13#pswd|        |      #14#oamtAcntNm|강인선              |    #15#prFeeAmt|00000|
+        #16#cashBuy|   |        #17#chkBuy|  |  #18#chkNo1|        |    #19#chkIssuInfo1|      |        #20#chkKindNo1|  |
+        #21#chkNo2|0000000 |    #22#chkIssuInfo2|      |        #23#chkKindNo2|  |      #24#chkNo3|00000000|    #25#chkIssuInfo3|   000|
+        #26#chkKindNo3|00|      #27#chkNo4|0  01111|    #28#chkIssuInfo4|031547|        #29#chkKindNo4|10|      #30#chkNo5|0000000 |
+        #31#chkIssuInfo5|      |        #32#chkKindNo5|  |      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|     |
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+DEBUG [CmsRecvGramCC.java:98] - chk000000000000
+DEBUG [CmsRecvGramCC.java:101] - chk111111111111111
+DEBUG [CmsRecvGramCC.java:190] - chk...............................1
+DEBUG [CmsRecvGramCC.java:192] - chk...............................1:88
+DEBUG [CmsRecvGramDao.java:166] - >> 가상계좌의 고객명 조회
+=== accept waiting ===
+DEBUG [CmsRecvGramCC.java:199] - chk...............................2
+DEBUG [CmsRecvGramCC.java:103] - 22225555552222222222222
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:671] - CMS입금 응답전문-->21R02004100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880230010  3021041000002011110320111102100152020032903601032903                                                                                                                           20001347  0 3              정상                                    000448              0000000095946 00000000000000000000000000200329030056201550462949  강인선-하이         0000008800123456789012            강인선              00000000000000000000000000000000000000000000000000000000000  01111031547100000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02004100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880230010  3021041000002011110320111102100152020032903601032903                                                                                                                           20001347  0 3              정상                                    000448              0000000095946 00000000000000000000000000200329030056201550462949  강인선-하이         0000008800123456789012            강인선              00000000000000000000000000000000000000000000000000000000000  01111031547100000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
+=== accepted ===
+Connection gain complete. 
+[원격수신전문-----------------------------------------------]
+[0554055000092003290300006000008880230010  302001100   2011110315475302102712020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000095946 00000000000000000000000000200329030056201550462949                      0000002600                        강인선              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000]  [554]
+[---------------------------------------------------------][554]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0230
+attr[8]   : 010  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 1100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 154753
+attr[15]  : 0210271
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 0
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000000
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[1100] 입금전문수신
+2011-11-03 15:47:34.624 SyncCall.call Start
+2011-11-03 15:47:34.624 SyncCall.call Check 1
+2011-11-03 15:47:34.624 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+=== accept waiting ===
+2011-11-03 15:47:34.624 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02001100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880230010  302001100   2011110315475302102712020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000095946 00000000000000000000000000200329030056201550462949                      0000002600                        강인선              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+DEBUG [CmsRecvGramCC.java:68] - CMS입금 요청VO-->[============ com.cabis.sc.b.cp.cm.IamtGram ============
+        #2#trAmt|0000000095946| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201550462949  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000026|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|                |        #13#pswd|        |      #14#oamtAcntNm|강인선              |    #15#prFeeAmt|00000|
+        #16#cashBuy|000|        #17#chkBuy|00|  #18#chkNo1|00000000|    #19#chkIssuInfo1|000000|        #20#chkKindNo1|00|
+        #21#chkNo2|00000000|    #22#chkIssuInfo2|000000|        #23#chkKindNo2|00|      #24#chkNo3|00000000|    #25#chkIssuInfo3|000000|
+        #26#chkKindNo3|00|      #27#chkNo4|00000000|    #28#chkIssuInfo4|000000|        #29#chkKindNo4|00|      #30#chkNo5|00000000|
+        #31#chkIssuInfo5|000000|        #32#chkKindNo5|00|      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|00000|
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+DEBUG [CmsRecvGramCC.java:73] - 입금처리 시작
+DEBUG [CmsRecvGramDao.java:126] - >> 거래기관 조회
+DEBUG [CmsRecvGramDao.java:134] - cmsIamtDescVO.getRcptTpCd() = C1
+DEBUG [CmsRecvGramDao.java:135] - cmsIamtDescVO.getBankCd() = 26
+DEBUG [CmsRecvGramCC.java:231] - 지점코드[0230], 단말코드[010  
+DEBUG [CmsRecvGramCC.java:235] - 입금 시작
+DEBUG [CmsRecvGramCC.java:324] - 입금요청정보 >> [============ com.cabis.sc.b.cp.cm.CmsIamtDescVO ============
+        #1#trOrgCd|C1004|       #2#trNo|201111030210271|        #3#trDt|2011-11-03|     #4#trSnum|210271|       #5#rcptTpCd|C1|
+        #6#bankCd|26|   #7#trAmt|95946.0|       #8#acntNo|56201550462949|       #9#depoOwnNo||  #10#depoOwnnm|강인선|
+        #11#iamtRsltCd|000|     #12#recvDt|2011-11-03|  #13#recvTm|154721|      #14#setlFg|0|   #15#setlNo|0|
+        #16#cnclFg|0|   #17#orgTrDt||   #18#orgTrSnum|0|        #19#cnclDt||    #20#cnclRecvDt||
+        #21#cnclRecvTm||        #22#cnclSetlFg|0|       #23#cnclSetlNo|0|       #24#loanNo||    #25#loanSeq||
+        #26#mngDeptCd|330000|   #27#unCnfmFg||  #28#procDt|2011-11-03|  #29#procTm|154721|      #30#procEmpNo|System|
+        #31#bankBrnchCd|0230|   #32#trmnCd|010  |
+]
+DEBUG [CmsRecvGramDao.java:206] - >> CMS 원거래 조회
+DEBUG [CmsRecvGramCC.java:338] - 대출정보 조회 Start
+DEBUG [CmsRecvGramDao.java:282] - >> CMS 대출정보 조회 ----- 20111025 -----
+DEBUG [CmsRecvGramDao.java:293] - acntNo56201550462949
+DEBUG [CmsRecvGramDao.java:294] - bankCd26
+DEBUG [CmsRecvGramDao.java:297] - SEARCH_LOAN_FOR_CMScom.cabis.sc.b.util.LoggableStatement@52175217
+DEBUG [CmsRecvGramCC.java:340] - 대출정보 조회 End
+DEBUG [CmsRecvGramCC.java:346] - 계좌번호 화인 Start
+DEBUG [CmsRecvGramCC.java:364] - 계좌번호 화인 End
+DEBUG [CmsRecvGramDao.java:325] - >> CMS 거래 등록
+DEBUG [LoggableStatement.java:290] - 수행시간 - 2, 변경건수 : 1
+DEBUG [CmsRecvGramCC.java:383] - returnCode000
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:551] - CMS입금 응답전문-->21R02001100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880230010  3021011000002011110315475302102712020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000095946 00000000000000000000000000200329030056201550462949                      0000002600                        강인선              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02001100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880230010  3021011000002011110315475302102712020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000095946 00000000000000000000000000200329030056201550462949                      0000002600                        강인선              000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
+=== accepted ===
+Connection gain complete. 
+[원격수신전문-----------------------------------------------]
+[0585055000092003290300006000008880000380  302004100   2011110320111102103812020032903601032903                                                                                                                           20001347  0 3                                                      000449              0000000001000 00000000000000000000000000200329030056201551025231                      0000008800123456789012                                00000                     0000000         00000000   000000  01111031548000000000                                                            ]  [585]
+[---------------------------------------------------------][585]byte
+attr[0]   : 0550
+attr[1]   : 0009
+attr[2]   : 20032903
+attr[3]   : 0
+attr[4]   : 000
+attr[5]   : 6
+attr[6]   : 00000888
+attr[7]   : 0000
+attr[8]   : 380  
+attr[9]   : 3
+attr[10]  : 0200
+attr[11]  : 4100
+attr[12]  :    
+attr[13]  : 20111103
+attr[14]  : 201111
+attr[15]  : 0210381
+attr[16]  : 2
+attr[17]  : 0
+attr[18]  : 20032903
+attr[19]  : 6
+attr[20]  : 01032903                                                                                                                           20001347  
+attr[21]  : 0
+attr[22]  :  
+attr[23]  : 3
+attr[24]  :               
+attr[25]  :                                         
+attr[26]  : 000449
+attr[27]  :               
+전문거래유형[0200] 전문구분코드[4100] 입금전문수신
+2011-11-03 15:47:48.103 SyncCall.call Start
+2011-11-03 15:47:48.103 SyncCall.call Check 1
+2011-11-03 15:47:48.103 SyncCall.call Check 2
+##class com.cabis.sc.b.cp.cm.CmsRecvGramCC
+**[0]equals
+**[1]hashCode
+**[2]toString
+**[3]procRecv
+2011-11-03 15:47:48.103 SyncCall.call Finish - 직전
+DEBUG [CmsRecvGramCC.java:48] - CMS입금 요청전문-->21R02004100000000000000000000000000000000000020060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300006000008880000380  302004100   2011110320111102103812020032903601032903                                                                                                                           20001347  0 3                                                      000449              0000000001000 00000000000000000000000000200329030056201551025231                      0000008800123456789012                                00000                     0000000         00000000   000000  01111031548000000000                                                            
+DEBUG [CmsRecvGramCC.java:95] - CMS수취인 조회  요청VO-->[============ com.cabis.sc.b.cp.cm.CustGram ============
+        #2#trAmt|0000000001000| #3#lcalScalCd| |        #4#trAfRamt|0000000000000|      #5#etcAmt|0000000000000|
+        #6#iamtBankCd|20032903| #7#iamtAcntDivCd|00|    #8#iamtAcntNo|56201551025231  | #9#iamtAcntNm|                    |     #10#oamtBankCd|00000088|
+        #11#oamtAcntDivCd|00|   #12#oamtAcntNo|123456789012    |        #13#pswd|        |      #14#oamtAcntNm|                    |    #15#prFeeAmt|00000|
+        #16#cashBuy|   |        #17#chkBuy|  |  #18#chkNo1|        |    #19#chkIssuInfo1|      |        #20#chkKindNo1|  |
+        #21#chkNo2|0000000 |    #22#chkIssuInfo2|      |        #23#chkKindNo2|  |      #24#chkNo3|00000000|    #25#chkIssuInfo3|   000|
+        #26#chkKindNo3|00|      #27#chkNo4|0  01111|    #28#chkIssuInfo4|031548|        #29#chkKindNo4|00|      #30#chkNo5|0000000 |
+        #31#chkIssuInfo5|      |        #32#chkKindNo5|  |      #33#cnclRsn|   |        #34#trMngNo|            |       #35#distFeeAmt|     |
+        #36#recvMsg|null|       #37#sendMsg|null|
+]
+=== accept waiting ===
+DEBUG [CmsRecvGramCC.java:98] - chk000000000000
+DEBUG [CmsRecvGramCC.java:101] - chk111111111111111
+DEBUG [CmsRecvGramCC.java:190] - chk...............................1
+DEBUG [CmsRecvGramCC.java:192] - chk...............................1:88
+DEBUG [CmsRecvGramDao.java:166] - >> 가상계좌의 고객명 조회
+DEBUG [CmsRecvGramCC.java:199] - chk...............................2
+DEBUG [CmsRecvGramCC.java:103] - 22225555552222222222222
+DEBUG [CmsRecvGramDao.java:384] - >> ERR 내용 조회
+DEBUG [CmsRecvGramCC.java:671] - CMS입금 응답전문-->21R02004100000000000000000000000000000000000 20060102101010000000000001SYSTEMOP1XXXXXXXXXXXXXXXXXXXX055000092003290300005000008880000380  3021041000002011110320111102103812020032903601032903                                                                                                                           20001347  0 3              정상                                    000449              0000000001000 00000000000000000000000000200329030056201551025231  -하이               0000008800123456789012                                00000000000000000000000000000000000000000000000000000000000  01111031548000000000000000000               00000
+[로컬응답전문-----------------------------------------]
+localResponseHeader[0][21]
+localResponseHeader[1][R]
+localResponseHeader[2][02004100]
+localResponseHeader[3][00000000000000000000]
+localResponseHeader[4][0000000000]
+localResponseHeader[5][000 ]
+localResponseHeader[6][20060102]
+localResponseHeader[7][101010]
+localResponseHeader[8][0000]
+localResponseHeader[9][00000001]
+localResponseHeader[10][SYSTEMOP]
+localResponseHeader[11][1]
+localResponseHeader[12][XXXXXXXXXXXXXXXXXXXX]
+[--------------------------------------------------]
+응답전문을 KIB 원격호스트로 전송-----------------------------------------
+[0554055000092003290300005000008880000380  3021041000002011110320111102103812020032903601032903                                                                                                                           20001347  0 3              정상                                    000449              0000000001000 00000000000000000000000000200329030056201551025231  -하이               0000008800123456789012                                00000000000000000000000000000000000000000000000000000000000  01111031548000000000000000000               00000][554]
+-------------------------------------------------------------------------
+전문 로그를 기록 ===================
