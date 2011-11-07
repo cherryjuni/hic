@@ -1,0 +1,59 @@
+2011-11-07 20:28:35,  INFO [main](BatchLogger.java:27) : /HIC_APP/batch/log/alo/SLNPM0301/SLNPM0301_20111107.log
+2011-11-07 20:28:35,  INFO [main](ConnMng.java:55) : driver : oracle.jdbc.driver.OracleDriver
+2011-11-07 20:28:35,  INFO [main](ConnMng.java:56) : url : jdbc:oracle:thin:@172.20.100.33:1521:HICDB
+2011-11-07 20:28:35,  INFO [main](ConnMng.java:57) : user : zuser
+2011-11-07 20:28:35,  INFO [main](ConnMng.java:58) : pwd : hiczusr26
+2011-11-07 20:28:35,  INFO [main](SLNPM0301Dao.java:52) : 실시간 지급 대상 건수 조회 SQL=
+SELECT                	  
+	A.PAY_NO             ,-- 지급_번호
+	A.RCGN_NO            ,-- 식별_번호
+	A.LOAN_NO            ,-- 대출_번호
+	A.LOAN_SEQ           ,-- 대출_순번
+	A.PAY_BSN_DIV_CD     ,-- 지급_업무_구분코드
+	A.CUST_NM            ,-- 고객명
+	A.MNG_DEPT_CD        ,-- 관리_부서_코드
+	A.SETL_BANK_CD       ,-- 결제_은행_코드
+	A.SETL_ACNT_NO       ,-- 결제_계좌번호
+	A.DEPO_OWN_NO        ,-- 예금주_번호
+	A.DEPO_OWNNM         ,-- 예금주명
+	A.IAMT_MANMN         ,-- 입금_인명
+	A.LOAN_PAMT          ,-- 대출_원금
+	A.TRT_FEE            ,-- 취급_수수료
+	A.CPRT_FEE           ,-- 제휴_수수료
+	A.STMP_FEE           ,-- 인지대
+	A.TRAN_RQST_AMT      ,-- 이체_요청_금액
+	A.TRAN_RQST_DTTM     ,-- 이체_요청_일시
+	A.TRAN_PROC_DT       ,-- 이체_처리_일자
+	A.TR_BANK_CD         ,-- 거래_은행_코드
+	A.OAMT_FEE           ,-- 출금_수수료
+	A.GRAM_SEND_DTTM     ,-- 전문_전송_일시
+	A.GRAM_CHSE_NO       ,-- 전문_추적_번호
+	A.TR_STRT_TM         ,-- 거래_개시_시각
+	A.RSPN_CD            ,-- 응답_코드
+	A.PROC_STAT_CD       ,-- 처리_상태_코드
+	A.OAMT_AFAMT         ,-- 출금_후잔액
+	A.MNO_RQST_OBJ_FG    ,-- 결번_요청_대상_여부
+	A.TRAN_IPSS_GRAM_NO  ,-- 이체_불능_전문_번호
+	A.VOCH_JNL_LAST_SEQ  ,-- 전표_분개_최종_순번
+	A.LOAN_CNT           ,-- 대출_건수
+	B.BANK_CD	      	 ,-- 은행_코드
+	B.MO_ACNT_NO	     ,-- 모_계좌번호
+   C.PL_PRDT_DIV         -- PL_상품_구분
+FROM AUSER.ALOT_LOAN_ONLN_PAY A, -- ALOT_대출_지급_내역      
+     AUSER.ALOT_MO_ACNT_BASE  B, -- ALOT_모계좌_기본          
+     AUSER.ALOT_LOAN_BASE     C  -- ALOT_대출_기본             
+WHERE A.PROC_STAT_CD    = '01'   	
+  AND A.TRAN_PROC_DT    = ?     	
+  AND A.TRAN_RQST_DTTM <= ?     	
+  AND A.PAY_BSN_DIV_CD  = B.BSN_DIV_CD 
+  AND A.LOAN_NO = C.LOAN_NO(+) 
+  AND A.LOAN_SEQ = C.LOAN_SEQ(+) 
+  ORDER BY A.PAY_NO 
+
+2011-11-07 20:28:35,  INFO [main](SLNPM0301Dao.java:53) : arg1=2011-11-07
+arg2=20111107202822
+2011-11-07 20:28:35,  INFO [main](SLNPM0301.java:236) : 0
+2011-11-07 20:28:35,  INFO [main](SLNPM0301.java:257) : 실시간 지급 대상 조회에 걸린시간 => 0 M 0 S 194 MS
+2011-11-07 20:28:35,  INFO [main](SLNPM0301.java:176) : 대출실시간지급처리 대상건수 : 0
+2011-11-07 20:28:35,  INFO [main](SLNPM0301.java:180) : 대출실시간지급처리 대상건수가 없습니다.
+2011-11-07 20:28:35,  INFO [main](SLNPM0301.java:218) : 총 걸린시간 => 0 M 0 S 504 MS

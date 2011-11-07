@@ -1,0 +1,1519 @@
+2011-11-07 19:42:32,  INFO [main](BatchLogger.java:27) : /HIC_APP/batch/log/alo/SLNPM0301/SLNPM0301_20111107.log
+2011-11-07 19:42:32,  INFO [main](ConnMng.java:55) : driver : oracle.jdbc.driver.OracleDriver
+2011-11-07 19:42:32,  INFO [main](ConnMng.java:56) : url : jdbc:oracle:thin:@172.20.100.33:1521:HICDB
+2011-11-07 19:42:32,  INFO [main](ConnMng.java:57) : user : zuser
+2011-11-07 19:42:32,  INFO [main](ConnMng.java:58) : pwd : hiczusr26
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:52) : 실시간 지급 대상 건수 조회 SQL=
+SELECT                	  
+	A.PAY_NO             ,-- 지급_번호
+	A.RCGN_NO            ,-- 식별_번호
+	A.LOAN_NO            ,-- 대출_번호
+	A.LOAN_SEQ           ,-- 대출_순번
+	A.PAY_BSN_DIV_CD     ,-- 지급_업무_구분코드
+	A.CUST_NM            ,-- 고객명
+	A.MNG_DEPT_CD        ,-- 관리_부서_코드
+	A.SETL_BANK_CD       ,-- 결제_은행_코드
+	A.SETL_ACNT_NO       ,-- 결제_계좌번호
+	A.DEPO_OWN_NO        ,-- 예금주_번호
+	A.DEPO_OWNNM         ,-- 예금주명
+	A.IAMT_MANMN         ,-- 입금_인명
+	A.LOAN_PAMT          ,-- 대출_원금
+	A.TRT_FEE            ,-- 취급_수수료
+	A.CPRT_FEE           ,-- 제휴_수수료
+	A.STMP_FEE           ,-- 인지대
+	A.TRAN_RQST_AMT      ,-- 이체_요청_금액
+	A.TRAN_RQST_DTTM     ,-- 이체_요청_일시
+	A.TRAN_PROC_DT       ,-- 이체_처리_일자
+	A.TR_BANK_CD         ,-- 거래_은행_코드
+	A.OAMT_FEE           ,-- 출금_수수료
+	A.GRAM_SEND_DTTM     ,-- 전문_전송_일시
+	A.GRAM_CHSE_NO       ,-- 전문_추적_번호
+	A.TR_STRT_TM         ,-- 거래_개시_시각
+	A.RSPN_CD            ,-- 응답_코드
+	A.PROC_STAT_CD       ,-- 처리_상태_코드
+	A.OAMT_AFAMT         ,-- 출금_후잔액
+	A.MNO_RQST_OBJ_FG    ,-- 결번_요청_대상_여부
+	A.TRAN_IPSS_GRAM_NO  ,-- 이체_불능_전문_번호
+	A.VOCH_JNL_LAST_SEQ  ,-- 전표_분개_최종_순번
+	A.LOAN_CNT           ,-- 대출_건수
+	B.BANK_CD	      	 ,-- 은행_코드
+	B.MO_ACNT_NO	     ,-- 모_계좌번호
+   C.PL_PRDT_DIV         -- PL_상품_구분
+FROM AUSER.ALOT_LOAN_ONLN_PAY A, -- ALOT_대출_지급_내역      
+     AUSER.ALOT_MO_ACNT_BASE  B, -- ALOT_모계좌_기본          
+     AUSER.ALOT_LOAN_BASE     C  -- ALOT_대출_기본             
+WHERE A.PROC_STAT_CD    = '01'   	
+  AND A.TRAN_PROC_DT    = ?     	
+  AND A.TRAN_RQST_DTTM <= ?     	
+  AND A.PAY_BSN_DIV_CD  = B.BSN_DIV_CD 
+  AND A.LOAN_NO = C.LOAN_NO(+) 
+  AND A.LOAN_SEQ = C.LOAN_SEQ(+) 
+  ORDER BY A.PAY_NO 
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:53) : arg1=2011-11-07
+arg2=20111107194220
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:236) : 1
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:257) : 실시간 지급 대상 조회에 걸린시간 => 0 M 0 S 232 MS
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:176) : 대출실시간지급처리 대상건수 : 1
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:183) : 대출실시간지급.처리상태코드 '02' 처리중으로 변경 START        ==================
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:287) : 대출실시간 지급대상 얻기 payNo=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:389) : ALOT_LOAN_ONLN_PAY(대출실시간 지급대상) 상태코드 수정 SQL=
+UPDATE AUSER.ALOT_LOAN_ONLN_PAY  				
+     SET PROC_STAT_CD = ?  ,     				
+         LAST_PROC_DT = TO_CHAR(SYSDATE,'YYYY-MM-DD'),					
+         LAST_PROC_TM = TO_CHAR(SYSDATE,'hh24miss'),	
+         LAST_PROC_EMP_NO = 'SLNPM031'							
+   WHERE PAY_NO       = ?        						
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:390) : arg1=02
+arg2=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:291) : 지급대상 상태코드= 02 , pabNo=11110700000166업데이트 완료
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:295) : 대출실시간지급처리 건수 : 1
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:304) : 대출실시간지급처리에 걸린시간 => 0 M 0 S 5 MS
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:187) : 대외로 전송 START        ==================
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:341) : >>> 지급번호 :11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:342) : >>> 이체요청금액 :1000000
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:345) : >>> 지급업무구분코드 :03
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:156) : 대출지급내역 지급금액합계 조회 SQL=
+SELECT  							
+	SUM(PAY_AMT) PAY_AMT_SUM		
+FROM AUSER.ALOT_LOAN_PAY_DESC      
+WHERE PAY_NO          = ?  	   	
+AND   PAY_STAT_CD     = '1'        
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:157) : arg1=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:360) : >>> 대출지급내역의 지급금액 합계 :1000000
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:427) : 지급전 지급완료 처리 프로세스 START
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:920) : 지급번호=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:389) : ALOT_LOAN_ONLN_PAY(대출실시간 지급대상) 상태코드 수정 SQL=
+UPDATE AUSER.ALOT_LOAN_ONLN_PAY  				
+     SET PROC_STAT_CD = ?  ,     				
+         LAST_PROC_DT = TO_CHAR(SYSDATE,'YYYY-MM-DD'),					
+         LAST_PROC_TM = TO_CHAR(SYSDATE,'hh24miss'),	
+         LAST_PROC_EMP_NO = 'SLNPM031'							
+   WHERE PAY_NO       = ?        						
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:390) : arg1=05
+arg2=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:924) : 실시간 지급상태 = 05(정상지급) 수정, 지급번호=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:935) : 대출금지급이면 대출지급내역  = 5(지급완료) 수정, 지급번호=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:423) : ALOT_LOAN_PAY_DESC(대출지급내역)상태코드 수정[SUCCESS] SQL=
+UPDATE AUSER.ALOT_LOAN_PAY_DESC   				
+     SET PAY_STAT_CD  = ?,        				
+         PAY_DT       = TO_CHAR(SYSDATE,'YYYY-MM-DD'), 	
+         LAST_PROC_DT = TO_CHAR(SYSDATE,'YYYY-MM-DD'),					
+         LAST_PROC_TM = TO_CHAR(SYSDATE,'hh24miss'),	
+         LAST_PROC_EMP_NO = 'SLNPM031'							
+   WHERE PAY_NO       = ?        				
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:436) : arg1=5
+arg2=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:939) : 대출기본,대출지급내역 조회 - 대출번호,대출순번,상품대분류코드,상품중분류코드,대출이자율 조회 START
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:108) : 대출지급내역,대출기본 조회 SQL=
+SELECT  						
+	A.PAY_BSN_DIV_CD,			
+	'' AS CPRT_COM_NO,			
+	A.CNCL_FG,					
+	A.RQST_DIV_CD,				
+	A.SNUM,						
+	B.LOAN_NO, 					
+	B.LOAN_SEQ, 				
+	B.PRDT_LRGE_CLAS_CD, 		
+	B.PRDT_MID_CLAS_CD, 		
+	B.LOAN_INT_RT,				
+	B.LOAN_DT,					
+	B.PRDT_CD,					
+	B.LOAN_PAMT,				
+	B.LOAN_TERM,				
+	B.SETL_DD,					
+	B.FCNT_DUE_DT,				
+	B.FCNT_MOPA_CALC_FG,		
+	B.CUST_TRT_FEE,				
+	B.CPRT_COM_TRT_FEE,			
+	B.IMG_ACNT_BANK_CD,			
+	B.MNG_DEPT_CD,				
+	B.CPRT_FEE,				    
+   0 AS  PR_FEE,               
+	B.DUE_METH_CD,				
+   B.DFEE_RT,                  
+   B.DLY_INT_RT                
+FROM AUSER.ALOT_LOAN_PAY_DESC A,   
+     AUSER.ALOT_LOAN_BASE     B    
+WHERE A.PAY_NO          = ?  	   	
+  AND A.LOAN_NO   = B.LOAN_NO    	
+  AND A.LOAN_SEQ  = B.LOAN_SEQ   	
+  AND A.CNCL_FG  != '1'            
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:109) : arg1=11110700000166
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:941) : 1
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:949) : >> 대출일자 세팅후: 2011-11-07
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:953) : >> 요청구분코드:1
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:954) : -----------------------
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:955) : >>   상품대분류:2
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:956) : -----------------------
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:957) : >>   상품중분류:22
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:958) : >>   제휴사코드:null
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:959) : >>    취소여부:0
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:960) : >> ================================
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:966) : >> 요청구분코드 1
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:992) : >> 자판외<<<
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1053) : 1==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1055) : 2==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1057) : 3==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1059) : 4==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1061) : 5==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1063) : 6==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1065) : 7==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1069) : 8==
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1093) : 연체이자료율 ==> 44
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1096) : 연체이자료율 ==> 38.26
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1102) : 연체료율 ==> 0
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1106) : >>> 연체료율 생성 모듈 호출  <<<
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1107) : 대출번호:11110700268
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1108) : 대출순번:01
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1109) : 대출일자:20111107
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1110) : 이자율:37.0
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1111) : 연체료율:0.0
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1112) : 연체이자료율:38.26
+2011-11-07 19:42:33, DEBUG [main](DfeeRtCrte.java:46) : 연체요율 처리 createDfeeRt()
+2011-11-07 19:42:33, ERROR [main](DfeeRtCrte.java:80) : [연체료_율_내역] DELETE 호출
+2011-11-07 19:42:33, DEBUG [main](DfeeRtCrte.java:344) : 연체료율 내역 Table에서 기존 데이터를 삭제 SQL= 
+delete from auser.alot_dfee_rt_desc 
+ where loan_no = ? 
+   and loan_seq = ? 
+
+2011-11-07 19:42:33, DEBUG [main](DfeeRtCrte.java:345) : arg1= 11110700268
+
+2011-11-07 19:42:33, DEBUG [main](DfeeRtCrte.java:346) : arg2= 01
+
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:711) : 연체료_율_내역에 INSERT SQL=
+  insert into auser.alot_dfee_rt_desc 
+  (loan_no, loan_seq, snum, 
+   aply_strt_dt, aply_end_dt, dfee_rt, 
+   frst_reg_dt, frst_reg_tm, frst_reg_emp_no, 
+   last_proc_dt, last_proc_tm, last_proc_emp_no, DLY_INT_RT) 
+   values(?,?,?,?,?,?,?,?,?,?,?,?,?) 
+
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:712) : arg1=11110700268
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:713) : arg2=01
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:714) : arg3=001
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:715) : arg4=2001-01-01
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:716) : arg5=2999-12-31
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:717) : arg6=0.0
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:718) : arg7=2011-11-07
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:719) : arg8=194233
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:720) : arg9=SLNPM031
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:721) : arg10=2011-11-07
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:722) : arg11=194233
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:723) : arg12=SLNPM031
+2011-11-07 19:42:33,  INFO [main](DfeeRtCrte.java:724) : arg13=38.26
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1125) : ==> 연체료율:0.0
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1130) : ==> 대출기본 수정(Parameter: 대출일자,연체료율,대출번호,대출순번,지급번호,디비커넥션
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:549) : 대출기본 수정 SQL= 
+UPDATE AUSER.ALOT_LOAN_BASE               	   		
+     SET PAY_DT        = TO_CHAR(SYSDATE,'YYYY-MM-DD'),    
+         LOAN_ACCT_DT  = TO_CHAR(SYSDATE,'YYYY-MM-DD'),    
+         INT_STRT_DT   = TO_CHAR(SYSDATE,'YYYY-MM-DD'),    
+         LOAN_DT       = ?   ,   		
+         LOAN_STAT_CD  = '22',   		
+         DFEE_RT       = ?   ,   		
+         LAST_PROC_DT = TO_CHAR(SYSDATE,'YYYY-MM-DD'),	
+         LAST_PROC_TM = TO_CHAR(SYSDATE,'hh24miss'),	
+         LAST_PROC_EMP_NO = 'SLNPM031'		
+   WHERE LOAN_NO       = ?      		
+     AND LOAN_SEQ      = ?      		
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:550) : arg1= 2011-11-07
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:551) : arg2= 0.0
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:552) : arg3= 11110700268
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:553) : arg4= 01
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1136) : ==> 상환계획생성모듈 호출
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1463) : 대출원리금 조회(상환계획생성모듈의 파라메타로 들어감)
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1464) : 대출번호=11110700268 순번=01
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:290) : 대출원리금 조회 SQL=
+ SELECT LOAN_NO, 						
+		LOAN_SEQ, 						
+		TR_SNUM,						
+		FRST_RANK,						
+		RMBR_FRML_CD,					
+		LOAN_PAMT,						
+		(END_TIMS - STRT_TIMS+1) TERM,	
+		STRT_TIMS,						
+		LOAN_INT_RT,					
+		DUE_CYCL_CD,					
+		DUE_STRT_TIMS,					
+		CRTE_DIV_CD						
+FROM AUSER.ALOT_LOAN_PIAMT       		
+WHERE LOAN_NO   = ?    				
+  AND LOAN_SEQ  = ?  					
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:291) : arg1= 11110700268
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:292) : arg2= 01
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1469) : 상환계획모듈 호출
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:143) : [[ 기산일(loanObj.setlDd) : 12]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:147) : [[ 원리금갯수(size2) : 1]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:159) : [[ 이자배분여부(loanObj.defrIntDistFg) : 0]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:181) : [[ 이자배분금액(piamtObj.intDistAmt) : 0]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:185) : [[ 1. 초회일수 = 대출기본.초회납입일자(loanObj.loanDt)[20111107] - 대출기본.대출일자(loanObj.fcntDueDt)[35] = 35]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:462) : [[ 원리금별 상환계획 내역 생성... ]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:466) : [[ 대출원리금별 상환계획총회차  = (int)(대출원리금.기간(piamtObj.term)[24] + 대출원리금.시작회차(piamtObj.strtTims)[1] - 1) = 24]]
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:470) : 1
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:683) : 11
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:768) : ====cc end
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:78) : RmbrPlanCrteCC.createRmblPlan() 상환계획내역 호출  ==> rmbrPlanDescCrte()
+2011-11-07 19:42:33, DEBUG [main](RmbrPlanCrteCC.java:81) : 상환계획내역 저장 : 24 건
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1473) : 상환계획모듈 대출기본 수정
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1141) : 대출관계자를 조회 START
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:339) : 대출관계자 조회 SQL=
+ SELECT LOAN_NO, 					
+		LOAN_SEQ, 					
+		CUST_NO,					
+		LOAN_REL_CD,				
+		MAIN_CONT_MAN_REL_CD,		
+		REL_MTR,					
+		MAIN_CONT_MAN_FG,			
+		RL_DUE_MAN_FG,				
+		ASK_PLC_DIV_CD,				
+		EMAL_ASK_FG,				
+		CNTC_PLC_DIV_CD,			
+		DLVR_RSRV_FG,				
+		CONT_ACTL_CNFM_FG,			
+		CONT_ACTL_CNFM_METH_CD,		
+		CONT_ACTL_TELC_DT,			
+		CONT_ACTL_TELC_TM,			
+		CONT_ACTL_TELC_DESC,		
+		CONT_PROC_EMP_NO			
+FROM AUSER.ALOT_LOAN_REL_MAN      	
+WHERE LOAN_NO   		= ?  	  	
+  AND LOAN_SEQ  		= ?  		
+  AND RL_DUE_MAN_FG  	= '1'  		
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:340) : arg1= 11110700268
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:341) : arg2= 01
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1143) : 1
+2011-11-07 19:42:33, DEBUG [main](ConfigInfo.java:128) : db.useDataSource: true
+2011-11-07 19:42:33, DEBUG [main](ConfigInfo.java:129) : db.dataSource   : cabisDS
+2011-11-07 19:42:33, DEBUG [main](ConfigInfo.java:130) : USEMETACACHE    : false
+2011-11-07 19:42:33, DEBUG [main](ConfigInfo.java:131) : 프로그램 log    : true
+2011-11-07 19:42:33, DEBUG [main](ConfigInfo.java:132) : 접   속  log    : true
+2011-11-07 19:42:33,  INFO [main](GenerateKey.java:63) : com.cabis.util.GenerateKey.getNextNumber시작
+2011-11-07 19:42:33, DEBUG [main](SqlRowProcedure.java:22) : start SqlRowProcedure 생성
+2011-11-07 19:42:33, DEBUG [main](GenerateKey.java:90) : 
+========== 채번 (GUSER.GP_GVNO_01(?,?,?,?,?,?,?,?,?,?)) ============
+분류종류번호:S006
+분류번호1  :11110700268
+분류번호2  :01
+분류번호3  :
+분류번호4  :
+분류번호5  :
+분류번호6  :
+사원번호   :SLNPM031
+===============================================
+2011-11-07 19:42:33, DEBUG [main](SqlRowProcedure.java:60) : start SetOutType
+2011-11-07 19:42:33, DEBUG [main](SqlRowProcedure.java:60) : start SetOutType
+2011-11-07 19:42:33,  INFO [main](SqlRunner.java:70) : BC_NO     : GBCGO_GVNOBC
+2011-11-07 19:42:33,  INFO [main](SqlRunner.java:71) : LIST_NO   : 11
+2011-11-07 19:42:33,  INFO [main](SqlRunner.java:72) : EXEC_TYPE : 9
+2011-11-07 19:42:33, DEBUG [main](SqlExecutor.java:83) : start connectDB
+2011-11-07 19:42:33, DEBUG [main](SqlExecutor.java:86) : tx.getConnection()
+2011-11-07 19:42:33, DEBUG [main](SqlExecutor.java:732) : * SQL 실행시간 ==> 1.320662553845E12
+2011-11-07 19:42:33, DEBUG [main](SqlExecutor.java:733) : * SQL : {CALL GUSER.GP_GVNO_01(?,?,?,?,?,?,?,?,?,?)}
+2011-11-07 19:42:33, DEBUG [main](SqlExecutor.java:742) : * SQL 종료시간 ==> 1.320662553876E12
+2011-11-07 19:42:33, DEBUG [main](SqlExecutor.java:743) : 총 걸린시간  ==> 31.0
+2011-11-07 19:42:33, DEBUG [main](GenerateKey.java:116) : 채번 결과====>00001
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1151) : 대출관계자를 등록
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:616) : 대출실납입자 등록 SQL= 
+INSERT INTO AUSER.ALOT_LOAN_RL_DUE_MAN (	
+		LOAN_NO, 			
+		LOAN_SEQ,			
+		SNUM,				
+		LOAN_CHNG_DIV_CD,		
+		RL_DUE_MAN_NO,			
+		ASK_PLC_DIV_CD,			
+		EMAL_ASK_FG,			
+		MAIN_CONT_MAN_REL_CD,		
+		REL_MTR,			
+		GIRO_RE_DLVR_FG,		
+		CHNG_RQST_MAN_NM,		
+		DLVR_RSRV_FG,			
+		LOAN_CHNG_CONS_RSLT_CD, 	
+		NTRM_JST_MAN_CD,  	        
+		DUE_METH_CD,     	        
+		FRST_REG_DT ,			
+		FRST_REG_TM ,			
+		FRST_REG_EMP_NO,		
+		LAST_PROC_DT,			
+		LAST_PROC_TM,			
+		LAST_PROC_EMP_NO		
+) VALUES (       				
+?,?,?,'00', 					
+?, ?, ?, ?, ?, '0', '', '0', '05', '99', ?,	
+ TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE,'hh24miss'),'SLNPM031', TO_CHAR(SYSDATE,'YYYY-MM-DD'),TO_CHAR(SYSDATE,'hh24miss'),'SLNPM031')
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:617) : loanNo= 11110700268
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:618) : loanSeq= 01
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:619) : snum= 00001
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:620) : rlDueManNo= 7411272350923
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:621) : askPlcDivCd= 01
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:622) : emalAskFg= 0
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:623) : mainContManRelCd= 11
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:624) : relMtr= null
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301Dao.java:625) : dueMethCd= null
+
+2011-11-07 19:42:33,  INFO [main](SLNPM0301.java:1184) :  가상계좌생성 모듈 호출
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:89) : imgAcntCrte.getImgAcntNo 사용가상계좌 조회 호출 == 
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:93) : imgAcntCrte.imgAcntCrte() 미사용가상계좌 조회(unUseImgAcntSrch) 호출
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:291) : 미사용 가상계좌 조회 SQL= 
+SELECT IMG_ACNT_NO	            
+FROM (                           
+SELECT IMG_ACNT_NO	            
+FROM AUSER.ALOT_LOAN_IMG_ACNT_DESC 
+WHERE IMG_ACNT_BANK_CD = ?         
+AND USE_FG = '0'                   
+AND DISU_DT IS NULL                
+)                                  
+WHERE ROWNUM = 1                   
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:292) : arg1= 026
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:100) : imgAcntCrte.imgAcntCrte() 가상계좌 할당(imgAcntDescUpdt) 호출
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:228) : 가상계좌 할당 SQL= 
+UPDATE AUSER.ALOT_LOAN_IMG_ACNT_DESC 
+SET USE_FG = '1'                     
+    ,LAST_PROC_DT = ?                
+    ,LAST_PROC_TM = ?                
+    ,LAST_PROC_EMP_NO = ?            
+WHERE IMG_ACNT_BANK_CD = ?           
+AND IMG_ACNT_NO = ?                  
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:229) : arg4= 026
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:230) : arg5= 56201550755466
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:105) : imgAcntCrte.imgAcntCrte() 가상계좌이력생성(imgAcntHistCrte) 호출
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:152) : 가상계좌이력 생성 SQL= 
+INSERT INTO AUSER.ALOT_LOAN_IMG_ACNT_HIST 
+(IMG_ACNT_BANK_CD                         
+,IMG_ACNT_NO                              
+,CHNG_SNUM                                
+,LOAN_NO                                  
+,LOAN_SEQ                                 
+,USE_FG                                   
+,USE_CMPL_DT                              
+,DISU_DT                                  
+,RMRK                                     
+,ISRT_DEPT_CD                             
+,FRST_REG_DT                              
+,FRST_REG_TM                              
+,FRST_REG_EMP_NO                          
+,LAST_PROC_DT                             
+,LAST_PROC_TM                             
+,LAST_PROC_EMP_NO)                        
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)  
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:153) : arg1= 026
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:154) : arg1= 56201550755466
+
+2011-11-07 19:42:34, DEBUG [main](Gvno.java:114) : SELECT MAX(CHNG_SNUM) FROM AUSER.ALOT_LOAN_IMG_ACNT_HIST WHERE  1=1 AND IMG_ACNT_BANK_CD = '026' AND IMG_ACNT_NO = '56201550755466' ORDER BY CHNG_SNUM DESC 
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:83) : start connectDB
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:86) : tx.getConnection()
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:942) : * SQL 실행시간 ==> 1.320662554128E12
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:943) : * SQL : SELECT MAX(CHNG_SNUM) FROM AUSER.ALOT_LOAN_IMG_ACNT_HIST WHERE  1=1 AND IMG_ACNT_BANK_CD = '026' AND IMG_ACNT_NO = '56201550755466' ORDER BY CHNG_SNUM DESC 
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:950) : * SQL 종료시간 ==> 1.320662554147E12
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:951) : 총 걸린시간  ==> 19.0
+lastNo : 00001
+tempNo : 1
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:109) : imgAcntCrte.imgAcntCrte() 대출기본(loanBaseUpdt) UPDATE
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:349) : 대출원장 갱신 SQL= 
+UPDATE AUSER.ALOT_LOAN_BASE
+SET	  IMG_ACNT_BANK_CD = ?
+	 ,IMG_ACNT_NO = ?
+	 ,LAST_PROC_DT = ?
+	 ,LAST_PROC_TM = ?
+	 ,LAST_PROC_EMP_NO = ?
+WHERE  LOAN_NO = ?
+AND    LOAN_SEQ = ?
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:350) : arg1= 026
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:351) : arg2= 56201550755466
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:352) : arg6= 11110700268
+
+2011-11-07 19:42:34, DEBUG [main](imgAcntCrte.java:353) : arg7= 01
+
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1226) : 회계일자(필수)[20111107]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1227) : 입력지점코드(필수)[330000]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1229) : 거래유형코드(필수)[S0030]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1231) : 입력사원번호(필수)[SLNPM031]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1232) : 배치처리구분코드[1]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1233) : 대출번호(필수)[11110700268]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1234) : 대출순번(필수)[01]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1235) : 일련번호(필수)[01]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1236) : 처리건수[0]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1237) : 서브유형코드(필수)[R]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:1239) :  영업전표생성을 호출한다. >>>>>>>>>>>>>>> 
+2011-11-07 19:42:34, DEBUG [main](VochProcCall.java:114) :  !(S0230 - 판촉수수료선금지급 && S003S02400 - 판촉수수료선금환입) => 공통부 조회[S0030]
+2011-11-07 19:42:34, DEBUG [main](VochProcQuery.java:38) : VochProcQuery.selectCommonItem() QUERY
+SELECT 							
+   A.PRDT_LRGE_CLAS_CD,			
+   A.PRDT_MID_CLAS_CD, 			
+   A.LOAN_STAT_CD,	   			
+   B.BND_STAT_CD, 	   			
+   A.MNG_DEPT_CD,	   			
+   A.LOAN_TERM,		   		    
+   '' CPRT_COM_NO 		        
+FROM					
+   AUSER.ALOT_LOAN_BASE      A LEFT OUTER JOIN    CUSER.CART_BND_CLS_BASE   B
+   ON  A.LOAN_NO = B.LOAN_NO		
+   AND A.LOAN_SEQ = B.LOAN_SEQ      
+WHERE  A.LOAN_NO  = ?    			
+   AND A.LOAN_SEQ = ?    			
+
+2011-11-07 19:42:34, DEBUG [main](VochProcQuery.java:38) : VochProcQuery.selectCommonItem() QUERY
+SELECT 							
+   A.PRDT_LRGE_CLAS_CD,			
+   A.PRDT_MID_CLAS_CD, 			
+   A.LOAN_STAT_CD,	   			
+   B.BND_STAT_CD, 	   			
+   A.MNG_DEPT_CD,	   			
+   A.LOAN_TERM,		   		    
+   '' CPRT_COM_NO 		        
+FROM					
+   AUSER.ALOT_LOAN_BASE      A LEFT OUTER JOIN    CUSER.CART_BND_CLS_BASE   B
+   ON  A.LOAN_NO = B.LOAN_NO		
+   AND A.LOAN_SEQ = B.LOAN_SEQ      
+WHERE  A.LOAN_NO  = ?    			
+   AND A.LOAN_SEQ = ?    			
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:43) : 공통조회항목 조회 SQL= 
+SELECT 							
+   A.PRDT_LRGE_CLAS_CD,			
+   A.PRDT_MID_CLAS_CD, 			
+   A.LOAN_STAT_CD,	   			
+   B.BND_STAT_CD, 	   			
+   A.MNG_DEPT_CD,	   			
+   A.LOAN_TERM,		   		    
+   '' CPRT_COM_NO 		        
+FROM					
+   AUSER.ALOT_LOAN_BASE      A LEFT OUTER JOIN    CUSER.CART_BND_CLS_BASE   B
+   ON  A.LOAN_NO = B.LOAN_NO		
+   AND A.LOAN_SEQ = B.LOAN_SEQ      
+WHERE  A.LOAN_NO  = ?    			
+   AND A.LOAN_SEQ = ?    			
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:44) : arg1= 11110700268
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:45) : arg2= 01
+
+2011-11-07 19:42:34, DEBUG [main](VochProcCall.java:132) :  !(S0020 - 대출지급_신차할부 && S0030 - 대출지급_신차할부) [S0030]
+2011-11-07 19:42:34, DEBUG [main](VochProcCall.java:1000) : ====================
+2011-11-07 19:42:34, DEBUG [main](VochProcCall.java:1001) : setLoanPay()-대출지급
+2011-11-07 19:42:34, DEBUG [main](VochProcCall.java:1002) : ====================
+2011-11-07 19:42:34, DEBUG [main](VochProcQuery.java:110) : VochProcQuery.selectLoanIsrtEx() QUERY
+SELECT 						
+   A.LOAN_PAMT,				
+   A.STMP_FEE,					
+   A.PAY_AMT,					
+   0 TRT_FEE,	
+   0 CPRT_FEE,					
+   A.SET_FEE,					
+   A.NOTA_FEE,					
+   A.ETC_FEE,					
+   A.LOAN_NO, 					
+   A.LOAN_SEQ,	   				
+   '0' RT_FEE_DFER_PROC_FG,		
+   '0' CPRT_FEE_DFER_PROC_FG,	
+   C.BANK_CD,	        	
+   C.MO_ACNT_NO,		
+   '0' STMP_FEE_AF_ACQT_FG, 
+   A.PRXP_PAMT,		
+   A.PRXP_INT		
+FROM			
+   AUSER.ALOT_LOAN_PAY_DESC A,  
+   AUSER.APDT_PRDT_BASE     B,  
+   AUSER.ALOT_MO_ACNT_BASE  C   
+WHERE A.LOAN_NO  = ?	     
+  AND A.LOAN_SEQ = ?	     
+  AND A.SNUM     = ?	     
+  AND A.PRDT_CD  = B.PRDT_CD    
+  AND A.PAY_BSN_DIV_CD  = C.BSN_DIV_CD 
+
+2011-11-07 19:42:34, DEBUG [main](VochProcQuery.java:110) : VochProcQuery.selectLoanIsrtEx() QUERY
+SELECT 						
+   A.LOAN_PAMT,				
+   A.STMP_FEE,					
+   A.PAY_AMT,					
+   0 TRT_FEE,	
+   0 CPRT_FEE,					
+   A.SET_FEE,					
+   A.NOTA_FEE,					
+   A.ETC_FEE,					
+   A.LOAN_NO, 					
+   A.LOAN_SEQ,	   				
+   '0' RT_FEE_DFER_PROC_FG,		
+   '0' CPRT_FEE_DFER_PROC_FG,	
+   C.BANK_CD,	        	
+   C.MO_ACNT_NO,		
+   '0' STMP_FEE_AF_ACQT_FG, 
+   A.PRXP_PAMT,		
+   A.PRXP_INT		
+FROM			
+   AUSER.ALOT_LOAN_PAY_DESC A,  
+   AUSER.APDT_PRDT_BASE     B,  
+   AUSER.ALOT_MO_ACNT_BASE  C   
+WHERE A.LOAN_NO  = ?	     
+  AND A.LOAN_SEQ = ?	     
+  AND A.SNUM     = ?	     
+  AND A.PRDT_CD  = B.PRDT_CD    
+  AND A.PAY_BSN_DIV_CD  = C.BSN_DIV_CD 
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:142) : 대출지급 신차할부외 SQL= 
+SELECT 						
+   A.LOAN_PAMT,				
+   A.STMP_FEE,					
+   A.PAY_AMT,					
+   0 TRT_FEE,	
+   0 CPRT_FEE,					
+   A.SET_FEE,					
+   A.NOTA_FEE,					
+   A.ETC_FEE,					
+   A.LOAN_NO, 					
+   A.LOAN_SEQ,	   				
+   '0' RT_FEE_DFER_PROC_FG,		
+   '0' CPRT_FEE_DFER_PROC_FG,	
+   C.BANK_CD,	        	
+   C.MO_ACNT_NO,		
+   '0' STMP_FEE_AF_ACQT_FG, 
+   A.PRXP_PAMT,		
+   A.PRXP_INT		
+FROM			
+   AUSER.ALOT_LOAN_PAY_DESC A,  
+   AUSER.APDT_PRDT_BASE     B,  
+   AUSER.ALOT_MO_ACNT_BASE  C   
+WHERE A.LOAN_NO  = ?	     
+  AND A.LOAN_SEQ = ?	     
+  AND A.SNUM     = ?	     
+  AND A.PRDT_CD  = B.PRDT_CD    
+  AND A.PAY_BSN_DIV_CD  = C.BSN_DIV_CD 
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:143) : arg1= 11110700268
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:144) : arg2= 01
+
+2011-11-07 19:42:34, DEBUG [main](VochProcDao.java:145) : arg3= 01
+
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:81) : [ ===========> 자동전표 처리 시작 <============ ]
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:86) : [ ===========> 마감거래 내역 등록  <============ ]
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:330) : 전표처리.=> 거래단계 확인
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:422) : ==> trTpCd = S0030
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:423) : ==> #trStagDivCd = 020
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:432) : ==> #2
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:338) : 전표처리.=> 마감가능부서 확인
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:365) : 전표처리.=> 마감거래내역 등록
+2011-11-07 19:42:34, DEBUG [main](VochDao.java:375) : INSERT_CLS_TR_DESC--------------
+2011-11-07 19:42:34, DEBUG [main](VochDao.java:385) : 마감거래내역 등록(회계일자,거래내역번호,거래일련번호,거래유형코드,거래이체코드,거래단계코드,대출번호,대출순번)(2011-11-07,986201,1,S0030,S03,020,11110700268,01)
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:90) : [ ===========> 회계보조거래  내역 등록  <============ ]
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:219) : [ ===========> 보조내역에 등록될 금액이 존재하는지 확인  <============ ]
+2011-11-07 19:42:34, DEBUG [main](VochDao.java:587) : 보조내역 등록금액확인 (회계일자,거래내역번)- (2011-11-07,986201)
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:226) : [ ===========>회계 보조 내역 등록  <============ ]
+2011-11-07 19:42:34, DEBUG [main](LoggableStatement.java:290) : 수행시간 - 82, 변경건수 : 2
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:97) : [ ===========> 차대확인  <============ ]
+2011-11-07 19:42:34, DEBUG [main](VochDao.java:49) : 전표처리.6-1.....................6-1
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:107) : [ ===========> 마감기본을 수정  <============ ]
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:150) : ===> 가수환불 확인 1 <===
+2011-11-07 19:42:34, DEBUG [main](VochDao.java:222) : 이체유형조회(회계일자, 거래내역번호)-(2011-11-07,986201)
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:152) : ===> 가수환불 확인 2 <===
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:157) : ===> 가수환불 확인 2 <===
+2011-11-07 19:42:34, DEBUG [main](VochDao.java:263) : 마감기본조회 (회계일자,회계단위코드,회계부서코드,이체유형코드)- (2011-11-07,W01,330000,S03)
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:179) : ===> 가수환불 확인 5 <===
+2011-11-07 19:42:34, DEBUG [main](LoggableStatement.java:290) : 수행시간 - 1, 변경건수 : 2
+2011-11-07 19:42:34, DEBUG [main](VochCC.java:182) : ===> 가수환불 확인 6 <===
+2011-11-07 19:42:34,  INFO [main](GenerateKey.java:63) : com.cabis.util.GenerateKey.getNextNumber시작
+2011-11-07 19:42:34, DEBUG [main](SqlRowProcedure.java:22) : start SqlRowProcedure 생성
+2011-11-07 19:42:34, DEBUG [main](GenerateKey.java:90) : 
+========== 채번 (GUSER.GP_GVNO_01(?,?,?,?,?,?,?,?,?,?)) ============
+분류종류번호:S009
+분류번호1  :20111107
+분류번호2  :
+분류번호3  :
+분류번호4  :
+분류번호5  :
+분류번호6  :
+사원번호   :SLNPM031
+===============================================
+2011-11-07 19:42:34, DEBUG [main](SqlRowProcedure.java:60) : start SetOutType
+2011-11-07 19:42:34, DEBUG [main](SqlRowProcedure.java:60) : start SetOutType
+2011-11-07 19:42:34,  INFO [main](SqlRunner.java:70) : BC_NO     : GBCGO_GVNOBC
+2011-11-07 19:42:34,  INFO [main](SqlRunner.java:71) : LIST_NO   : 11
+2011-11-07 19:42:34,  INFO [main](SqlRunner.java:72) : EXEC_TYPE : 9
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:83) : start connectDB
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:86) : tx.getConnection()
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:732) : * SQL 실행시간 ==> 1.32066255455E12
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:733) : * SQL : {CALL GUSER.GP_GVNO_01(?,?,?,?,?,?,?,?,?,?)}
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:742) : * SQL 종료시간 ==> 1.320662554565E12
+2011-11-07 19:42:34, DEBUG [main](SqlExecutor.java:743) : 총 걸린시간  ==> 15.0
+2011-11-07 19:42:34, DEBUG [main](GenerateKey.java:116) : 채번 결과====>2011110700151
+2011-11-07 19:42:34, DEBUG [main](VochProcQuery.java:592) : VochProcQuery.insertVochNo() QUERY
+INSERT INTO AUSER.ASCT_INTN_VOCH (		
+   INTN_VOCH_NO,							
+   ACCT_DT, 								
+   ISRT_DEPT_CD,	   						
+   TR_TP_CD, 	   							
+   TR_DESC_NO,   							
+   LOAN_NO,		   						
+   LOAN_SEQ,	   							
+   FRST_REG_DT,							
+   FRST_REG_TM,   						
+   FRST_REG_EMP_NO,						
+   LAST_PROC_DT,    						
+   LAST_PROC_TM,    						
+   LAST_PROC_EMP_NO   					
+) VALUES (								
+	?,?,?,?,?,?,?,							
+   TO_CHAR(SYSDATE,'YYYY-MM-DD'),					
+   TO_CHAR(SYSDATE,'hh24miss'),	
+   'VOCHPROC',							
+   TO_CHAR(SYSDATE,'YYYY-MM-DD'),					
+   TO_CHAR(SYSDATE,'hh24miss'),	
+   'VOCHPROC'								
+)											
+
+2011-11-07 19:42:34, DEBUG [main](VochProcQuery.java:669) : VochProcQuery.updateLoanPayDescVochNo() QUERY
+UPDATE AUSER.ALOT_LOAN_PAY_DESC 	
+SET PAY_INTN_VOCH_NO 	= ?		
+WHERE LOAN_NO 		= ?		
+ AND  LOAN_SEQ		= ?		
+ AND  SNUM    		= ?		
+
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:479) : /////■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■/////
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:480) : /////대외계 처리가능시 START ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■/////
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:481) : /////■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■/////
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:505) : KIB기관코드 :20032902:
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:522) : 채번된 지급일련번호 :0076112:
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:550) : 지급배치에서 KIB 지급거래일련번호 채번:0076112
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:563) : [[[[[AP Common]]]]] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:564) : [ 1][  4/N ] SOCKET LENGTH==>0604<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:565) : [ 2][  4/N ] LENGTH==>0600<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:566) : [ 3][  4/AN] CS번호 (0009 FIX)==>0009<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:567) : [ 4][  8/AN] CS관리 기관코드(KIB에서 채번한 기관코드  <= 하이캐피탈 지급이체 계좌 )==>20032902<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:568) : [ 5][  1/AN] REACTION CODE (0 FIX)==>0<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:569) : [ 6][  3/N ] 연속거래번호(000 FIX)==>000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:570) : [ 7][  1/AN] 송수신 FLAG (5 FIX)==>5<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:571) : [ 8][  8/AN] 취급기관코드(KIB에서 채번한 기관코드  <= 하이캐피탈 지급이체 계좌 )==>20032902<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:572) : [ 9][  9/AN] 취급영업점코드(KIB에서 채번한 기관코드 <= 하이캐피탈 지급이체 계좌 )==>20032902<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:574) : [10][  1/AN] 매체(발생)구분 (3 FIX)==>3<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:575) : [11][  4/N ] 전문구분코드(MSG TYPE) (0200 FIX)==>0200<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:576) : [12][  4/N ] 거래구분코드 (1100 FIX)==>1100<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:577) : [13][  3/AN] 응답코드(3)==>000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:578) : [14][  8/N ] 거래일자==>20111107<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:579) : [15][  6/N ] 거래시간==>194220<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:580) : [16][  7/N ] 거래일련번호==>0076112<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:582) : [17][  1/AN] 한글코드 구분 (2 FIX)==>2<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:583) : [18][  1/N ] 마감후 구분 (0 FIX)==>0<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:585) : [19][  8/N ] 개설기관코드(00000988-신한은행)==>988<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:586) : [20][  1/AN] M/S TRACK번호 (0 FIX)==>0<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:589) : [21][158/AN] USER WORK AREA==>                                                                                                                                                              <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:592) : [22][ 40/AN] 응답 MESSAGE==>                                        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:593) : [23][  6/N ] 원거래요소==>000000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:594) : [24][  4/AN] 은행응답코드==>    <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:595) : [25][ 10/AN] FILLER==>          <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:597) : [[[[[지급이체]]]]] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:598) : [26][ 13/N ] 거래금액==>1000000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:600) : [28][ 13/N ] 거래후 계좌잔액(0 13 개 FIX)==>0000000000000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:601) : [29][ 13/N ] 미결제 타점권 금액(0 13 개 FIX)==>0000000000000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:602) : 입금계좌부~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:603) : [30][  8/AN] 제휴기관코드(00000088-신한은행)==>088<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:604) : [31][  2/N ] 입금계좌구분코드(00 FIX)==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:606) : ==========> 고객계좌(2010.03.02-ALL):110276454855
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:607) : [32][ 16/AN] 계좌번호(고객계좌:숫자만)==>110276454855<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:608) : ==========> 고객계좌(2010.03.02-숫자만):110276454855
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:611) : ==========> 출금성명(2010.03.01-ALL):하이캐피탈
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:613) : ==========> 출금성명(2010.03.01-한글만/5자):하이캐피탈
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:616) : ==========> 입금성명(2010.03.01-ALL):김순녀
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:618) : ==========> 입금성명(2010.03.01-한글만/5자):김순녀
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:621) : [33][20/AN] 입금계좌성명-입금성명(입금계좌에 찍힐 텍스트)==>김순녀<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:623) : 출금계좌부~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:624) : [34][ 8/AN] 은행(제휴기관)코드(00000088-신한은행)==>088<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:625) : [35][ 2/N ] 출금계좌구분코드(00 FIX)==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:627) : ==========> 모계좌(2010.03.02-ALL):100024180210
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:628) : [36][16/AN] 계좌번호(모계좌:숫자만)==>100024180210<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:629) : ==========> 모계좌(2010.03.02-숫자만):100024180210
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:631) : [37][ 8/AN] 비밀번호==>        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:634) : [38][20/N ] 출금계좌성명-출금성명(출금통장에 찍힐 텍스트)==>하이캐피탈<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:636) : [39][ 5/N ] 수수료금액(00000 FIX)==>00000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:637) : [40][ 3/N ] 현금매수(000 FIX)==>000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:638) : [41][ 2/N ] 수표매수(00 FIX)==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:639) : [42][ 8/AN] 수표번호1==>        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:640) : [43][ 6/AN] 수표발행정보1==>      <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:641) : [44][ 2/N ] 수표권종1==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:642) : [45][ 8/AN] 수표번호2==>        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:643) : [46][ 6/AN] 수표발행정보2==>      <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:644) : [47][ 2/N ] 수표권종2==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:645) : [48][ 8/AN] 수표번호3==>        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:646) : [49][ 6/AN] 수표발행정보3==>      <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:647) : [50][ 2/N ] 수표권종3==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:648) : [51][ 8/AN] 수표번호4==>        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:649) : [52][ 6/AN] 수표발행정보4==>      <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:650) : [53][ 2/N ] 수표권종4==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:651) : [54][ 8/AN] 수표번호5==>        <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:652) : [55][ 6/AN] 수표발행정보5==>      <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:653) : [56][ 2/N ] 수표권종5==>00<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:654) : [57][ 3/AN] 취소 사유==>   <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:655) : [58][12/AN] 거래관리번호==>            <==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:656) : [59][ 5/N ] 배분수수료금액==>00000<==
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:657) : [60][50/AN] KIB요청에 의해 600바이트를 맞추기 위한 FILLER==>                                                  <==
+con : oracle.jdbc.driver.T4CConnection@76f076f
+Connection gain complete. 
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:694) : !!보내기전 찍기!!전송전문
+ : [06040600000920032902000052003290220032902 30200110000020111107194220007611220000009880                                                                                                                                                                                                      000000              0000001000000 000000000000000000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  ]
+2011-11-07 19:42:34,  INFO [main](SLNPM0301.java:695) : :::송신시각[20111107194221/1320662554805]:::
+con : oracle.jdbc.driver.T4CConnection@47d747d7
+Connection gain complete. 
+======== 소켓 연결되었습니다 ============
+===전문 로그를 기록 ===================
+oracle.jdbc.driver.T4CConnection@47d747d7
+GramExecutor 전송전문 : [06040600000920032902000052003290220032902 30200110000020111107194220007611220000009880                                                                                                                                                                                                      000000              0000001000000 000000000000000000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  ]
+GramExecutor 수신전문 : [06040600000920032902000062003290220032902 3021011000002011110719425500761122000000988620032901                                                                                                                                     0 009236584      정상처리                                000000              0000001000000 000006835207400000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:701) : :::수신시각[20111107194222/1320662556129]:::
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:702) : !!보내고나서 찍기!!수신전문
+ : [06040600000920032902000062003290220032902 3021011000002011110719425500761122000000988620032901                                                                                                                                     0 009236584      정상처리                                000000              0000001000000 000006835207400000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:704) : [KB0200]From 전문송신 ~ To 전문수신 소요시간1324 (단위 : 1/1000 초)
+con : oracle.jdbc.driver.T4CConnection@78b278b2
+Connection gain complete. 
+수신해야할 갯수 : 60
+lth : 4
+strtPlc : 0
+retVal[0] : 0604
+lth : 4
+strtPlc : 4
+retVal[1] : 0600
+lth : 4
+strtPlc : 8
+retVal[2] : 0009
+lth : 8
+strtPlc : 12
+retVal[3] : 20032902
+lth : 1
+strtPlc : 20
+retVal[4] : 0
+lth : 3
+strtPlc : 21
+retVal[5] : 000
+lth : 1
+strtPlc : 24
+retVal[6] : 6
+lth : 8
+strtPlc : 25
+retVal[7] : 20032902
+lth : 9
+strtPlc : 33
+retVal[8] : 20032902
+lth : 1
+strtPlc : 42
+retVal[9] : 3
+lth : 4
+strtPlc : 43
+retVal[10] : 0210
+lth : 4
+strtPlc : 47
+retVal[11] : 1100
+lth : 3
+strtPlc : 51
+retVal[12] : 000
+lth : 8
+strtPlc : 54
+retVal[13] : 20111107
+lth : 6
+strtPlc : 62
+retVal[14] : 194255
+lth : 7
+strtPlc : 68
+retVal[15] : 0076112
+lth : 1
+strtPlc : 75
+retVal[16] : 2
+lth : 1
+strtPlc : 76
+retVal[17] : 0
+lth : 8
+strtPlc : 77
+retVal[18] : 00000988
+lth : 1
+strtPlc : 85
+retVal[19] : 6
+lth : 158
+strtPlc : 86
+retVal[20] : 20032901                                                                                                                                     0 009236584
+lth : 40
+strtPlc : 244
+retVal[21] : 정상처리
+lth : 6
+strtPlc : 284
+retVal[22] : 000000
+lth : 4
+strtPlc : 290
+retVal[23] : 
+lth : 10
+strtPlc : 294
+retVal[24] : 
+lth : 13
+strtPlc : 304
+retVal[25] : 0000001000000
+lth : 1
+strtPlc : 317
+retVal[26] : 
+lth : 13
+strtPlc : 318
+retVal[27] : 0000068352074
+lth : 13
+strtPlc : 331
+retVal[28] : 0000000000000
+lth : 8
+strtPlc : 344
+retVal[29] : 00000088
+lth : 2
+strtPlc : 352
+retVal[30] : 00
+lth : 16
+strtPlc : 354
+retVal[31] : 110276454855
+lth : 20
+strtPlc : 370
+retVal[32] : 김순녀
+lth : 8
+strtPlc : 390
+retVal[33] : 00000088
+lth : 2
+strtPlc : 398
+retVal[34] : 00
+lth : 16
+strtPlc : 400
+retVal[35] : 100024180210
+lth : 8
+strtPlc : 416
+retVal[36] : 
+lth : 20
+strtPlc : 424
+retVal[37] : 하이캐피탈
+lth : 5
+strtPlc : 444
+retVal[38] : 00100
+lth : 3
+strtPlc : 449
+retVal[39] : 000
+lth : 2
+strtPlc : 452
+retVal[40] : 00
+lth : 8
+strtPlc : 454
+retVal[41] : 00000000
+lth : 6
+strtPlc : 462
+retVal[42] : 000000
+lth : 2
+strtPlc : 468
+retVal[43] : 00
+lth : 8
+strtPlc : 470
+retVal[44] : 00000000
+lth : 6
+strtPlc : 478
+retVal[45] : 000000
+lth : 2
+strtPlc : 484
+retVal[46] : 00
+lth : 8
+strtPlc : 486
+retVal[47] : 00000000
+lth : 6
+strtPlc : 494
+retVal[48] : 000000
+lth : 2
+strtPlc : 500
+retVal[49] : 00
+lth : 8
+strtPlc : 502
+retVal[50] : 00000000
+lth : 6
+strtPlc : 510
+retVal[51] : 000000
+lth : 2
+strtPlc : 516
+retVal[52] : 00
+lth : 8
+strtPlc : 518
+retVal[53] : 00000000
+lth : 6
+strtPlc : 526
+retVal[54] : 000000
+lth : 2
+strtPlc : 532
+retVal[55] : 00
+lth : 3
+strtPlc : 534
+retVal[56] : 
+lth : 12
+strtPlc : 537
+retVal[57] : 
+lth : 5
+strtPlc : 549
+retVal[58] : 00000
+lth : 50
+strtPlc : 554
+retVal[59] : 
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:709) : recevieParm.length : 60
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[0]0604
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[1]0600
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[2]0009
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[3]20032902
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[4]0
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[5]000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[6]6
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[7]20032902
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[8]20032902
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[9]3
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[10]0210
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[11]1100
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[12]000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[13]20111107
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[14]194255
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[15]0076112
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[16]2
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[17]0
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[18]00000988
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[19]6
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[20]20032901                                                                                                                                     0 009236584
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[21]정상처리
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[22]000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[23]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[24]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[25]0000001000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[26]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[27]0000068352074
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[28]0000000000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[29]00000088
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[30]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[31]110276454855
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[32]김순녀
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[33]00000088
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[34]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[35]100024180210
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[36]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[37]하이캐피탈
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[38]00100
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[39]000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[40]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[41]00000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[42]000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[43]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[44]00000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[45]000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[46]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[47]00000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[48]000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[49]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[50]00000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[51]000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[52]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[53]00000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[54]000000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[55]00
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[56]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[57]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[58]00000
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:713) : j[59]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:725) : ===========================================
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:726) : 전송전문 : [06040600000920032902000052003290220032902 30200110000020111107194220007611220000009880                                                                                                                                                                                                      000000              0000001000000 000000000000000000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:727) : 수신전문 : [06040600000920032902000062003290220032902 3021011000002011110719425500761122000000988620032901                                                                                                                                     0 009236584      정상처리                                000000              0000001000000 000006835207400000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:728) : 응답코드(rspnCd) : [000]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:729) : KIB기관코드(kibOrgCd) : [20032902]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:730) : 거래일련번호(dealSN) : [200329020076112]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:731) : 수수료금액(lOamtFee) : [100]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:732) : 출금후잔액(lOamtAfamt) : [68352074]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:733) : ===========================================
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:760) : /////■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■/////
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:761) : /////대외계 처리가능시 END ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■/////
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:762) : /////■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■/////
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:770) : @@ 정상지급 시, 실시간지급(LOAN_ONLN).전문전송일시/전문추적번호/응답코드/출금수수료/출금후잔액/지급번호 UPDATE START @@
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:710) : 전문전송시각, 전문추적번호, 응답코드, 출금수수료, 출금후잔액, 지급번호를 수정 SQL= 
+UPDATE AUSER.ALOT_LOAN_ONLN_PAY      						
+   SET   GRAM_SEND_DTTM = ?,              					
+         GRAM_CHSE_NO = ?, 								
+         RSPN_CD = ?,  									
+         OAMT_FEE = ?,                                     
+         OAMT_AFAMT = ?,                                   
+         LAST_PROC_DT = TO_CHAR(SYSDATE,'YYYY-MM-DD'),		
+         LAST_PROC_TM = TO_CHAR(SYSDATE,'hh24miss'),		
+         LAST_PROC_EMP_NO = 'SLNPM031'						
+WHERE PAY_NO = ?      										
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:711) : arg1= 20111107194221
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:712) : arg2= 200329020076112
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:713) : arg3= 000
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:714) : arg4= 100.0
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:715) : arg5= 6.8352074E7
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:716) : arg6= 11110700000166
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:772) : @@ 정상지급 시, 실시간지급(LOAN_ONLN).전문전송일시/전문추적번호/응답코드/지급번호 UPDATE END @@
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:775) : @@ payAftSucessProc(정상지급  후 처리) CALL START @@
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1488) : 지급번호=11110700000166
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1500) : 계약서류관리를 위해 ALDT_계약_서류_도착_관리_원장 insert start
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:853) : 계약서류관리원장 생성 SQL= 
+-- (대출지급 시)계약서류관리원장 생성 SQL             
+INSERT INTO AUSER.ALDT_CONT_DOC_ARRL_MNG_MST (	
+		LOAN_NO 				
+	   ,LOAN_SEQ				
+	   ,GUAR_YN					
+	   ,DOC_LAST_STAT_CD		
+	   ,COM_CMPL_FG				
+	   ,MRTG_RIGT_CMPL_FG		
+	   ,AUTH_LETT_CMPL_FG		
+	   ,RESI_CDOC_CMPL_FG		
+	   ,IDCD_COPY_CMPL_FG		
+	   ,SEAL_CDOC_CMPL_FG		
+	   ,GUAR_MAN_CMPL_FG		
+      ,THDD_DUP_LOAN_FG		
+	   ,FRST_REG_DT				
+	   ,FRST_REG_TM				
+	   ,FRST_REG_EMP_NO			
+	   ,LAST_PROC_DT			
+	   ,LAST_PROC_TM			
+	   ,LAST_PROC_EMP_NO		
+) VALUES         				
+(			 					
+       ?			 			
+      ,?			 			
+      ,(SELECT CASE WHEN COUNT(x.LOAN_NO) > 0 THEN '1'	   
+       			       ELSE '0'                        
+       			  END                                  
+        FROM   AUSER.ALOT_LOAN_REL_MAN x                  
+        WHERE  x.LOAN_NO     = ?                          
+        AND    x.LOAN_SEQ    = ?                          
+        AND    x.LOAN_REL_CD = '2')                       
+      ,'00'			 							       
+      ,'0'			 									   
+      ,'0'			 									   
+      ,'0'			 									   
+      ,'0'			 									   
+      ,'0'			 									   
+      ,'0'			 									   
+      ,'0'			 									   
+	   ,(SELECT CASE WHEN  COUNT(DM.LOAN_NO) > 0 THEN '1'	       
+       			       ELSE '0'                        
+       			  END                                  
+	     FROM   AUSER.ALOT_LOAN_BASE LB 				   
+	           ,AUSER.ALDT_CONT_DOC_ARRL_MNG_MST DM   	   
+	     WHERE LB.LOAN_NO = DM.LOAN_NO 					   
+	     AND   LB.LOAN_SEQ = DM.LOAN_SEQ  				   
+	     AND   LB.LOAN_DT = TO_CHAR(SYSDATE,'YYYY-MM-DD')  
+	     AND   LB.LOAN_NO = ?)              			   
+      ,TO_CHAR(SYSDATE,'YYYY-MM-DD') 					   
+      ,TO_CHAR(SYSDATE,'hh24miss')   					   
+      ,'SLNPM031'                    					   
+      ,TO_CHAR(SYSDATE,'YYYY-MM-DD') 					   
+      ,TO_CHAR(SYSDATE,'hh24miss')   					   
+      ,'SLNPM031'                    					   
+)
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:854) : loanNo= 11110700268
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:855) : loanSeq= 01
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1505) : 계약서류관리를 위해 ALDT_계약_서류_도착_관리_원장 insert end
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1513) : 신규대출(PL상품구분 == 10(신규) 또는  40(재대출) 또는 70(신규RE))인 경우 ==> 발송신청이력 및 교섭이력 자동생성
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1516) : 계약서셋트 자동신청 ALDT_발송_관리_정보 insert start
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:946) : 계약서발송신청용 정보조회 SQL=
+SELECT   L.CONT_MAN_NO CUST_NO				                 -- 고객_번호			    
+	     ,(SELECT NVL(MAX(SNUM),0)+1                                                
+            FROM AUSER.ALDT_DLVR_MNG_INFO                                          
+           WHERE CUST_NO = L.CONT_MAN_NO) SNUM              -- 일련번호                           
+	     ,'06' FORM_TP_CD                               	 -- 서식_유형_코드                
+	     ,'A' FORM_CLAS_CD                             		 -- 서식_분류_코드                
+	     ,CASE WHEN L.PL_PRDT_DIV = '70' THEN '0610A'      	                        
+	           WHEN L.PL_PRDT_DIV = '40' THEN '0610A'      	                        
+	           ELSE '0600A'                                        	                
+	      END FORM_KIND_CD                          	-- 문서_종류_코드(A00136)     
+	     ,C.MEMB_NO MEMB_NO                                  -- 회원_번호                         
+	     ,'1' RECV_MAN_DIV_CD                          		 -- 수신구분-채무자(계약자)	
+	     ,L.CONT_MAN_NO RECV_MAN_CUST_NO                     -- 수신자_고객_번호	    
+	     ,L.LOAN_NO LOAN_NO                                  -- 대출_번호                         
+	     ,L.LOAN_SEQ LOAN_SEQ                                -- 대출_순번                         
+	     ,L.PRDT_CD PRDT_CD                                  -- 상품_코드                         
+        ,CASE WHEN C.DLVR_PLC_DIV_CD = '01' THEN '1'                               
+              ELSE '4'                                                             
+         END  DLVR_METH_CD                                  -- 발송_방법_코드                
+	     ,'1' TOT_FG                                   		 -- 일괄_여부                         
+        ,CASE WHEN C.DLVR_PLC_DIV_CD = '01' THEN '02'                              
+              ELSE ''                                                              
+         END  MAIL_KIND_CD                                  -- 우편_종류_코드                
+        ,CASE WHEN C.DLVR_PLC_DIV_CD = '01' THEN '05'                              
+              ELSE ''                                                              
+         END  ADDR_DIV_CD                                   -- 주소_구분코드                  
+        ,CASE WHEN C.DLVR_PLC_DIV_CD = '01' THEN (SELECT ZIP_CD                                   
+                                                  FROM   AUSER.ACTT_CUST_ADDR                     
+                                                  WHERE  CUST_NO =  L.CONT_MAN_NO                 
+                                                  AND ADDR_DIV_CD = '05')                         
+              ELSE ''                                                                             
+         END  ZIP_CD -- 우편_번호                                                                                                                                      
+        ,CASE WHEN C.DLVR_PLC_DIV_CD = '01' THEN (SELECT ADDR_DESC                                
+                                                  FROM   AUSER.ACTT_CUST_ADDR                     
+                                                  WHERE  CUST_NO =  L.CONT_MAN_NO                 
+                                                  AND ADDR_DIV_CD = '05')                         
+              ELSE (SELECT CD_DESC_KOR_NM                                                         
+                    FROM   GUSER.GBCT_COMM_CD_DESC                                                
+                    WHERE  CD_DESC_NO = C.DLVR_PLC_DIV_CD                                         
+                    AND    CD_KIND_NO = 'S00559') /* 계약방법코드 - 우편발송/전자서명/내방계약/서류대행 */ 
+         END  ADDR_DESC -- 주소_기본                                                                                                                               
+        ,CASE WHEN C.DLVR_PLC_DIV_CD = '01' THEN (SELECT ADDR_SPEC                                
+                                                  FROM   AUSER.ACTT_CUST_ADDR                     
+                                                  WHERE  CUST_NO =  L.CONT_MAN_NO                 
+                                                  AND ADDR_DIV_CD = '05')                         
+              ELSE ''                                                                             
+         END  ADDR_SPEC -- 주소_상세                                                                                                                               
+	    ,TO_CHAR(SYSDATE,'YYYY-MM-DD') ASK_STND_DT  		 -- 청구기준일자              
+	    ,'01' DLVR_STAT_CD                          		 -- 발송_상태_코드          
+	    ,'' RSND_RSN_CD                             		 -- 반송_사유_코드          
+	    ,(SELECT CNTC_PLC_TEL1                                                   
+		   	 FROM AUSER.ACTT_CUST_CNTC_PLC                                       
+ 		   	WHERE CUST_NO =  L.CONT_MAN_NO                                       
+		   	  AND CNTC_PLC_DIV_CD = '01') TEL_NO_ZONE		 -- 전화번호_지역            
+	    ,(SELECT CNTC_PLC_TEL2                                                   
+		   	 FROM AUSER.ACTT_CUST_CNTC_PLC                                       
+ 		     WHERE CUST_NO =  L.CONT_MAN_NO                                      
+		   	  AND CNTC_PLC_DIV_CD = '01') TEL_NO_TONO		 -- 전화번호_국번            
+	    ,(SELECT CNTC_PLC_TEL3                                                   
+		   	 FROM AUSER.ACTT_CUST_CNTC_PLC                                       
+ 		   	WHERE CUST_NO =  L.CONT_MAN_NO                                       
+		   	  AND CNTC_PLC_DIV_CD = '01') TEL_NO_SEQ 		 -- 전화번호_순번            
+	    ,(SELECT CNTC_PLC_TEL1                                                   
+		   	 FROM AUSER.ACTT_CUST_CNTC_PLC                                       
+ 		   	WHERE CUST_NO =  L.CONT_MAN_NO                                       
+		   	  AND CNTC_PLC_DIV_CD = '03') HP_NO1     		 -- 휴대폰_번호1       
+	    ,(SELECT CNTC_PLC_TEL2                                                   
+		   	 FROM AUSER.ACTT_CUST_CNTC_PLC                                       
+ 		   	WHERE CUST_NO =  L.CONT_MAN_NO                                       
+		   	  AND CNTC_PLC_DIV_CD = '03') HP_NO2     		 -- 휴대폰_번호2       
+	    ,(SELECT CNTC_PLC_TEL3                                                   
+		   	 FROM AUSER.ACTT_CUST_CNTC_PLC                                       
+ 		   	WHERE CUST_NO =  L.CONT_MAN_NO                                       
+		   	  AND CNTC_PLC_DIV_CD = '03') HP_NO3     		 -- 휴대폰_번호3       
+	    ,'' FAX_NO1                                 		 -- 팩스_번호1         
+	    ,'' FAX_NO2                                 		 -- 팩스_번호2         
+	    ,'' FAX_NO3                                 		 -- 팩스_번호3         
+	    ,'' EMAL                                    		 -- 전자메일                      
+	    ,'' BND_STAT_CD                             		 -- 채권_상태_코드           
+	    ,'22' LOAN_STAT_CD                          		 -- 대출상태코드               
+	    ,'' DOC_LAST_STAT_CD                        		 -- 서류최종상태코드         
+	    ,'' VSIT_DIV_CD                             		 -- 방문_구분코드             
+	    ,'' LAST_PRT_DT                             		 -- 최종출력일                  
+	    ,'' LAST_PRT_EMP_NO                         		 -- 최종출력사원번호         
+	    ,0 PRT_CNT                                  		 -- 출력횟수                     
+	    ,TO_CHAR(SYSDATE,'YYYY-MM-DD') DLVR_APPL_DT 		 -- 발송_신청_일자           
+	    ,L.OCCR_DEPT_CD DLVR_APPL_DEPT_CD           		 -- 발송_신청_부서_코드  
+	    ,LN_DIVS_EMP_NO DLVR_APPL_EMP_NO            		 -- 발송_신청_사원_번호  
+	    ,TO_CHAR(SYSDATE,'YYYY-MM-DD') DLVR_REG_DT  		 -- 발송_등록_일자           
+	    ,'' DLVR_REG_DEPT_CD                        		 -- 발송_등록_부서_코드   
+	    ,'' DLVR_REG_EMP_NO                         		 -- 발송_등록_사원_번호   
+	    ,TO_CHAR(SYSDATE,'YYYY-MM-DD') FRST_REG_DT  		 -- 최초_등록_일자           
+	    ,TO_CHAR(SYSDATE,'hh24miss') FRST_REG_TM    		 -- 최초_등록_시각           
+	    ,'SLNPM031' FRST_REG_EMP_NO                 		 -- 최초_등록_사원_번호   
+	    ,TO_CHAR(SYSDATE,'YYYY-MM-DD') LAST_PROC_DT          -- 최종_처리_일자           
+	    ,TO_CHAR(SYSDATE,'hh24miss') LAST_PROC_TM            -- 최종_처리_시각           
+	    ,'SLNPM031' LAST_PROC_EMP_NO                         -- 최종_처리_사원번호     
+FROM   AUSER.ALOT_LOAN_BASE L                                                   
+     , AUSER.ACTT_CUST_BASE C                                                   
+WHERE  L.cont_man_no = C.cust_no                                                
+AND    L.loan_no     = ?                                                        
+AND    L.loan_seq    = ?                                                        
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:947) : arg1=11110700268
+ arg2=01
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:951) : loanNo= 11110700268
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:952) : loanSeq= 01
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1052) : 계약서류도착관리원장 생성 SQL= 
+-- (대출지급 시)ALDT_발송_관리_정보 생성 SQL 
+INSERT INTO AUSER.ALDT_DLVR_MNG_INFO (	
+			  CUST_NO						 
+			 ,SNUM               
+			 ,FORM_TP_CD         
+			 ,FORM_CLAS_CD       
+			 ,FORM_KIND_CD       
+			 ,MEMB_NO            
+			 ,RECV_MAN_DIV_CD    
+			 ,RECV_MAN_CUST_NO   
+			 ,LOAN_NO            
+			 ,LOAN_SEQ           
+			 ,PRDT_CD            
+			 ,DLVR_METH_CD       
+			 ,TOT_FG             
+			 ,MAIL_KIND_CD       
+			 ,ADDR_DIV_CD        
+			 ,ZIP_CD             
+			 ,ADDR_DESC            
+			 ,ADDR_SPEC          
+			 ,ASK_STND_DT        
+			 ,DLVR_STAT_CD       
+			 ,RSND_RSN_CD        
+			 ,TEL_NO_ZONE        
+			 ,TEL_NO_TONO        
+			 ,TEL_NO_SEQ         
+			 ,HP_NO1             
+			 ,HP_NO2             
+			 ,HP_NO3             
+			 ,FAX_NO1            
+			 ,FAX_NO2            
+			 ,FAX_NO3            
+			 ,EMAL               
+			 ,BND_STAT_CD        
+			 ,LOAN_STAT_CD       
+			 ,DOC_LAST_STAT_CD   
+			 ,VSIT_DIV_CD        
+			 ,LAST_PRT_DT        
+			 ,LAST_PRT_EMP_NO    
+			 ,PRT_CNT            
+			 ,DLVR_APPL_DT       
+			 ,DLVR_APPL_DEPT_CD  
+			 ,DLVR_APPL_EMP_NO   
+			 ,DLVR_REG_DT        
+			 ,DLVR_REG_DEPT_CD   
+			 ,DLVR_REG_EMP_NO    
+			 ,FRST_REG_DT        
+			 ,FRST_REG_TM        
+			 ,FRST_REG_EMP_NO    
+			 ,LAST_PROC_DT       
+			 ,LAST_PROC_TM       
+			 ,LAST_PROC_EMP_NO   
+) VALUES         				 
+(			 					         
+			  ?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+			 ,?  
+)               
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [0:7411272350923]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [1:1]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [2:06]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [3:A]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [4:0600A]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [5:HC0107964]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [6:1]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [7:7411272350923]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [8:11110700268]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [9:01]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [10:LOeQ06]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [11:4]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [12:1]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [13:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [14:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [15:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [16:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [17:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [18:2011-11-07]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [19:01]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [20:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [21:043 ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [22:000 ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [23:0000]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [24:010 ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [25:8314]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [26:1819]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [27:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [28:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [29:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [30:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [31:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [32:22]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [33:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [34:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [35:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [36:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [37:0]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [38:2011-11-07]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [39:334000]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [40:BATCHJ]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [41:2011-11-07]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [42:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [43:null]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [44:2011-11-07]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [45:194223]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [46:SLNPM031]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [47:2011-11-07]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [48:194223]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1056) : [49:SLNPM031]
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1521) : 계약서셋트 자동신청 ALDT_발송_관리_정보 insert end
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1524) : 채권교섭이력에 발송신청 이력 insert start
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1090) : 채권교섭이력 생성 SQL= 
+-- (대출지급 시)채권교섭이력 생성 SQL            
+INSERT INTO CUSER.CBCT_CUST_CNSL_GUID (	
+  LOAN_NO              
+, LOAN_SEQ             
+, REG_DT               
+, REG_TM               
+, CUST_NO              
+, GUID_URGE_DIV_CD     
+, ACTV_SPEC_CD         
+, DIVS_MAN_NM          
+, CNSL_OBJ_MAN_NM      
+, LOAN_REL_CD          
+, TELC_CNTN            
+, CNTC_PLC_DIV_CD      
+, CNTC_STAT_CD         
+, IN_OUT_BOUND_DIV_CD  
+, LNGS_DLY_DDCNT       
+, PSG_DDCNT            
+, DLY_AMT              
+, DIVS_MAN_EMP_NO      
+, LOAN_WDRW_AMT        
+, FRST_REG_DT          
+, FRST_REG_TM          
+, FRST_REG_EMP_NO      
+, LAST_PROC_DT         
+, LAST_PROC_TM         
+, LAST_PROC_EMP_NO     
+, TXT_RECV_FG          
+, BSN_CD_A             
+, BSN_CD_B )           
+SELECT A.LOAN_NO                                
+      ,A.LOAN_SEQ                               
+	  ,TO_CHAR(SYSDATE,'YYYY-MM-DD') AS REG_DT   
+	  ,TO_CHAR(SYSDATE,'HH24MISS') AS REG_TM     
+	  ,A.CUST_NO                                 
+	  ,'02' AS GUID_URGE_DIV_CD                  
+	  ,'99' AS ACTV_SPEC_CD                      
+	  ,'일괄발송' AS DIVS_MAN_NM                   
+	  ,AUSER.AF_CUSTBASE_01(A.RECV_MAN_CUST_NO) AS CNSL_OBJ_MAN_NM                            
+	  ,A.RECV_MAN_DIV_CD                                                                      
+	  ,GUSER.GF_COMMCD_NM_01('A00136',A.FORM_KIND_CD) || ' [발송신청] [' || GUSER.GF_COMMCD_NM_01('A00138',A.DLVR_METH_CD) || ']'AS TELC_CNTN           
+	  ,CASE WHEN A.DLVR_METH_CD = '1'                                                         
+	             THEN DECODE(A.ADDR_DIV_CD,'01','01','02','02','03','14','04','08','05','15')	
+			WHEN A.DLVR_METH_CD = '2' THEN '16'   
+			WHEN A.DLVR_METH_CD = '3' THEN '08'   
+			WHEN A.DLVR_METH_CD = '4' THEN '09'   
+			END AS CNTC_PLC_DIV_CD                
+	  ,'1' AS CNTC_STAT_CD                        
+	  ,'1' AS IN_OUT_BOUND_DIV_CD                 
+	  ,NVL(C.LNGS_DLY_DDCNT,0) AS LNGS_DLY_DDCNT  
+	  ,NVL(C.DLY_DDCNT,0) AS PSG_DDCNT            
+	  ,NVL(C.DLY_PAMT,0) + NVL(C.DLY_INT,0) AS DLY_AMT             
+	  ,NVL(B.BND_DIVS_EMP_NO,C.BND_DIVS_EMP_NO) AS DIVS_MAN_EMP_NO 
+	  ,0 AS LOAN_WDRW_AMT                         
+	  ,A.FRST_REG_DT                              
+	  ,A.FRST_REG_TM                              
+      ,A.FRST_REG_EMP_NO                         
+	  ,A.LAST_PROC_DT                             
+	  ,A.LAST_PROC_TM                             
+	  ,A.LAST_PROC_EMP_NO                         
+	  ,'0' AS TXT_RECV_FG                         
+	  ,'0' AS BSN_CD_A                            
+	  ,'5' AS BSN_CD_B                            
+  FROM AUSER.ALDT_DLVR_MNG_INFO A                
+ INNER JOIN AUSER.ALOT_LOAN_BASE B               
+         ON B.LOAN_NO  = A.LOAN_NO               
+		AND B.LOAN_SEQ = A.LOAN_SEQ               
+ LEFT OUTER JOIN CUSER.CART_BND_CLS_BASE C       
+         ON C.LOAN_NO  = A.LOAN_NO               
+		AND C.LOAN_SEQ = A.LOAN_SEQ               
+ WHERE A.LOAN_NO = ?                             
+   AND A.LOAN_SEQ = ?                            
+   AND A.SNUM = ?                                
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1091) : loanNo= 11110700268
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1092) : loanSeq= 01
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:1093) : sNum= 1
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1530) : 채권교섭이력에 발송신청 이력 insert end
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1549) : ACNT_심사_진행_기본 진행상태 update start
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:897) : 심사진행기본 진행상태 UPDATE SQL= 
+-- (대출지급 시)ACNT_심사_진행_기본 진행상태 UPDATE SQL        			 
+ UPDATE AUSER.ACNT_EXAM_PRGS_BASE  								 
+ SET    EXAM_PRGS_STAT_CD = ?  ,   /*심사_진행_상태_코드 04-입금(실행)*/ 
+        LAST_PROC_DT      = TO_CHAR(SYSDATE,'YYYY-MM-DD'),			 
+        LAST_PROC_TM      = TO_CHAR(SYSDATE,'hh24miss'),			 
+        LAST_PROC_EMP_NO  = 'SLNPM031'								 
+ WHERE  LOAN_NO       = ?        									 
+ AND    LOAN_SEQ      = ?        									 
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:898) : examPrgsStatCd= 04
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:899) : loanNo= 11110700268
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301Dao.java:900) : loanSeq= 01
+
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:1555) : ACNT_심사_진행_기본 진행상태 update end
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:777) : @@ payAftSucessProc(정상지급  후 처리) CALL END @@
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:785) : ################ 지급정상으로 지급처리 프로세스 종료  ####################################################
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:852) : 대출실시간지급처리 건수 : 1
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:861) : 대출실시간지급처리에 걸린시간 => 0 M 2 S 955 MS
+2011-11-07 19:42:36,  INFO [main](SLNPM0301.java:218) : 총 걸린시간 => 0 M 3 S 514 MS
