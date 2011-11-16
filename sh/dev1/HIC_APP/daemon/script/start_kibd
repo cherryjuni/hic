@@ -3,5 +3,12 @@ DAEMON_HOME=/HIC_APP/daemon
 export DAEMON_HOME
 . $DAEMON_HOME/script/daemon.profile
 
+send_id="$(ps -ef | grep 9300 | grep KibReceiver | grep -v grep | grep -v tail)"
+
+if [ ! "${send_id}" = "" ]; then
+    echo "Kib Daemon Already Start!!!!!";
+    exit;
+fi;
+
 LOG_DATE=`date +"%Y%m%d_%H%M"`
 nohup java rsvr.KibReceiver 9300 cabisdev zuser zuser >> $DAEMON_HOME/log/KibReceiver_9300_$LOG_DATE.log &
