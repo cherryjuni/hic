@@ -1,0 +1,11 @@
+#!/bin/sh
+
+kib_id="$(ps -ef | grep 9300 |grep -v grep | grep -v db2agent |cut -c10-16)"
+
+if [ ! "${kib_id}" = "" ]; then
+	kill -9  ${kib_id};
+	echo "KibReceiver Server Down !!!"
+else
+	echo "Already KibReceiver Server Down !!!"
+fi
+

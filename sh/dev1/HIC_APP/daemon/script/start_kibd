@@ -1,0 +1,7 @@
+#daemon env profile call
+DAEMON_HOME=/HIC_APP/daemon
+export DAEMON_HOME
+. $DAEMON_HOME/script/daemon.profile
+
+LOG_DATE=`date +"%Y%m%d"`
+nohup java rsvr.KibReceiver 9300 cabisdev zuser zuser >> $DAEMON_HOME/log/KibReceiver_9300_$LOG_DATE.log &
