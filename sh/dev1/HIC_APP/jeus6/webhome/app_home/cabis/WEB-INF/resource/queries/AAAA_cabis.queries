@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="euc-kr"?>
+
+<!--
+<key>...</key> 내용은 수정이 불가피 할때만 수정한다. 소스에서 사용하는 이름임.
+-->
+
+<resources>
+
+	<!-- SC 클래스 패스를 모두 조회 -->
+	<resource>
+	  <key>SELECT_SC_CLASSPATH</key>
+	  <value>
+	  SELECT PRGM_NO, SC_PATH, PRGM_NM FROM GUSER.GSCT_PRGM WITH UR
+	  </value>
+	</resource>
+	
+	<!-- SC 클래스 패스를 KEY로 조회 -->
+	<resource>
+	  <key>SELECT_SC_CLASSPATH_BY_PRGM_NO</key>
+	  <value>
+	  SELECT PRGM_NO, SC_PATH, PRGM_NM FROM GUSER.GSCT_PRGM WHERE PRGM_NO = ? WITH UR
+	  </value>
+	</resource>
+	
+	<!-- Login시 사용자 정보 조회 -->	
+	<resource>
+	  <key>SELECT_USER</key>
+	  <value>
+	    SELECT   U.USER_NO
+		        ,U.USER_NM
+		        ,U.EMP_NO
+		        ,decrypt_char( U.PSWD,'ANAFINANCE') PSWD
+		        ,U.USE_FG
+		        ,E.MNG_DEPT_CD AS BSN_DEPT_CD
+		        ,(SELECT DEPT_NM FROM DUSER.DHRT_ORG WHERE DEPT_CD = E.MNG_DEPT_CD) AS BSN_DEPT_NM
+		        ,D.DEPT_CD AS ONWORK_DEPT_CD
+		        ,D.DEPT_NM AS ONWORK_DEPT_NM
+		        ,D.MNBR_DIV_CD
+		        ,CASE WHEN LENGTH(RTRIM(H.ATTD_DEPT_CD)) > 0 THEN H.ATTD_DEPT_CD ELSE D.DEPT_CD END ATTD_DEPT_CD				
+		        ,D.ACCT_DEPT_CD
+		        ,CASE WHEN LENGTH(RTRIM(H.ATTD_DEPT_CD)) > 0 THEN (SELECT DEPT_NM FROM DUSER.DHRT_ORG WHERE DEPT_CD = H.ATTD_DEPT_CD) ELSE D.DEPT_NM END ATTD_DEPT_NM
+				,E.ACCT_DEPT_CD ATTD_ACCT_DEPT_CD				
+				,(SELECT DEPT_NM FROM DUSER.DHRT_ORG WHERE DEPT_CD = E.ACCT_DEPT_CD) AS ATTD_ACCT_DEPT_NM
+				,GUSER.GF_MONTH_COUNT_02( CASE WHEN U.RCNT_PSWD_CHNG_DT = '' THEN CASE WHEN U.LAST_PROC_DT = '' THEN CHAR(CURRENT DATE) ELSE U.LAST_PROC_DT END ELSE U.RCNT_PSWD_CHNG_DT END,
+		     CHAR(CURRENT DATE))
+		FROM   GUSER.GBCT_USER U 
+			   LEFT JOIN DUSER.DHRT_ORG D 
+			   ON U.DEPT_CD = D.DEPT_CD 
+			   LEFT OUTER JOIN 
+			   DUSER.DHRT_EMP_BASE H
+			   ON U.EMP_NO = H.EMP_NO
+			   LEFT OUTER JOIN
+			   DUSER.DHRT_ORG E
+			   ON H.ATTD_DEPT_CD = E.DEPT_CD
+		WHERE   USER_NO = ?
+		WITH UR
+	  </value>
+	</resource>
+	
+	<!-- Login시 사용자 역할리스트 조회 -->	
+	<resource>
+	  <key>SELECT_USER_ROLE</key>
+	  <value>
+        SELECT  UR.ROLE_NO ,R.ROLE_NM
+        FROM    GUSER.GSCT_USER_ROLE UR
+               ,GUSER.GSCT_ROLE R
+        WHERE   UR.USER_NO = ?
+        AND     UR.ROLE_NO = R.ROLE_NO
+        WITH UR
+	  </value>
+	</resource>
+	
+	<!-- 사용자별 메뉴 리스트 조회 -->
+	<resource>
+	  <key>SELECT_MENU</key>
+	  <value>
+        SELECT  T1.PRGM_NO
+        		,T2.PRGM_NM
+        		,T2.PRGM_PATH
+        		,T2.UP_PRGM_NO
+        		,T2.SYS_ID
+        		,T2.UC_NO
+        		,T2.MENU_REF_ODR
+        		,T2.LAST_FG
+        		,T2.MARK_FG
+        		,T2.MENU_ODR
+        		,T2.MENU_LEVL
+        		,T1.USE_DGRE
+        		,VALUE(( SELECT  Z.PRGM_NM FROM GUSER.GSCT_PRGM Z WHERE Z.PRGM_NO = T2.UP_PRGM_NO  FETCH FIRST 1 ROW ONLY  ),'') UP_PRGM_NO
+        		,T1.MENU_READ
+		FROM
+		    (
+		        SELECT A.PRGM_NO,  
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.MENU_READ_FG,1,1)),0)) = 0 THEN '0' ELSE '1' END MENU_READ,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,1,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,2,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,3,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,4,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,5,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,6,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,7,1)),0)) = 0 THEN '0' ELSE '1' END USE_DGRE
+		        FROM  GUSER.GSCT_USER_ROLE C, GUSER.GSCT_PRGM B, GUSER.GSCT_PRGM_ROLE A, GUSER.GSCT_ROLE D
+		        WHERE A.PRGM_NO = B.PRGM_NO
+		        AND   A.ROLE_NO = C.ROLE_NO
+			AND   C.ROLE_NO = D.ROLE_NO
+		        AND   C.USER_NO = ?
+		        AND   ( ((SUBSTR(C.USER_NO,1,3) = 'CAB' AND B.PRGM_NO LIKE 'P%') OR 
+		              EXISTS(SELECT 1
+								           FROM   GUSER.GBCT_COMM_CD_DESC AA
+													 WHERE  AA.CD_KIND_NO = 'L50001'
+													 AND    AA.CD_DESC_NO = B.PRGM_NO))	 
+		           OR
+                   	(SUBSTR(C.USER_NO,1,3) != 'CAB' AND   B.PRGM_NO NOT LIKE 'P%')
+                  ) 
+                        GROUP BY A.PRGM_NO
+		    ) T1
+		    , GUSER.GSCT_PRGM T2
+		WHERE T1.PRGM_NO = T2.PRGM_NO
+		AND   T2.MARK_FG = ? 
+                ORDER BY CASE WHEN SUBSTR(T2.PRGM_NO, 1, 1) = 'P' THEN T2.MENU_REF_ODR ELSE 'G' || T2.MENU_REF_ODR END
+		WITH UR
+	  </value>
+	</resource>
+	<!--<resource>
+	  <key>SELECT_MENU</key>
+	  <value>
+        SELECT  T1.PRGM_NO
+        		,T2.PRGM_NM
+        		,T2.PRGM_PATH
+        		,T2.UP_PRGM_NO
+        		,T2.SYS_ID
+        		,T2.UC_NO
+        		,T2.MENU_REF_ODR
+        		,T2.LAST_FG
+        		,T2.MARK_FG
+        		,T2.MENU_ODR
+        		,T2.MENU_LEVL
+        		,T1.USE_DGRE
+        		,T2.UP_PRGM_NO 
+            ,GUSER.GF_MENU_PATH_01(T2.UP_PRGM_NO)
+		FROM
+		    (
+		        SELECT A.PRGM_NO,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.MENU_READ_FG,1,1)),0)) = 0 THEN '0' ELSE '1' END MENU_READ,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,1,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,2,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,3,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,4,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,5,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,6,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,7,1)),0)) = 0 THEN '0' ELSE '1' END USE_DGRE
+		        FROM  GUSER.GSCT_USER_ROLE C, GUSER.GSCT_PRGM B, GUSER.GSCT_PRGM_ROLE A, GUSER.GSCT_ROLE D
+		        WHERE A.PRGM_NO = B.PRGM_NO
+		        AND   A.ROLE_NO = C.ROLE_NO
+			AND   C.ROLE_NO = D.ROLE_NO
+		        AND   C.USER_NO = ?
+		        GROUP BY A.PRGM_NO
+		    ) T1
+		    , GUSER.GSCT_PRGM T2
+		WHERE T1.PRGM_NO = T2.PRGM_NO
+		AND   T1.MENU_READ = ?
+		ORDER BY T2.MENU_REF_ODR
+		WITH UR
+	  </value>
+	</resource>-->	
+	
+	<!-- 사용자별 즐겨찾기 리스트 조회 -->	
+	<resource>
+	  <key>SELECT_FVRT</key>
+	  <value>
+		WITH AA(PRGM_NO,PRGM_NM,PRGM_PATH,UP_PRGM_NO,SYS_ID,UC_NO,MENU_REF_ODR,LAST_FG,MARK_FG,MENU_ODR,LVL,USE_DGRE,AAA, BBB) 
+AS (
+SELECT '0' PRGM_NO
+	   ,'즐겨찾기' PRGM_NM
+	   ,'' PRGM_PATH
+	   ,'' UP_PRGM_NO
+	   ,'' SYS_ID
+	   ,'' UC_NO
+	   ,'0' MENU_REF_ODR
+	   ,'' LAST_FG
+	   ,'1' MARK_FG
+	   ,0 MENU_ODR
+	   ,'0' LVL
+	   ,'' USE_DGRE
+	   ,'' AAA
+	   ,0 BBB
+FROM SYSIBM.SYSDUMMY1
+UNION all
+SELECT  T1.PRGM_NO
+		,T2.PRGM_NM
+		,T2.PRGM_PATH
+		,T2.UP_PRGM_NO
+		,T2.SYS_ID
+		,T2.UC_NO
+		,T2.MENU_REF_ODR
+		,T2.LAST_FG
+		,T2.MARK_FG
+		,T2.MENU_ODR
+		,'1'
+		,T1.USE_DGRE
+	  ,GUSER.GF_MENU_PATH_01(T2.UP_PRGM_NO) bb
+		,T3.MENU_OUTP_ODR
+		FROM
+		    (
+		        SELECT A.PRGM_NO,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.MENU_READ_FG,1,1)),0)) = 0 THEN '0' ELSE '1' END MENU_READ,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,1,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,2,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,3,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,4,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,5,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,6,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,7,1)),0)) = 0 THEN '0' ELSE '1' END USE_DGRE
+		        FROM  GUSER.GSCT_USER_ROLE C, GUSER.GSCT_PRGM B, GUSER.GSCT_PRGM_ROLE A, GUSER.GSCT_ROLE D
+		        WHERE A.PRGM_NO = B.PRGM_NO
+		        AND   A.ROLE_NO = C.ROLE_NO
+			AND   C.ROLE_NO = D.ROLE_NO
+		        AND   C.USER_NO = ?
+		        GROUP BY A.PRGM_NO
+		    ) T1
+		    , GUSER.GSCT_PRGM T2
+		    , GUSER.GSCT_FVRT T3
+		WHERE T1.PRGM_NO = T2.PRGM_NO
+		AND   T1.MENU_READ = ?
+		AND   T3.USER_NO = ?
+		AND   T3.PRGM_NO = T2.PRGM_NO)
+SELECT *
+FROM   AA
+ORDER BY BBB, PRGM_NO
+	  </value>
+	</resource>
+	
+	<!-- search common cd -->
+	<resource>
+	  <key>SELECT_COMM_CD</key>
+	  <value>
+        SELECT CD_DESC_NO,CD_DESC_KOR_NM, CLAS1, CLAS2, CD_DESC_ETC_NM  
+        FROM  GUSER.GBCT_COMM_CD_DESC
+		WHERE CD_KIND_NO=?
+		ORDER BY MARK_ODR 
+		WITH UR
+	  </value>
+	</resource>
+	
+	<resource>
+	  <key>SELECT_COMM_CD_WITH_NULL</key>
+	  <value>
+        SELECT CD_DESC_NO, CD_DESC_KOR_NM, CLAS1, CLAS2, CD_DESC_ETC_NM
+		FROM  
+		(
+			SELECT '' CD_DESC_NO, '' CD_DESC_KOR_NM, '' CLAS1, '' CLAS2, 0 MARK_ODR , '' CD_DESC_ETC_NM 
+			FROM SYSIBM.SYSDUMMY1 
+			UNION ALL  
+			SELECT CD_DESC_NO, CD_DESC_KOR_NM, CLAS1, CLAS2, MARK_ODR, CD_DESC_ETC_NM 
+			FROM GUSER.GBCT_COMM_CD_DESC 
+			WHERE CD_KIND_NO=?
+		)
+		A ORDER BY MARK_ODR 
+		WITH UR
+	  </value>
+	</resource>
+	
+	<!-- 사용자별 프로그램 아이디 및 역할 조회 -->	
+	<resource>
+	  <key>SELECT_ACCESS_ROLE</key>
+	  <value>
+        SELECT  T1.PRGM_NO        		
+	          , T1.ROLE_NO
+		FROM
+		    (
+		        SELECT A.PRGM_NO,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.MENU_READ_FG,1,1)),0)) = 0 THEN '0' ELSE '1' END MENU_READ,
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,1,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,2,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,3,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,4,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,5,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,6,1)),0)) = 0 THEN '0' ELSE '1' END ||
+					CASE WHEN SUM(VALUE(INT('0' || SUBSTR(A.USE_DGRE,7,1)),0)) = 0 THEN '0' ELSE '1' END USE_DGRE
+					, A.ROLE_NO
+		        FROM  GUSER.GSCT_USER_ROLE C, GUSER.GSCT_PRGM B, GUSER.GSCT_PRGM_ROLE A, GUSER.GSCT_ROLE D
+		        WHERE A.PRGM_NO = B.PRGM_NO
+		        AND   A.ROLE_NO = C.ROLE_NO
+			AND   C.ROLE_NO = D.ROLE_NO
+		        AND   C.USER_NO = ?
+		        GROUP BY A.PRGM_NO, A.ROLE_NO
+		    ) T1
+		    , GUSER.GSCT_PRGM T2
+		WHERE T1.PRGM_NO = T2.PRGM_NO
+		AND   T2.MARK_FG = ?
+		AND	  T2.LAST_FG = '1'
+		WITH UR
+	  </value>
+	</resource>
+
+	<!-- 사원검색 -->	
+	<resource>
+	  <key>SELECT_EMP_SCH</key>
+	  <value>
+         SELECT A.EMP_NO, A.KOR_NAME,  B.DEPT_NM,        
+	   		    GUSER.GF_COMMCD_NM_01('H00360',A.POSI_CD) POS_NM,       
+	   		    GUSER.GF_COMMCD_NM_01('H00003',B.MNBR_DIV_cD)	MNBR_DIV_CD,       
+	   			A.EMAL, RTRIM(A.HP_NO1)||'-'||RTRIM(A.HP_NO2)||'-'||RTRIM(A.HP_NO3) HP_NO, 
+	   			RTRIM(A.OFFC_TEL_NO1)||'-'||RTRIM(A.OFFC_TEL_NO2)||'-'||RTRIM(A.OFFC_TEL_NO3) CO_TEL_NO,
+				RTRIM(A.FAX_NO1)||'-'||RTRIM(A.FAX_NO2)||'-'||RTRIM(A.FAX_NO3) FAX_NO, A.INNO_NO  
+		   FROM DUSER.DHRT_EMP_BASE A 
+	 			LEFT JOIN 
+	 			DUSER.DHRT_ORG B 
+	 			ON A.DEPT_CD = B.DEPT_CD 
+		  WHERE A.KOR_NAME like ?||'%' 
+		  ORDER BY A.EMP_NO
+		WITH UR
+	  </value>
+	</resource>
+	
+	<!-- 주민번호 검색 -->	
+	<resource>
+	  <key>SELECT_RESI_NO</key>
+	  <value>
+         	SELECT RESI_NO
+  			  FROM DUSER.DHRT_EMP_BASE
+ 			 WHERE EMP_NO = ?
+			WITH UR
+	  </value>
+	</resource>
+</resources>
