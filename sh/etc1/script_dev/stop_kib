@@ -1,6 +1,6 @@
 #!/bin/sh
 
-send_id="$(ps -ef | grep 9130 |grep -v grep|grep -v db2agent|cut -c10-16)";
+send_id="$(ps -ef | grep 'SendDaemon 9130' |grep -v grep | grep -v tail | cut -c10-16)";
 
 if [ ! "${send_id}" = "" ]; then
 	kill -9 ${send_id};

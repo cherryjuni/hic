@@ -2,12 +2,12 @@
 
 prefix=`date '+%Y%m%d_%H%M'`
 
-send_id="$(ps -ef | grep 9130)"
+send_id="$(ps -ef | grep 'SendDaemon 9130' |grep -v grep | grep -v tail)"
 
 if [ ! "${send_id}" = "" ]; then
     echo "Kib Daemon Already Start!!!!!";
     exit;
 fi;
 
-mv /HIC_APP/daemon/log_dev/kib.log /HIC_APP/daemon/log_dev/kib${prefix}.log
-nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9130 192.168.4.200 50811 >> /HIC_APP/daemon/log_dev/kib.log &
+mv /HIC_APP/daemon/log_dev/kib_9130.log /HIC_APP/daemon/log_dev/kib_9130_${prefix}.log
+nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemon 9130 192.168.4.200 50811 >> /HIC_APP/daemon/log_dev/kib_9130.log &
