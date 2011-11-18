@@ -10,7 +10,7 @@ public interface IKibGramEnum {
 	public static final String 거래구분_입금대행거래 = "1300";
 
 	public static final String 거래구분_개시거래 = "2100";
-	public static final String 거래구분_종료거래 = "2300";
+	public static final String 거래구분_종료거래 = "2400";
 	
 	public static final int h전문길이               = 0;
 	public static final int hCS번호                 = 1;

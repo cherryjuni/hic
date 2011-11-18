@@ -45,7 +45,7 @@ public class KibGram implements IKibGramEnum {
 		parserKibHeader();
 	}
 
-	public void parserKibHeader() throws Exception {
+	public String[] parserKibHeader() throws Exception {
 
 		if (!isValidation(orgGram))
 			throw new Exception("Validation Exception...");
@@ -84,6 +84,7 @@ public class KibGram implements IKibGramEnum {
 		// kibHeader[25] = subString(240,280); // 응답 MESSAGE(40)
 		// kibHeader[26] = subString(280,286); // 원거래요소(6)
 		// kibHeader[27] = subString(286,300); // FILLER(14)
+		return kibHeader;
 	}
 
 	private boolean isValidation(String msg) {
@@ -211,6 +212,10 @@ public class KibGram implements IKibGramEnum {
 	 */
 	public static KibGram create(String msg) throws Exception {
 		return new KibGram(msg);
+	}
+
+	public static int[] getHeaderpositon() {
+		return headerPositon;
 	}
 
 }
