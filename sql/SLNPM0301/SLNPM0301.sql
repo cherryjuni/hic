@@ -168,3 +168,15 @@ from GUSER.GSCT_GRAM_CHNL
 order by chnl_cd
 ;
 
+-----------------------------------------
+-- 전문..
+-----------------------------------------
+--GRAMCD -> KB0200
+SELECT * FROM GUSER.GSCT_GRAM_BASE ORDER BY CHNL_CD, GRAM_CD;
+-----------------------------------------
+-- 채널
+SELECT * FROM GUSER.GSCT_GRAM_CHNL ORDER BY CHNL_CD;
+-----------------------------------------
+
+
+

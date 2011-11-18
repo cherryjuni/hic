@@ -1,16 +1,35 @@
-
+;
 --------------------------------------------------
+
 SELECT  NVL(LOAN_NO,' ')       LOAN_NO
        ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
-       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD ,loan_stat_cd
       FROM  AUSER.ALOT_LOAN_BASE
      WHERE
-       IMG_ACNT_NO      = ?                      /* :입금내역.계좌번호  */
-       AND IMG_ACNT_BANK_CD = '0'||?             /* :입금내역.은행_코드 */
-       AND LOAN_STAT_CD IN ('22', '29')             /* 대출 중인 계좌 */
+       IMG_ACNT_NO      = '56201550189380'  /* :입금내역.계좌번호  */
+       AND IMG_ACNT_BANK_CD = '0'||'26'     /* :입금내역.은행_코드 */
+       AND LOAN_STAT_CD >= '22'             /* 대출 중인 계좌 */
        AND LOAN_LAST_FG     = '1'
+       order by loan_stat_cd asc
        ;
---------------------------------------------------
+
+-------------
+CONT_MAN_NO
+;
+select * from auser.alot_loan_base
+where cont_man_no in ('7612252489710'
+,'8005172074630'
+,'8111202850026'
+,'8107221155725'
+,'56201551009387' )
+;
+--56201550189380
+select * from auser.alot_loan_base
+where loan_no in ('10100700091' )
+;
+
+--10100700091 01 (해지) -> 11042500085 01 (정상)
+-------------------------------------
 -- 예 - 대출중 계좌
 SELECT  NVL(LOAN_NO,' ')       LOAN_NO
        ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
@@ -93,15 +112,26 @@ where IMG_ACNT_NO IN ('56201553000020', '56201552000032', '56201554000025') AND 
 group by loan_no
 --having count(*) > 1
 ;
+
+
+select IMG_ACNT_NO,loan_stat_cd from auser.alot_loan_base
+where LOAN_NO in ('11022500201'
+,'11030900110'
+,'11051200193' )
+
 --------------------------------------------------
 -- 마지막 코드 여러건 찾기
 --------------------------------------------------
-select loan_no, count(*)
+;
+select cont_man_no , count(*)
 from auser.alot_loan_base
-where loan_last_fg = '1'
-group by loan_no
+where loan_last_fg = '1' and loan_stat_cd in ('22','31','32' )
+group by cont_man_no
 having count(*) > 1
 ;
+
+
+
 
 select loan_no, loan_seq, loan_last_fg, loan_dt, end_dt
 from auser.alot_loan_base
@@ -119,11 +149,10 @@ order by loan_no, loan_seq
 --------------------------------------------------
 
 select * from (
-SELECT  CASE WHEN SUBSTR(B.LOAN_STAT_CD,1,1) = '2' 
-    THEN LOAN_NO                            
-    WHEN SUBSTR(A.LOAN_STAT_CD,1,1) = '3'   
-      THEN '344'                            
-      ELSE null  END    AS LOAN_NO                  
+SELECT  CASE WHEN SUBSTR(B.LOAN_STAT_CD,1,1) = '2' THEN LOAN_NO                            
+             WHEN SUBSTR(A.LOAN_STAT_CD,1,1) = '3' THEN '344'                            
+             ELSE null
+        END    AS LOAN_NO                  
    ,NVL(B.LOAN_SEQ,'01')               LOAN_SEQ    
    ,NVL(B.MNG_DEPT_CD, A.MNG_DEPT_CD)  MNG_DEPT_CD  
   FROM  BUSER.BVAT_UNCNFM_BASE A        
@@ -154,11 +183,10 @@ where  TRIM(IMG_ACNT_NO)  = '56201550414684'         /* :입금내역.계좌번호   */
 ;
 
 
-CASE WHEN SUBSTR(B.LOAN_STAT_CD,1,1) = '2' 
-    THEN LOAN_NO                            
-    WHEN SUBSTR(A.LOAN_STAT_CD,1,1) = '3'   
-      THEN '344'                            
-      ELSE null  END    AS LOAN_NO
+CASE WHEN SUBSTR(B.LOAN_STAT_CD,1,1) = '2' THEN LOAN_NO                            
+     WHEN SUBSTR(A.LOAN_STAT_CD,1,1) = '3' THEN '344'                            
+     ELSE null
+END    AS LOAN_NO
 ;
 
 select  IMG_ACNT_NO , count(loan_last_fg) from AUSER.ALOT_LOAN_BASE
