@@ -79,30 +79,30 @@ public class KibReceiver {
 	}
 
     private Connection getConnection() {
-//    	Connection con = null;
-//    	try {
-//    		con  = ConnMng.getInstance("").getConnection();
-//    	} catch(Exception e) {
-//    		e.printStackTrace();
-//    	}
-//    	
-//    	return con; //
-    	
-    	Connection conn = null;
-        
+    	Connection con = null;
     	try {
-            String driver = "oracle.jdbc.driver.OracleDriver";
-            String url = "jdbc:oracle:thin:@172.20.102.41:1521:"+inDbNm;
-            String user = inUsrNm;
-            String pwd = inPwd;
-
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, user, pwd);
-            System.out.println("Connection gain complete. ");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return conn;
+    		con  = ConnMng.getInstance("").getConnection();
+    	} catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	return con; //
+    	
+//    	Connection conn = null;
+//        
+//    	try {
+//            String driver = "oracle.jdbc.driver.OracleDriver";
+//            String url = "jdbc:oracle:thin:@172.20.102.41:1521:"+inDbNm;
+//            String user = inUsrNm;
+//            String pwd = inPwd;
+//
+//            Class.forName(driver);
+//            conn = DriverManager.getConnection(url, user, pwd);
+//            System.out.println("Connection gain complete. ");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return conn;
         
     }
 
@@ -135,7 +135,7 @@ public class KibReceiver {
 		}
 	}
 
-	class Client extends Thread {
+	public class Client extends Thread {
 
 		Connection con = getConnection();
 
@@ -146,7 +146,7 @@ public class KibReceiver {
 
 		private byte[] sToBytes;
 
-		Client(Socket con) throws Exception {
+		public Client(Socket con) throws Exception {
 			xS = con;
 			in  = new BufferedReader(new InputStreamReader(xS.getInputStream()));
 		    out = new BufferedWriter(new OutputStreamWriter(xS.getOutputStream()));
@@ -197,25 +197,8 @@ public class KibReceiver {
                     isInamountCancelTransaction(kibHeader)  ||  /* 취소 */
                     isInamountAgentCancelTransaction(kibHeader)) {  /* 취소대행 */
 					System.out.println("전문거래유형["+kibHeader[10]+"] 전문구분코드["+kibHeader[11]+"] 입금전문수신");
-					/*
-					 * 로컬 공통부 구성 - 기관수신전문의 공통부를 파싱하여 얻은정보로 로컬공통부를 구성한다.
-					 */
-					String localHeaderMake = "";
-					localHeaderMake += "21";  					// 대외기관코드(요청시의 기관코드를 그대로 리턴)(2)
-					localHeaderMake += "R";  					// 송수신여부(1)
-					localHeaderMake += kibHeader[10];			// 전문구분코드(4)
-					localHeaderMake += kibHeader[11];			// 거래구분코드(4)
-					localHeaderMake += "00000000000000000000"; 	// 관리번호(20)
-					localHeaderMake += "0000000000";			// 거래일련번호(10)
-					localHeaderMake += "0000";					// 응답코드(4)
-					localHeaderMake += "20060102";				// 거래일자(8)
-					localHeaderMake += "101010";				// 거래시간(6)
-					localHeaderMake += "0000";					// 데이터길이(4)
-					localHeaderMake += "00000001";				// 처리단말번호(8)
-					localHeaderMake += "SYSTEMOP";				// 단말등록사원번호(8)
-					localHeaderMake += "1";						// 상태코드(1)
-					localHeaderMake += "XXXXXXXXXXXXXXXXXXXX";	// 예비정보내역(20)
-					localHeaderMake += xRcv;					// 데이타본문(응답전문)(가변)
+
+					String localHeaderMake = hicLocalHeadMake(xRcv, kibHeader);
 
 					/*
 					 * 청구입금의 업무프로그램을 호출하여 응답전문을 돌려받는다.
@@ -330,30 +313,92 @@ public class KibReceiver {
 
 		}
 
+		private String hicLocalHeadMake(String xRcv, String[] kibHeader) {
+			/*
+			 * 로컬 공통부 구성 - 기관수신전문의 공통부를 파싱하여 얻은정보로 로컬공통부를 구성한다.
+			 */
+			String localHeaderMake = "";
+			localHeaderMake += "21";  					// 대외기관코드(요청시의 기관코드를 그대로 리턴)(2)
+			localHeaderMake += "R";  					// 송수신여부(1)
+			localHeaderMake += kibHeader[10];			// 전문구분코드(4)
+			localHeaderMake += kibHeader[11];			// 거래구분코드(4)
+			localHeaderMake += "00000000000000000000"; 	// 관리번호(20)
+			localHeaderMake += "0000000000";			// 거래일련번호(10)
+			localHeaderMake += "0000";					// 응답코드(4)
+			localHeaderMake += "20060102";				// 거래일자(8)
+			localHeaderMake += "101010";				// 거래시간(6)
+			localHeaderMake += "0000";					// 데이터길이(4)
+			localHeaderMake += "00000001";				// 처리단말번호(8)
+			localHeaderMake += "SYSTEMOP";				// 단말등록사원번호(8)
+			localHeaderMake += "1";						// 상태코드(1)
+			localHeaderMake += "XXXXXXXXXXXXXXXXXXXX";	// 예비정보내역(20)
+			localHeaderMake += xRcv;					// 데이타본문(응답전문)(가변)
+			
+			return localHeaderMake;
+		}
+
+		/**
+		 * 입금대행취소거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
 		private boolean isInamountAgentCancelTransaction(String[] kibHeader) {
 			return kibHeader[10].equals("0400") && kibHeader[11].equals("1300");
 		}
 
+		/**
+		 * 입금취소거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
 		private boolean isInamountCancelTransaction(String[] kibHeader) {
 			return kibHeader[10].equals("0400") && kibHeader[11].equals("1100");
 		}
 
+		/**
+		 * 수취조회거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
 		private boolean isReceiveReadTransaction(String[] kibHeader) {
 			return kibHeader[10].equals("0200") && kibHeader[11].equals("4100");
 		}
 
+		/**
+		 * 입금대행거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
 		private boolean isInamountAgentTransaction(String[] kibHeader) {
 			return kibHeader[10].equals("0200") && kibHeader[11].equals("1300");
 		}
 
+		/**
+		 * 입금거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
 		private boolean isInamountTransaction(String[] kibHeader) {
 			return kibHeader[10].equals("0200") && kibHeader[11].equals("1100");
 		}
 
+		/**
+		 * 개시거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
 		private boolean isStartGram(String[] kibHeader) {
 			return kibHeader[10].equals("0800") && kibHeader[11].equals("2100");
 		}
 
+		/**
+		 * 종료거래인가?
+		 * 
+		 * @return boolean - true(그렇다) / false(아니다)
+		 */
+		private boolean isEndGram(String[] kibHeader) {
+			return kibHeader[10].equals("0800") && kibHeader[11].equals("2400");
+		}
 		/**
 		 * 외부기관에 응답전문을 전송한다.
 		 * @param String to set
