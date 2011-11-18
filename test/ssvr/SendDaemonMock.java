@@ -21,6 +21,11 @@ public class SendDaemonMock extends SendDaemon {
 		public String rcvMsg() throws IOException {
 			return super.rcvMsg();
 		}
+
+		@Override
+		public void sendMsg(String msg) throws IOException {
+			super.sendMsg(msg);
+		}
 	}
 
 }
