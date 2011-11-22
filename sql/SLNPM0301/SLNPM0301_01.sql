@@ -279,6 +279,7 @@ SELECT * FROM BUSER.BVAT_TR_BANK_DESC ORDER BY RCPT_TP_CD, BANK_SNUM;
 -- 24 거래_기관_기본
 SELECT TR_ORG_CD FROM BUSER.BVAT_TR_ORG_BASE WHERE RCPT_TP_CD = 'C1' AND BANK_CD = '088';
 SELECT TR_ORG_CD FROM BUSER.BVAT_TR_ORG_BASE WHERE RCPT_TP_CD = 'C1' AND BANK_CD = '026';
+SELECT TR_ORG_CD FROM BUSER.BVAT_TR_ORG_BASE WHERE RCPT_TP_CD = 'C1' AND BANK_CD = '020';
 SELECT * FROM BUSER.BVAT_TR_ORG_BASE ORDER BY TR_ORG_CD;
 
 ----------------------------------------------------------------------------------
@@ -296,8 +297,8 @@ SELECT * FROM GUSER.GBCT_COMM_CD_DESC WHERE CD_DESC_NO = (SELECT DLVR_PLC_DIV_CD
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 -- SENDER SOCKET
+SELECT C.CHNL_IP, C.CHNL_PORT, B.HDR_LTH FROM GUSER.GSCT_GRAM_CHNL C, GUSER.GSCT_GRAM_BASE B WHERE C.CHNL_CD = B.CHNL_CD AND B.GRAM_CD = ?;
 SELECT C.CHNL_IP, C.CHNL_PORT, B.HDR_LTH FROM GUSER.GSCT_GRAM_CHNL C, GUSER.GSCT_GRAM_BASE B WHERE C.CHNL_CD = B.CHNL_CD AND B.GRAM_CD = 'KB0200';
-
 SELECT * FROM GUSER.GSCT_GRAM_CHNL ORDER BY CHNL_CD;
 SELECT * FROM GUSER.GSCT_GRAM_BASE ORDER BY GRAM_CD;
 ----------------------------------------------------------------------------------
@@ -308,6 +309,50 @@ SELECT * FROM GUSER.GSCT_GRAM_DESC WHERE GRAM_CD = 'KB0200' AND SNR_DIV = 'S';
 SELECT KOR_ITEM_NM, ENG_ITEM_NM, ATT, LTH, ITER_FG FROM GUSER.GSCT_GRAM_DESC WHERE GRAM_CD = 'KB0200' AND SNR_DIV = 'R' ORDER BY SNUM ASC;
 SELECT SNUM, SNR_DIV, HDR_FG, KOR_ITEM_NM, ENG_ITEM_NM, ATT, LTH, ITER_FG FROM GUSER.GSCT_GRAM_DESC WHERE GRAM_CD = 'KB0200' AND SNR_DIV = 'R' ORDER BY SNUM ASC;
 SELECT * FROM GUSER.GSCT_GRAM_DESC WHERE GRAM_CD = 'KB0200' AND SNR_DIV = 'R';
+
+
+-- 전문 로그 기록 테이블
+-- 지급배치 - 'KB0200'
+SELECT COUNT(*) FROM GUSER.GSCT_GRAM_LOG
+;
+SELECT GRAM_CD FROM GUSER.GSCT_GRAM_LOG
+GROUP BY GRAM_CD
+;
+SELECT distinct GRAM_CD FROM GUSER.GSCT_GRAM_LOG
+WHERE GRAM_CD IS NOT NULL
+--GROUP BY GRAM_CD
+;
+
+SELECT * FROM GUSER.GSCT_GRAM_BASE ORDER BY GRAM_CD;
+
+select * from guser.gsct_gram_log
+;
+
+select * from guser.gsct_gram_log
+where EXEC_DT = '20111122'
+order by EXEC_TM
+;
+--delete from guser.gsct_gram_log where exec_dt = '20111122';
+--commit;
+
+select * from guser.gsct_gram_log
+where gram_cd = 'KB6013'
+;
+
+select * from guser.gsct_gram_log
+where gram_cd = 'KB4100'
+;
+
+select GRAM_CD, MIN(EXEC_DT), MAX(EXEC_DT) from guser.gsct_gram_log
+where gram_cd = 'KB4100'
+GROUP BY GRAM_CD
+;
+
+select GRAM_CD, MIN(EXEC_DT), MAX(EXEC_DT) from guser.gsct_gram_log
+--where gram_cd = 'KB4100'
+GROUP BY GRAM_CD
+;
+
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
