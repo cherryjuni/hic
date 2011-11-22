@@ -66,7 +66,7 @@ SELECT  NVL(LOAN_NO,' ')       LOAN_NO
        ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
 FROM   AUSER.ALOT_LOAN_BASE
 WHERE
-       IMG_ACNT_NO      = '56201550486180'   /* :입금내역.계좌번호  */
+       IMG_ACNT_NO      = '56201550207156' --'56201550486180'   /* :입금내역.계좌번호  */
        AND IMG_ACNT_BANK_CD = '0'||'26'      /* :입금내역.은행_코드 */
        AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
        AND LOAN_LAST_FG     = '1'            /* '1'                 */
@@ -93,6 +93,63 @@ WHERE
 -------------------------------------------------
 -------------------------------------------------
 -------------------------------------------------
+
+-- 원거래조회
+SELECT                             
+	SETL_FG                         
+FROM BUSER.BVAT_CMS_IAMT_DESC      
+WHERE TR_ORG_CD = ? AND TR_NO = ?  
+;
+
+SELECT                             
+	SETL_FG                         
+FROM BUSER.BVAT_CMS_IAMT_DESC      
+WHERE TR_ORG_CD = 'C1004' AND TR_NO in ('201111030209662', '201111030209851')
+;
+
+SELECT                             
+ *                         
+FROM BUSER.BVAT_CMS_IAMT_DESC      
+WHERE TR_ORG_CD = 'C1004' AND TR_NO in ('201111030209662', '201111030209851')
+;
+
+-- 대출정보조회
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO       
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ      
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD   
+FROM   AUSER.ALOT_LOAN_BASE                  
+WHERE                                        
+       IMG_ACNT_NO      = ?                  /* :입금내역.계좌번호   */    
+       AND IMG_ACNT_BANK_CD = '0'||?         /* :입금내역.은행_코드 */    
+       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만         */    
+       AND LOAN_LAST_FG     = '1'            /* '1'              */   
+;
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO       
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ      
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD   
+FROM   AUSER.ALOT_LOAN_BASE                  
+WHERE                                        
+       IMG_ACNT_NO      = '56201550207156'                  /* :입금내역.계좌번호   */    
+       AND IMG_ACNT_BANK_CD = '0'||'26'         /* :입금내역.은행_코드 */    
+       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만         */    
+       AND LOAN_LAST_FG     = '1'            /* '1'              */   
+;
+
+-- 삭제 및 확인
+-------------------------------------------------
+-- test
+--insert into BUSER.BVAT_CMS_IAMT_DESC
+SELECT
+	*
+--;
+--delete
+FROM BUSER.BVAT_CMS_IAMT_DESC
+WHERE
+    TR_ORG_CD = 'C1004'
+    and TR_DT = '2011-11-03'
+    AND TR_NO = '201111030209851' --'201111030209662'
+;
+--commit;
 
 
 
