@@ -1,10 +1,10 @@
 #!/bin/sh
 
-send_id="$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)";
+send_id="$(ps -ef | grep 'ReceiveDaemon 10800' | grep -v grep | grep -v tail | cut -c10-16)";
 
 if [ ! "${send_id}" = "" ]; then
 	kill -9 ${send_id};
-	echo "Kibrsvr9800 Daemon Down !!";
+	echo "Kibrsvr10800 Daemon Down !!";
 else 
-	echo "Already Kibrsvr9800 Daemon Down!!"
+	echo "Already Kibrsvr10800 Daemon Down!!"
 fi;

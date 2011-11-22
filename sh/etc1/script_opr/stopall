@@ -1,6 +1,6 @@
 #!/bin/sh
 
-send_id="$(ps -ef | grep 9530 |grep -v grep|grep -v db2agent|cut -c10-16)";
+send_id="$(ps -ef | grep 'SendDaemon 9530' |grep -v grep | grep -v tail | cut -c10-16)";
 
 if [ ! "${send_id}" = "" ]; then
         kill -9 ${send_id};
@@ -9,7 +9,7 @@ else
         echo "Already Kib Daemon Down!!"
 fi;
 
-send_id1="$(ps -ef | grep 10800 |grep -v grep|grep -v db2agent|cut -c10-16)";
+send_id1="$(ps -ef | grep 'ReceiveDaemon 10800' |grep -v grep | grep -v tail | cut -c10-16)";
 
 if [ ! "${send_id1}" = "" ]; then
         kill -9 ${send_id1};
@@ -18,7 +18,7 @@ else
         echo "Already Kibrsvr10800 Daemon Down!!"
 fi;
 
-send_id2="$(ps -ef | grep 9800 |grep -v grep|grep -v db2agent|cut -c10-16)";
+send_id2="$(ps -ef | grep 'ReceiveDaemon 9800' |grep -v grep | grep -v tail | cut -c10-16)";
 
 if [ ! "${send_id2}" = "" ]; then
         kill -9 ${send_id2};
@@ -27,7 +27,7 @@ else
         echo "Already Kibrsvr9800 Daemon Down!!"
 fi;
 
-send_id3="$(ps -ef | grep 9810 |grep -v grep|grep -v db2agent|cut -c10-16)";
+send_id3="$(ps -ef | grep 'ReceiveDaemon 9810' |grep -v grep | grep -v tail | cut -c10-16)";
 
 if [ ! "${send_id3}" = "" ]; then
         kill -9 ${send_id3};
@@ -36,7 +36,7 @@ else
         echo "Already Kibrsvr9810 Daemon Down!!"
 fi;
 
-#send_id4="$(ps -ef | grep 9500 |grep -v grep|grep -v db2agent|cut -c10-16)";
+#send_id4="$(ps -ef | grep 'SendDaemon 9500' |grep -v grep | grep -v tail | cut -c10-16)";
 
 #if [ ! "${send_id4}" = "" ]; then
 #        kill -9 ${send_id4};
@@ -45,7 +45,7 @@ fi;
 #        echo "Already Nice Daemon Down!!"
 #fi;
 
-#send_id5="$(ps -ef | grep 9520 |grep -v grep|grep -v db2agent|cut -c10-16)";
+#send_id5="$(ps -ef | grep 'SendDaemon 9520' |grep -v grep | grep -v tail | cut -c10-16)";
 
 #if [ ! "${send_id5}" = "" ]; then
 #        kill -9 ${send_id5};
