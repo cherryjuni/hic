@@ -7,7 +7,10 @@ import static org.junit.Assert.fail;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,38 +21,52 @@ import org.junit.Test;
 import util.StringUtil;
 
 public class SendDaemonTest {
-	static String devTestIP = "172.20.102.41";  // HIC 테스트서버; 
-	static String localTestIP = "127.0.0.1";    // 로컬 
-//	static String RealTestIP = "172.20.101.41"; // HIC Real서버; 
-	static String kibTestIP = "192.168.4.200";  // KIBNET TEST
+	private static final int 상수_지급이체테스트 = 0;
+//	private static final int 상수_예상전문_지급이체01_수취조회 = 1;
+//	private static final int 상수_예상전문_지급이체02_지급이체 = 2;
 	
+//	static String RealTestIP = "172.20.101.20"; // HIC Real서버; 
 //	String kibRealIP = "192.168.4.100";  // KIBNET REAL
-	static String ip = localTestIP;
+	static String sdRealIP = "172.20.101.20";  // KIBNET TEST - 개발자 컴에서 테스트 안됨
+	static String sdTestIP = sdRealIP;  // HIC 테스트서버; 
+	static String localTestIP = "127.0.0.1";    // 로컬 
 	
-	static int krLocalPort = 9200;       // HIC TEST KibReceiver SERVER PORT
-	static int krDevPort   = 9300;       // HIC TEST KibReceiver SERVER PORT
-	static int krRealPort  = 9800;       // HIC REAL KibReceiver SERVER PORT
 	
 //	static int port = 50811;             // KIBNET PORT
-	static int sdport            = 9130; // SenderDaemon PORT
-	static int rdImgAcntPort     = 9300; // ReceiveDaemon PORT 가상계좌
-	static int rdAcntQryAcntPort = 50811; // ReceiveDaemon PORT 수취조회
-	static int port = sdport;
+//	static int sdRealPort    = 9530;     // sendDaemon PORT REAL
+	static int sdDevPort     = 9130;     // sendDaemon PORT DEV
+	static int sdDevLocalPort= sdDevPort;// sendDaemon PORT LOCAL
+
+	// 개발자 로칼
+//	static String ip = localTestIP;
+//	static int  port = sdDevLocalPort;
 	
-	static Socket socket = null;
-	static BufferedReader in   = null;
-	static BufferedWriter out  = null;
+	// 대외계 개발 서버
+	static String ip = sdTestIP;
+	static int  port = sdDevPort;
+	
+	static Socket     socket = null;
+	static BufferedReader in = null;
+	static BufferedWriter out= null;
 
 	//                                                  20032901 - 수취조회
 	//                                                  20032902 - 지급이체
 	//                                                  20032903 - 가상계좌
-	String sd01_지급계좌전송              = "0554055000092003290300006000008880120010  302001100   2011110315463102096622020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000";
-	String sd02_sd_kib_지급계좌전송_KR전송 = "0554055000092003290300006000008880120010  302001100   2011110315463102096622020032903601032903                                                                                                                           20001347  0 0                                                      000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000";
-	String sd03_kib_sd_지급계좌수신_KR수신 = "0554055000092003290300005000008880120010  3021011000002011110315463102096622020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000";
-	String sd04_지급계좌수신              = "0554055000092003290300005000008880120010  3021011000002011110315463102096622020032903601032903                                                                                                                           20001347  0 0              정상                                    000000              0000000099996 00000000000000000000000000200329030056201550486180                      0000002600                        강기주　　          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000";
-
-	String testGram =     "06040600000920032902000052003290220032902 30200110000020111107194220007611220000009880                                                                                                                                                                                                      000000              0000001000000 000000000000000000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  ";
-	String expectedGram = "06040600000920032902000062003290220032902 3021011000002011110719425500761122000000988620032901                                                                                                                                     0 009236584      정상처리                                000000              0000001000000 000006835207400000000000000000008800110276454855    김순녀              0000008800100024180210            하이캐피탈          001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  ";
+	// 가상계좌전송 테스트시 기존 데이터 삭제 필요
+	// 작업후, 테이블에 추가 됨
+	// delete from buser.bvat_cm_iamt_desc where tr_org_cd = 'C1004' and tr_no = '201111030209662' and tr_dt = '2011-03'
+	String[] sd01_지급이체              = { "06040600000920032902000052003290220032902 30200110000020111116181048007732920000009880                                                                                                                                                                                                      000000              0000003000000 000000000000000000000000000000008800110083688780    홍성희              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  "
+                                          , ""
+	};
+	String[] sd02_rd_kb_지급이체_KIB전송 = { ""
+                                          , ""
+	};
+	String[] sd03_kb_rd_지급이체_KIB수신 = { ""
+                                          , ""
+	};
+	String[] sd04_지급이체              = { "06040600000920032902000062003290220032902 3021011000002011111618112500773292000000988620032901                                                                                                                                     0 002154736      정상처리                                000000              0000003000000 000016007061900000000000000000008800110083688780    홍성희              0000008800100024180210            하이캐피탈          001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  "
+                                          , ""
+	};
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -67,16 +84,32 @@ public class SendDaemonTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testSendDaemonSendMsg() {
+	private static void openSocket() {
 		try {
-			out.write(sd01_지급계좌전송);
-			out.flush();
+			socket = new Socket(ip, port);
+			in  = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			fail("socket..");
 		} catch (IOException e) {
 			e.printStackTrace();
-			fail("Error Socket Write..");
+			fail("socket open..");
+		}			
+	}
+	
+	private static void closeSocket() {
+		try {
+			in.close();
+			out.close();
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("socket close..");
 		}
-		
+	}
+	
+	private StringBuffer 전문수신() {
 		StringBuffer rtnStr = new StringBuffer("");
 		try {
 			int response;
@@ -87,7 +120,7 @@ public class SendDaemonTest {
 			if (in.read(cTot) != -1) {
 				rtnStr.append(new String(cTot));
 				totCnt = StringUtil.cInt(StringUtil.CHSTRING(rtnStr.toString(), " ", "0"));
-				// RD는 전문길이가 전문에 포함되므로 이미꺼낸 4 byte 는 빼고 꺼낸다.
+				// KIB는 전문길이가 전문에 포함되므로 이미꺼낸 4 byte 는 빼고 꺼낸다.
 				for (i = 0; i < (totCnt - 4); i++) {
 					response = in.read();
 					if (response > 255) {
@@ -100,8 +133,36 @@ public class SendDaemonTest {
 			e.printStackTrace();
 			fail("Error Socket Write..");
 		}
-		String actuualMsg = rtnStr.toString();
+		return rtnStr;
+	}
+
+	private void 전문전송(String 전문) {
+		try {
+			out.write(전문);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail("Error Socket Write..");
+		}
+	}
+
+	@Test
+	public void testSendDaemonSendMsg() {
+		String 보낼전송전문;
+		String 예상수신전문;
+		StringBuffer 받은전문;
+		String 실제전문;
+
+		//////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+		openSocket();
+		보낼전송전문 = sd01_지급이체[상수_지급이체테스트];
+		예상수신전문 = sd04_지급이체[상수_지급이체테스트];
+		전문전송(보낼전송전문);
+		받은전문 = 전문수신();
+		실제전문 = 받은전문.toString();
 		
-		assertEquals(sd04_지급계좌수신, actuualMsg);
+		assertEquals(예상수신전문, 실제전문);
+		closeSocket();
 	}
 }
