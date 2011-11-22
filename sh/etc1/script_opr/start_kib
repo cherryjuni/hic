@@ -6,7 +6,7 @@ send_id="$(ps -ef | grep 'SendDaemon 9530' |grep -v grep | grep -v tail)"
 
 if [ ! "${send_id}" = "" ]; then
     echo "Kib Daemon Already Start!!!!!";
-#    exit;
+    exit;
 fi;
 
 mv /HIC_APP/daemon/log_opr/kib_9530.log /HIC_APP/daemon/log_opr/kib_9530_${prefix}.log

@@ -6,7 +6,7 @@ send_id="$(ps -ef | grep 'ReceiveDaemon 9800' | grep -v grep | grep -v tail)"
 
 if [ ! "${send_id}" = "" ]; then
     echo "Kibrsvr9800 Daemon Already Start!!!!!";
-#    exit;
+    exit;
 fi;
 
 mv /HIC_APP/daemon/log_opr/kibrsvr_9800.log /HIC_APP/daemon/log_opr/kibrsvr_9800_${prefix}.log
