@@ -1,0 +1,11 @@
+#Thu Nov 17 08:51:33 KST 2011
+eclipse.preferences.version=1
+encoding//resource/config.properties=MS949
+encoding//resource/log4j.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/classes/config.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/classes/css.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/classes/filepath.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/classes/ipcheck.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/classes/log4j.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/resource/properties/cabis.properties=MS949
+encoding//sh/dev1/HIC_APP/jeus6/webhome/app_home/cabis/WEB-INF/resource/properties/db.properties=MS949
