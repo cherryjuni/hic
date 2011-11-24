@@ -16,7 +16,15 @@ import org.junit.Test;
 
 import com.cabis.fw.util.gram.GramExecutor;
 
+// SendDaemon 은 로컬에서 테스트 할 수 없다
+//  SendDaemon이 KIBNET의 서버에 직접 연결되어야 테스트가능하다
+//  SendDaemon 테스트는 개발서버의 SendDaemon 에 접속하여 테스트 하도록 작성했다.
+// config.properties의 정보가 테스트 데이터베이스를 선택하도록 주의할 것.
+//  이 환경파일이 리얼 데이터베이스를 선택하면 리얼의 SendDaemon을 호출 한다
+// 아래 클래스의 설명을 주의 깊게 읽어보고 수정할 것
 public class SendDaemonTest {
+	// config.properties 에 의해 DB가 선택됨
+	//   config.properties는 클래스 root 에 있어야 함
 	// KIBNET 대외계관련 선언
 	// 1. GRAM_CD 로 채널 정보 가져오기
 	//    TABLE - GUSER.GSCT_GRAM_BASE
@@ -106,7 +114,26 @@ public class SendDaemonTest {
 		
 		try {
 			실제전문 = GramExecutor.getInstance().sendMsg(GRAM_CD, 보낼전송전문);
-			assertEquals(예상수신전문, 실제전문);
+			// 전문에서
+			// 날짜 부분 무시 - 50 column 8자리
+			// 타임 부분 무시 - 58 column 6자리
+			// 계좌잔액무시 - 319 column 13자리
+			// 수수료금액 무시 (테스트와 리얼 차이) - 445 column 5자리
+			
+			assertEquals(예상수신전문.substring(  0,  50+5-1)
+						, 실제전문.substring(  0,  55+5-1));
+			
+			assertEquals(예상수신전문.substring(5 + 50 + 8 + 6 , 5 + 50 + 8 + 6 + 17 - 1)
+						, 실제전문.substring(5 + 50 + 8 + 6, 5 + 50 + 8 + 6 + 17 - 1));
+			
+			assertEquals(예상수신전문.substring(5 + 50 + 8 + 6 + 17, 5 + 314 - 1)
+						, 실제전문.substring(5 + 50 + 8 + 6 + 17, 5 + 314 - 1));
+			
+			assertEquals(예상수신전문.substring(5 + 319 + 13, 5 + 445 - 1)
+						, 실제전문.substring(5 + 319 + 13, 5 + 445 - 1));
+			
+			assertEquals(예상수신전문.substring(5 + 445)
+						, 실제전문.substring(5 + 445));
 		} catch (Exception e) {
 			fail("전문 송수신 실패..");
 			e.printStackTrace();
