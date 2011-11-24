@@ -27,15 +27,15 @@ public class SendDaemonTest {
 	
 //	static String RealTestIP = "172.20.101.20"; // HIC Real서버; 
 //	String kibRealIP = "192.168.4.100";  // KIBNET REAL
-	static String sdRealIP = "172.20.101.20";  // KIBNET TEST - 개발자 컴에서 테스트 안됨
-	static String sdTestIP = sdRealIP;  // HIC 테스트서버; 
-	static String localTestIP = "127.0.0.1";    // 로컬 
+	final static String sdRealIP = "172.20.101.20";  // KIBNET TEST - 개발자 컴에서 테스트 안됨
+	final static String sdTestIP = sdRealIP;  // HIC 테스트서버; 
+	final static String localTestIP = "127.0.0.1";    // 로컬 
 	
 	
 //	static int port = 50811;             // KIBNET PORT
 //	static int sdRealPort    = 9530;     // sendDaemon PORT REAL
-	static int sdDevPort     = 9130;     // sendDaemon PORT DEV
-	static int sdDevLocalPort= sdDevPort;// sendDaemon PORT LOCAL
+	final static int sdDevPort     = 9130;     // sendDaemon PORT DEV
+	final static int sdDevLocalPort= sdDevPort;// sendDaemon PORT LOCAL
 
 	// 개발자 로칼
 //	static String ip = localTestIP;
@@ -55,7 +55,7 @@ public class SendDaemonTest {
 	// 가상계좌전송 테스트시 기존 데이터 삭제 필요
 	// 작업후, 테이블에 추가 됨
 	// delete from buser.bvat_cm_iamt_desc where tr_org_cd = 'C1004' and tr_no = '201111030209662' and tr_dt = '2011-03'
-	String[] sd01_지급이체              = { "06040600000920032902000052003290220032902 30200110000020111116181048007732920000009880                                                                                                                                                                                                      000000              0000003000000 000000000000000000000000000000008800110083688780    홍성희              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  "
+	String[] sd01_지급이체              = { "KB0200"+"06040600000920032902000052003290220032902 30200110000020111116181048007732920000009880                                                                                                                                                                                                      000000              0000003000000 000000000000000000000000000000008800110083688780    홍성희              0000008800100024180210            하이캐피탈          0000000000              00              00              00              00              00               00000                                                  "
                                           , ""
 	};
 	String[] sd02_rd_kb_지급이체_KIB전송 = { ""
@@ -64,9 +64,9 @@ public class SendDaemonTest {
 	String[] sd03_kb_rd_지급이체_KIB수신 = { ""
                                           , ""
 	};
-	String[] sd04_지급이체              = { "06040600000920032902000062003290220032902 3021011000002011111618112500773292000000988620032901                                                                                                                                     0 002154736      정상처리                                000000              0000003000000 000016007061900000000000000000008800110083688780    홍성희              0000008800100024180210            하이캐피탈          001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  "
+	String[] sd04_지급이체              = { "06040600000920032902000062003290220032902 3021011004352011112318005900782822000000988620032901                                                                                                                                     0 004456642      개시전문 수신전 상태                    000000U114          0000004000000 000000000000000000000000000000000500620202237914    박주영              0000008800100024180210            하이캐피탈          000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000               00000                                                  "
                                           , ""
-	};
+};
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -84,6 +84,18 @@ public class SendDaemonTest {
 	public void tearDown() throws Exception {
 	}
 
+	@SuppressWarnings("unused")
+	private static void openSocket(String _ip, int _port) {
+		setSocket(_ip, _port);
+		
+		openSocket();
+	}
+
+	private static void setSocket(String _ip, int _port) {
+		ip = _ip;
+		port = _port;
+	}
+	
 	private static void openSocket() {
 		try {
 			socket = new Socket(ip, port);
@@ -153,6 +165,11 @@ public class SendDaemonTest {
 		StringBuffer 받은전문;
 		String 실제전문;
 
+		//////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////
+//		setSocket(sdTestIP, sdDevPort);
+		setSocket(localTestIP, sdDevPort);
+		
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		openSocket();
