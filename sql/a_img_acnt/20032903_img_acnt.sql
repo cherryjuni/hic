@@ -151,5 +151,66 @@ WHERE
 ;
 --commit;
 
+--------------------------------
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+FROM   AUSER.ALOT_LOAN_BASE
+WHERE
+       IMG_ACNT_NO      = '56201550207156' --'56201550486180'   /* :입금내역.계좌번호  */
+       AND IMG_ACNT_BANK_CD = '0'||'26'      /* :입금내역.은행_코드 */
+       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
+       AND LOAN_LAST_FG     = '1'            /* '1'                 */
+;
+
+SELECT *
+FROM   AUSER.ALOT_LOAN_BASE
+WHERE
+    LOAN_DT > '2011-04-01'
+    AND LOAN_SEQ = '01'
+    AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
+    AND LOAN_LAST_FG     = '1'            /* '1'                 */
+ORDER BY LOAN_NO
+;
+
+SELECT LOAN_NO,LOAN_SEQ,IMG_ACNT_BANK_CD,IMG_ACNT_NO,LOAN_DT, LOAN_STAT_CD
+FROM   AUSER.ALOT_LOAN_BASE
+WHERE
+    LOAN_DT > '2011-04-01'
+    AND LOAN_SEQ = '01'
+    AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
+    AND LOAN_LAST_FG     = '1'            /* '1'                 */
+ORDER BY LOAN_NO
+;
+
+SELECT IMG_ACNT_NO
+FROM (
+SELECT IMG_ACNT_NO
+FROM AUSER.ALOT_LOAN_IMG_ACNT_DESC
+WHERE IMG_ACNT_BANK_CD = '020'
+AND USE_FG = '0'
+AND DISU_DT IS NULL
+)
+WHERE ROWNUM = 1
+;
 
 
+SELECT * --IMG_ACNT_NO
+FROM AUSER.ALOT_LOAN_IMG_ACNT_DESC
+WHERE IMG_ACNT_BANK_CD = '020'
+AND USE_FG = '0'
+ORDER BY IMG_ACNT_NO
+;
+
+SELECT * --IMG_ACNT_NO
+FROM AUSER.ALOT_LOAN_IMG_ACNT_DESC
+WHERE IMG_ACNT_NO <= '26665005118912'
+;
+
+SELECT * FROM
+--UPDATE
+AUSER.ALOT_LOAN_IMG_ACNT_DESC
+--SET USE_FG = '1'
+WHERE IMG_ACNT_NO <= '26665005118912'
+;
+--COMMIT;
