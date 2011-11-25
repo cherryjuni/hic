@@ -66,10 +66,36 @@ SELECT  NVL(LOAN_NO,' ')       LOAN_NO
        ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
 FROM   AUSER.ALOT_LOAN_BASE
 WHERE
-       IMG_ACNT_NO      = '56201550207156' --'56201550486180'   /* :입금내역.계좌번호  */
+       IMG_ACNT_NO      = '56201552044779' --'56201550207156' --'56201550486180'   /* :입금내역.계좌번호  */
        AND IMG_ACNT_BANK_CD = '0'||'26'      /* :입금내역.은행_코드 */
        AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
        AND LOAN_LAST_FG     = '1'            /* '1'                 */
+;
+-- 신한은행
+SELECT IMG_ACNT_NO,IMG_ACNT_BANK_CD
+       ,NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+FROM   AUSER.ALOT_LOAN_BASE
+WHERE
+       IMG_ACNT_NO      IN ('56201550514001', '56201552044779', '56201550471034', '56201550470990', '56201550471015') --'56201550207156' --'56201550486180'   /* :입금내역.계좌번호  */
+       AND IMG_ACNT_BANK_CD = '0'||'26'      /* :입금내역.은행_코드 */
+       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
+       AND LOAN_LAST_FG     = '1'            /* '1'                 */
+ORDER BY IMG_ACNT_NO, LOAN_NO
+;
+-- 우리은행 변경
+SELECT IMG_ACNT_NO,IMG_ACNT_BANK_CD
+       ,NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+FROM   AUSER.ALOT_LOAN_BASE
+WHERE
+       IMG_ACNT_NO      IN ('26665004518923', '26665004518931', '26665004518940', '26665004518956', '26665004518964') --'56201550207156' --'56201550486180'   /* :입금내역.계좌번호  */
+       AND IMG_ACNT_BANK_CD = '0'||'20'      /* :입금내역.은행_코드 */
+       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만     */
+       AND LOAN_LAST_FG     = '1'            /* '1'                 */
+ORDER BY IMG_ACNT_NO, LOAN_NO
 ;
 
 -------------------------------------------------
@@ -214,3 +240,12 @@ AUSER.ALOT_LOAN_IMG_ACNT_DESC
 WHERE IMG_ACNT_NO <= '26665005118912'
 ;
 --COMMIT;
+
+
+SELECT
+	*
+FROM BUSER.BVAT_CMS_IAMT_DESC
+WHERE
+    TR_ORG_CD = 'C1003' and TR_DT = '2011-11-25'
+;
+
