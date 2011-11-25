@@ -802,5 +802,28 @@ SELECT * FROM GUSER.GBCT_COMM_CD_DESC WHERE CD_KIND_NO = 'R00012';
 --             가상계좌집금서비스 (1005301927675)
 
 
+select rtrim(ltrim(substr(b.cust_nm,1,16)))||'-하이' CUST_NM
+  from buser.bgmt_comm_dummy d
+       left outer join auser.alot_loan_base a
+       on 1 = 1
+        and a.img_acnt_bank_cd = '0'||?
+       and a.img_acnt_no = trim(?)
+       and a.loan_last_fg = '1'
+       and substr(a.loan_stat_cd,1,1) = '2'
+       left outer join auser.actt_cust_base b
+      on b.cust_no = a.cont_man_no
+ where d.no = 1
+ ;
 
-
+select rtrim(ltrim(substr(b.cust_nm,1,16)))||'-하이' CUST_NM
+  from buser.bgmt_comm_dummy d
+       left outer join auser.alot_loan_base a
+       on 1 = 1
+        and a.img_acnt_bank_cd = '0'||'20'
+       and a.img_acnt_no = trim('26665004518964') -- 26665004518923 / 26665004518931 / 26665004518940 / 26665004518956 / 26665004518964
+       and a.loan_last_fg = '1'
+       and substr(a.loan_stat_cd,1,1) = '2'
+       left outer join auser.actt_cust_base b
+      on b.cust_no = a.cont_man_no
+ where d.no = 1
+ ;
