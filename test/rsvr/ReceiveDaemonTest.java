@@ -24,7 +24,8 @@ public class ReceiveDaemonTest {
 	private static final int 상수_예상전문_가상계좌01_수취조회 = 1;
 	private static final int 상수_예상전문_가상계좌02_가상계좌입금 = 2;
 	
-	private static String devTestIP = "172.20.102.41";  // HIC 테스트서버; 
+//	private static String devTestIP = "172.20.102.41";  // HIC 테스트서버; 
+	private static String devTestIP = "172.20.101.20";  // HIC 대외계 테스트서버; 
 	private static String localTestIP = "127.0.0.1";    // 로컬 
 //	private static String RealTestIP = "172.20.101.41"; // HIC Real서버; 
 	private static String krTestIP = "192.168.4.200";  // KIBNET TEST
@@ -33,7 +34,7 @@ public class ReceiveDaemonTest {
 	
 	private static int krLocalPort = 9200;       // HIC TEST KibReceiver SERVER PORT
 	private static int krDevPort   = 9300;       // HIC TEST KibReceiver SERVER PORT
-	private static int krRealPort  = 9800;       // HIC REAL KibReceiver SERVER PORT
+//	private static int krRealPort  = 9800;       // HIC REAL KibReceiver SERVER PORT
 	
 //	private static int port = 50811;             // KIBNET PORT
 	private static int sdport            = 9130; // SenderDaemon PORT
@@ -237,6 +238,7 @@ public class ReceiveDaemonTest {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		setSocket(devTestIP, rdImgAcntPort);
+//		setSocket(localTestIP, rdLocalImgAcntPort);
 		
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
@@ -286,7 +288,8 @@ public class ReceiveDaemonTest {
 
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
-		setSocket(localTestIP, rdLocalImgAcntPort);
+//		setSocket(localTestIP, rdLocalImgAcntPort);
+		setSocket(devTestIP, rdImgAcntPort);
 		
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
