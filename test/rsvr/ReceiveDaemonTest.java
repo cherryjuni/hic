@@ -37,7 +37,7 @@ public class ReceiveDaemonTest {
 //	private static int krRealPort  = 9800;       // HIC REAL KibReceiver SERVER PORT
 	
 //	private static int port = 50811;             // KIBNET PORT
-	private static int sdport            = 9130; // SenderDaemon PORT
+//	private static int sdport            = 9130; // SenderDaemon PORT
 	private static int rdImgAcntPort     = 9300; // ReceiveDaemon PORT 가상계좌
 	private static int rdLocalImgAcntPort= rdImgAcntPort; // ReceiveDaemon PORT 가상계좌
 	private static int rdAcntQryAcntPort = 9310; // ReceiveDaemon PORT 수취조회
@@ -143,7 +143,6 @@ public class ReceiveDaemonTest {
 	@SuppressWarnings("unused")
 	private static void openSocket(String _ip, int _port) {
 		setSocket(_ip, _port);
-		
 		openSocket();
 	}
 
