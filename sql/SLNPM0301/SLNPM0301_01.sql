@@ -347,6 +347,10 @@ select * from guser.gsct_gram_log
 where EXEC_DT = '20111124'
 order by EXEC_TM
 ;
+select * from guser.gsct_gram_log
+where EXEC_DT = '20111130' and gram_cd = 'KB0200'
+order by EXEC_TM
+;
 
 select * from guser.gsct_gram_log
 where gram_cd = 'KB0200'
@@ -831,3 +835,23 @@ select rtrim(ltrim(substr(b.cust_nm,1,16)))||'-гоюл' CUST_NM
       on b.cust_no = a.cont_man_no
  where d.no = 1
  ;
+
+
+SELECT
+	*
+FROM BUSER.BVAT_CMS_IAMT_DESC
+WHERE tr_dt > '2011-11-01'; --AND TR_NO = ?  ;
+--WHERE TR_ORG_CD = 'C1004' and tr_dt = '2011-11-30'; --AND TR_NO = ?  ;
+
+;
+
+select * from EUSER.EFDT_DEPO_TRIAL
+;
+
+desc EUSER.EFDT_DEPO_TRIAL;
+
+select * from EUSER.EFDT_DEPO_LDGR ;
+
+select * from EUSER.EFDT_DEPO_BASE;
+
+
