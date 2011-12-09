@@ -34,6 +34,13 @@ import util.StringUtil;
 // 비즈니스 로직을 이해해야 한다.
 public class ReceiveDaemonTest {
 
+	// ReceiveDaemonTest는 3가지 단계로 테스트 가능하도록 되어있다.
+	// 1단계 - 각 개발자 로컬
+	// 2단계 - 개발 서버
+	// 3단계 - 리얼 서버
+	// 이렇게 단계를 분리하기위해,
+	// 각 정보를 분리 저장했다.
+	// 3단계 리얼 서버 테스트는 전문을 새로 작성하는게 좋을듯
 	private static final int 상수_전문_분리_수 = 3;
 	
 //	private static String devTestIP = "172.20.102.41";  // HIC 테스트서버; 
