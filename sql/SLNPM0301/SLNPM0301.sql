@@ -1,6 +1,24 @@
 
 select * from GUSER.GBCT_COMM_CD_DESC;
 
+select *
+from GUSER.GBCT_COMM_CD_KIND
+where cd_kind_nm like '%은행%' 
+;
+
+select *
+from GUSER.GBCT_COMM_CD_DESC
+where cd_kind_no in (
+    select CD_KIND_NO
+    from GUSER.GBCT_COMM_CD_KIND
+    where cd_kind_nm like '%은행%' 
+    )
+;
+
+select *
+from GUSER.GBCT_COMM_CD_DESC
+where cd_kind_no in ('R00017')
+;
 
 select *
 from GUSER.GBCT_COMM_CD_KIND
