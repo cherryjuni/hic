@@ -187,6 +187,11 @@ public class ReceiveDaemonTest {
 	@After
 	public void tearDown() throws Exception {
 		closeSocket();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
