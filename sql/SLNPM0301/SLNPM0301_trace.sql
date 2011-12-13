@@ -37,22 +37,37 @@ FROM AUSER.ALOT_LOAN_ONLN_PAY A, -- ALOT_대출_지급_내역
      AUSER.ALOT_MO_ACNT_BASE  B, -- ALOT_모계좌_기본          
      AUSER.ALOT_LOAN_BASE     C  -- ALOT_대출_기본             
 WHERE
-    A.PROC_STAT_CD    = '01' --'04' --'01'   	
-  AND
+--    A.PROC_STAT_CD    = '01' --'04' --'01'   	
+--  AND
   A.TRAN_PROC_DT    = '2011-12-06'     	
-  AND A.TRAN_RQST_DTTM <= '20111209141806'     	
+  AND A.TRAN_RQST_DTTM <= '20111209141806'     	-- 은행코드 '023' 임 테스트위해 수정
   AND A.PAY_BSN_DIV_CD  = B.BSN_DIV_CD 
-  AND DECODE(nvl(A.TR_BANK_CD,'020'), '088', '026', '020')  = B.BANK_CD 
+--  AND DECODE(A.SETL_BANK_CD, '021', '088', '026', '088', '088', '088', '020')  = B.BANK_CD 
+--  and '088' = b.bank_cd
+  and '020' = b.bank_cd
+--  AND DECODE(nvl(A.TR_BANK_CD,'020'), '088', '026', '020')  = B.BANK_CD 
   AND A.LOAN_NO = C.LOAN_NO(+) 
   AND A.LOAN_SEQ = C.LOAN_SEQ(+) 
   ORDER BY A.PAY_NO 
 ;
 
-SELECT A.TR_BANK_CD, DECODE(nvl(A.TR_BANK_CD,'020'), '088', '026', nvl(A.TR_BANK_CD,'020')) ab
+select tr_bank_cd, count(*)
+from AUSER.ALOT_LOAN_ONLN_PAY A
+group by tr_bank_cd
+;
+
+select * from AUSER.ALOT_LOAN_ONLN_PAY A
+;
+
+SELECT
+    a.setl_bank_cd
+    , DECODE(A.SETL_BANK_CD, '021', '088', '026', '088', '088', '088', '020')
+    , A.TR_BANK_CD
+    , DECODE(nvl(A.TR_BANK_CD,'020'), '088', '026', nvl(A.TR_BANK_CD,'020')) ab
 FROM AUSER.ALOT_LOAN_ONLN_PAY A
 where
-  A.TRAN_PROC_DT    = '2011-11-28'     	
-  AND A.TRAN_RQST_DTTM <= '20111201191510'     	
+  A.TRAN_PROC_DT    = '2011-12-06' --'2011-11-28'     	
+  AND A.TRAN_RQST_DTTM <= '20111219191510'     	
 ;
 --
 -- SLNPM0301Dao.updatePayObj(String statusCd, String payNo, Connection con)
@@ -116,7 +131,7 @@ SELECT
    B.DLY_INT_RT
 FROM AUSER.ALOT_LOAN_PAY_DESC A,
      AUSER.ALOT_LOAN_BASE     B
-WHERE A.PAY_NO    = '11112800000002' --?
+WHERE A.PAY_NO    = '11120600000001' --'11112800000002' --?
   AND A.LOAN_NO   = B.LOAN_NO
   AND A.LOAN_SEQ  = B.LOAN_SEQ
   AND A.CNCL_FG  != '1'
@@ -126,7 +141,7 @@ WHERE A.PAY_NO    = '11112800000002' --?
 
 -- 11112800002	01
 select * from AUSER.ALOT_LOAN_PAY_DESC
-where pay_no = '11112800000002'
+where pay_no = '11120600000001' --'11112800000002'
 ;
 
 -- 가상계좌생성
@@ -141,11 +156,12 @@ AND PRDT_MID_CLAS_CD ='22'
 AND IMG_ACNT_NO IS NOT NULL OR IMG_ACNT_NO <> '')
 WHERE ROWNUM = 1
 ;
+
 -- 56201550661748
 SELECT IMG_ACNT_NO FROM
 (SELECT IMG_ACNT_NO FROM AUSER.ALOT_LOAN_BASE
 WHERE CONT_MAN_NO =(SELECT L.CONT_MAN_NO FROM AUSER.ALOT_LOAN_BASE L
-WHERE L.LOAN_NO ='11112800002'
+WHERE L.LOAN_NO ='11120600001' --'11112800002'
 AND L.LOAN_SEQ='01')
 AND LOAN_STAT_CD ='22'
 AND PRDT_MID_CLAS_CD ='22'
@@ -166,6 +182,18 @@ FROM (
 WHERE ROWNUM = 1
 ;
 --arg1= 0266409069848191
+
+SELECT IMG_ACNT_NO
+FROM (
+ SELECT IMG_ACNT_NO
+ FROM AUSER.ALOT_LOAN_IMG_ACNT_DESC
+ WHERE IMG_ACNT_BANK_CD = '020'
+  AND USE_FG = '0'
+  AND DISU_DT IS NULL
+)
+WHERE ROWNUM = 1
+;
+
 
 --UPDATE AUSER.ALOT_LOAN_IMG_ACNT_DESC
 SET USE_FG = '1'
@@ -245,22 +273,65 @@ AND    LOAN_SEQ = ?
 
 select * from AUSER.ALOT_LOAN_BASE
 where
-    loan_no = '11112800002'
+    loan_no = '' --'11112800002'
     and loan_seq = '01'
 ;
 
 
 
-
+-- 대출지급금액합계
 ------------------
 select
 	SUM(PAY_AMT) PAY_AMT_SUM
 FROM AUSER.ALOT_LOAN_PAY_DESC
-WHERE PAY_NO          = '11112800000002' --?
+WHERE PAY_NO          = '11120600000001' --'11112800000002' --?
 AND   PAY_STAT_CD     = '1'
 ;
 --2011-12-02 14:12:10,  INFO [main](SLNPM0301Dao.java:157) : arg1=11112800000002
 
+select
+	*
+FROM AUSER.ALOT_LOAN_PAY_DESC
+WHERE PAY_NO          = '11120600000001' --'11112800000002' --?
+--AND   PAY_STAT_CD     = '1'
+;
+
+-- 대출지급내역, 대출기본 조회
+-- getLoanPayObjQuery()
+SELECT  						
+	A.PAY_BSN_DIV_CD,			
+	'' AS CPRT_COM_NO,			
+	A.CNCL_FG,					
+	A.RQST_DIV_CD,				
+	A.SNUM,						
+	B.LOAN_NO, 					
+	B.LOAN_SEQ, 				
+	B.PRDT_LRGE_CLAS_CD, 		
+	B.PRDT_MID_CLAS_CD, 		
+	B.LOAN_INT_RT,				
+	B.LOAN_DT,					
+	B.PRDT_CD,					
+	B.LOAN_PAMT,				
+	B.LOAN_TERM,				
+	B.SETL_DD,					
+	B.FCNT_DUE_DT,				
+	B.FCNT_MOPA_CALC_FG,		
+	B.CUST_TRT_FEE,				
+	B.CPRT_COM_TRT_FEE,			
+	B.IMG_ACNT_BANK_CD,			
+	B.MNG_DEPT_CD,				
+	B.CPRT_FEE,				    
+   0 AS  PR_FEE,               
+	B.DUE_METH_CD,				
+   B.DFEE_RT,                  
+   B.DLY_INT_RT                
+FROM AUSER.ALOT_LOAN_PAY_DESC A,   
+     AUSER.ALOT_LOAN_BASE     B    
+WHERE A.PAY_NO          = '11120600000001' --?  	   	
+  AND A.LOAN_NO   = B.LOAN_NO    	
+  AND A.LOAN_SEQ  = B.LOAN_SEQ   	
+  AND A.CNCL_FG  != '1' 
+;
 
 --연체료율 내역 Table에서 기존 데이터를 삭제
 select * from auser.alot_dfee_rt_desc

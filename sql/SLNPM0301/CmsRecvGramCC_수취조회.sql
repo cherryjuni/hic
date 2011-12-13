@@ -6,8 +6,13 @@
 -- 거래기관조회
 SELECT
 	TR_ORG_CD
-FROM BUSER.BVAT_TR_ORG_BASE+
+FROM BUSER.BVAT_TR_ORG_BASE
 WHERE RCPT_TP_CD = ? AND BANK_CD = '0'||?
+;
+
+SELECT
+	*
+FROM BUSER.BVAT_TR_ORG_BASE
 ;
 
 --//가상계좌고객명조회
@@ -22,6 +27,19 @@ from buser.bgmt_comm_dummy d
     left outer join auser.actt_cust_base b
     on b.cust_no = a.cont_man_no
 
+where d.no = 1
+;
+
+select rtrim(ltrim(substr(b.cust_nm,1,16)))||'-하이' CUST_NM
+from buser.bgmt_comm_dummy d
+    left outer join auser.alot_loan_base a
+    on 1 = 1
+        and a.img_acnt_bank_cd = '0'||'26'
+        and a.img_acnt_no = trim('56201550661748')
+        and a.loan_last_fg = '1'
+        and substr(a.loan_stat_cd,1,1) = '2'
+    left outer join auser.actt_cust_base b
+    on b.cust_no = a.cont_man_no
 where d.no = 1
 ;
 
@@ -81,6 +99,32 @@ WHERE DIV_CD           = ?         /* '1'              */
     AND IMG_ACNT_NO  = ?         /* :입금내역.계좌번호   */    
     AND IMG_ACNT_BANK_CD = '0'||?    /* :입금내역.은행_코드 */    
     AND LOAN_LAST_FG     = ?         /* '1'              */    ;
+;
+
+-- 대출정보조회
+SELECT  NVL(LOAN_NO,' ')       LOAN_NO
+       ,NVL(LOAN_SEQ,'01')     LOAN_SEQ
+       ,NVL(MNG_DEPT_CD, ' ')  MNG_DEPT_CD
+       , img_acnt_no
+       , loan_stat_cd
+       , a.*
+FROM   AUSER.ALOT_LOAN_BASE a
+WHERE                    --                                      대출종료  
+       IMG_ACNT_NO      in ('56201554000203', '56201550661748', '56201553000020') --?                  /* :입금내역.계좌번호   */
+--       AND IMG_ACNT_BANK_CD = '0'||?         /* :입금내역.은행_코드 */
+--       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만         */
+       AND LOAN_LAST_FG     = '1'            /* '1'              */
+;
+
+select * from BUSER.BVAT_UNCNFM_BASE;
+
+select *
+FROM   AUSER.ALOT_LOAN_BASE
+WHERE
+       IMG_ACNT_NO      = '56201550661748' --?                  /* :입금내역.계좌번호   */
+--       AND IMG_ACNT_BANK_CD = '0'||?         /* :입금내역.은행_코드 */
+       AND LOAN_STAT_CD IN ('22', '29')      /* 대출중인 계좌만         */
+       AND LOAN_LAST_FG     = '1'            /* '1'              */
 ;
 
 --CMS거래내역 등록

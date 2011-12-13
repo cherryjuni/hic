@@ -45,6 +45,13 @@ WHERE A.PROC_STAT_CD    = '01' --'05' --'01'
   ORDER BY A.PAY_NO 
 ;
 
+
+select * from GUSER.GSCT_SQL_INFO
+;
+
+select * from GUSER.GSCT_PRGM
+;
+
 --TRAN_RQST_DTTM
 --20111108095409
 --20111108103642
@@ -289,6 +296,11 @@ SELECT TR_ORG_CD FROM BUSER.BVAT_TR_ORG_BASE WHERE RCPT_TP_CD = 'C1' AND BANK_CD
 SELECT TR_ORG_CD FROM BUSER.BVAT_TR_ORG_BASE WHERE RCPT_TP_CD = 'C1' AND BANK_CD = '026';
 SELECT TR_ORG_CD FROM BUSER.BVAT_TR_ORG_BASE WHERE RCPT_TP_CD = 'C1' AND BANK_CD = '020';
 SELECT * FROM BUSER.BVAT_TR_ORG_BASE ORDER BY TR_ORG_CD;
+
+-- 공통_코드_내역 - 은행
+SELECT * FROM GUSER.GBCT_COMM_CD_DESC WHERE CD_KIND_NO = 'A00003' order by CD_DESC_NO;
+-- 공통_코드_내역 - 은행
+SELECT * FROM GUSER.GBCT_COMM_CD_DESC WHERE CD_KIND_NO = 'R00012' order by CD_DESC_NO;
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
