@@ -31,6 +31,10 @@ public class DateTimeUtil {
 	}
 
 	public static int getTime() {
-		return Integer.parseInt(time06.format(new Date()));
+		return Integer.parseInt(getTime06());
+	}
+
+	public static int getMiliTime() {
+		return Integer.parseInt(getTime09());
 	}
 }
