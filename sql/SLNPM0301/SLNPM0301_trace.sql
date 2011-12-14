@@ -37,14 +37,15 @@ FROM AUSER.ALOT_LOAN_ONLN_PAY A, -- ALOT_대출_지급_내역
      AUSER.ALOT_MO_ACNT_BASE  B, -- ALOT_모계좌_기본          
      AUSER.ALOT_LOAN_BASE     C  -- ALOT_대출_기본             
 WHERE
---    A.PROC_STAT_CD    = '01' --'04' --'01'   	
---  AND
-  A.TRAN_PROC_DT    = '2011-12-06'     	
-  AND A.TRAN_RQST_DTTM <= '20111209141806'     	-- 은행코드 '023' 임 테스트위해 수정
+    A.PROC_STAT_CD    = '01' --'04' --'01'   	
+  AND
+  A.TRAN_PROC_DT    = '2011-12-14'     	
+  AND A.TRAN_RQST_DTTM <= '20111214141806'     	-- 은행코드 '023' 임 테스트위해 수정
   AND A.PAY_BSN_DIV_CD  = B.BSN_DIV_CD 
---  AND DECODE(A.SETL_BANK_CD, '021', '088', '026', '088', '088', '088', '020')  = B.BANK_CD 
+--  AND A.SETL_BANK_CD = B.BANK_CD
+  AND DECODE(A.SETL_BANK_CD, '021', '088', '026', '088', '088', '088', '020')  = B.BANK_CD 
 --  and '088' = b.bank_cd
-  and '020' = b.bank_cd
+--  and '020' = b.bank_cd
 --  AND DECODE(nvl(A.TR_BANK_CD,'020'), '088', '026', '020')  = B.BANK_CD 
   AND A.LOAN_NO = C.LOAN_NO(+) 
   AND A.LOAN_SEQ = C.LOAN_SEQ(+) 
