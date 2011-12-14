@@ -19,7 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import util.DateTimeUtil;
-import util.StringUtil;
+import com.cabis.xutil.StringUtil;
 
 // ReceiveDaemon 을 호출해서 테스트를 진행하면
 // KibReceiver를 호출하므로
@@ -69,9 +69,14 @@ public class ReceiveDaemonTest {
 	private static String ip = null; //devTestIP;
 	private static int  port = 0; //rdImgAcntPort;
 	
-	private static Socket     socket = null;
-	private static BufferedReader in = null;
-	private static BufferedWriter out= null;
+	private Socket     socket = null;
+	private BufferedReader in = null;
+	private BufferedWriter out= null;
+	
+	private static String today = null;
+	private static int startTime = 0;
+	private static int trNo = 0;
+	
 
 	//                                                  20032901 - 수취조회
 	//                                                  20032902 - 지급이체
@@ -95,19 +100,22 @@ public class ReceiveDaemonTest {
 	
 	
 	@BeforeClass
-	public static void setUpClass() {
+	public static void setUpBeforeClass() {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 //		setSocket(localTestIP, rdLocalImgAcntPort);
 		setSocket(devTestIP, rdImgAcntPort);
 		
+		today = DateTimeUtil.getToday08();
+		startTime = DateTimeUtil.getTime();
+		trNo = startTime; 
 	}
 	
 	@AfterClass
-	public static void tearDownClass() {
+	public static void tearDownAfterClass() {
 	}
 	
-	private static void openSocket() {
+	private void openSocket() {
 		try {
 			socket = new Socket(ip, port);
 			in  = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -122,7 +130,7 @@ public class ReceiveDaemonTest {
 	}
 	
 	@SuppressWarnings("unused")
-	private static void openSocket(String _ip, int _port) {
+	private void openSocket(String _ip, int _port) {
 		setSocket(_ip, _port);
 		openSocket();
 	}
@@ -132,7 +140,7 @@ public class ReceiveDaemonTest {
 		port = _port;
 	}
 	
-	private static void closeSocket() {
+	private void closeSocket() {
 		try {
 			in.close();
 			out.close();
@@ -188,11 +196,11 @@ public class ReceiveDaemonTest {
 	@After
 	public void tearDown() throws Exception {
 		closeSocket();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Test
@@ -233,8 +241,7 @@ public class ReceiveDaemonTest {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		for(int i = 0; i < 수취조회_요청.length; i+=상수_전문_분리_수) {
-			// 거래번호는 7자리지만, 맨앞의 한자리는 KIBNET에서 사용하므로 "0"로 세팅
-			전문번호 = DateTimeUtil.getToday08()+DateTimeUtil.getTime06()+"0"+DateTimeUtil.getTime07().substring(0,6);
+			전문번호 = 전문번호생성();
 			보낼전송전문 = 수취조회_요청[i]
 					      +전문번호
 					      +수취조회_요청[i+1]
@@ -251,12 +258,27 @@ public class ReceiveDaemonTest {
 			
 			assertEquals(예상수신전문, 실제전문);
 			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
+	}
+
+	private String 전문번호생성() {
+		// 거래번호는 7자리지만, 맨앞의 한자리는 KIBNET에서 사용하므로 "0"로 세팅
+		trNo ++;
+		startTime++;
+		return  today+StringUtil.addZero(startTime,6)+"0"+StringUtil.addZero(trNo, 6);
+	}
+	
+	@Test
+	public void test전문번호생성() {
+		String 전문번호1 = 전문번호생성();
+		String 전문번호2 = 전문번호생성();
+		
+		assertFalse(전문번호1.equals(전문번호2));
+
+		전문번호1 = 전문번호생성();
+		전문번호2 = 전문번호생성();
+		
+		assertFalse(전문번호1.equals(전문번호2));
 	}
 	
 	@Test
@@ -300,8 +322,7 @@ public class ReceiveDaemonTest {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		for(int i = 0; i < 수취조회_요청.length; i+=상수_전문_분리_수) {
-			// 거래번호는 7자리지만, 맨앞의 한자리는 KIBNET에서 사용하므로 "0"로 세팅
-			전문번호 = DateTimeUtil.getToday08()+DateTimeUtil.getTime06()+"0"+DateTimeUtil.getTime07().substring(0,6);
+			전문번호 = 전문번호생성();
 			보낼전송전문 = 수취조회_요청[i]
 				      +전문번호
 				      +수취조회_요청[i+1]
@@ -318,11 +339,6 @@ public class ReceiveDaemonTest {
 			
 			assertEquals(예상수신전문, 실제전문);
 
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -363,8 +379,7 @@ public class ReceiveDaemonTest {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		for(int i = 0; i < 가상계좌_요청.length; i+=상수_전문_분리_수) {
-			// 거래번호는 7자리지만, 맨앞의 한자리는 KIBNET에서 사용하므로 "0"로 세팅
-			전문번호 = DateTimeUtil.getToday08()+DateTimeUtil.getTime06()+"0"+DateTimeUtil.getTime07().substring(0,6);
+			전문번호 = 전문번호생성();
 			보낼전송전문 = 가상계좌_요청[i]
 				      +전문번호
 				      +가상계좌_요청[i+1]
@@ -381,11 +396,6 @@ public class ReceiveDaemonTest {
 			
 			assertEquals(예상수신전문, 실제전문);
 			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -423,8 +433,7 @@ public class ReceiveDaemonTest {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		for(int i = 0; i < 가상계좌_요청.length; i+=상수_전문_분리_수) {
-			// 거래번호는 7자리지만, 맨앞의 한자리는 KIBNET에서 사용하므로 "0"로 세팅
-			전문번호 = DateTimeUtil.getToday08()+DateTimeUtil.getTime06()+"0"+DateTimeUtil.getTime07().substring(0,6);
+			전문번호 = 전문번호생성();
 			보낼전송전문 = 가상계좌_요청[i]
 				      +전문번호
 				      +가상계좌_요청[i+1]
@@ -442,11 +451,6 @@ public class ReceiveDaemonTest {
 			
 			assertEquals(예상수신전문, 실제전문);
 			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -471,8 +475,7 @@ public class ReceiveDaemonTest {
 		//////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////
 		for(int i = 0; i < 가상계좌_요청.length; i+=상수_전문_분리_수) {
-			// 거래번호는 7자리지만, 맨앞의 한자리는 KIBNET에서 사용하므로 "0"로 세팅
-			전문번호 = DateTimeUtil.getToday08()+DateTimeUtil.getTime06()+"0"+DateTimeUtil.getTime07().substring(0,6);
+			전문번호 = 전문번호생성();
 			보낼전송전문 = 가상계좌_요청[i]
 				      +전문번호
 				      +가상계좌_요청[i+1]
@@ -489,7 +492,6 @@ public class ReceiveDaemonTest {
 			
 			assertEquals(예상수신전문, 실제전문);
 	
-			System.out.println("시간: " + DateTimeUtil.getTime07());
 			//////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////
 			보낼전송전문 = 가상계좌_요청[i]
@@ -507,7 +509,6 @@ public class ReceiveDaemonTest {
 			실제전문 = 받은전문.toString();
 			
 			assertEquals(예상수신전문, 실제전문);
-			System.out.println("시간: " + DateTimeUtil.getTime07());
 		}
 	}
 
