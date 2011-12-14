@@ -273,11 +273,19 @@ public class ReceiveDaemonTest {
 		String 전문번호1 = 전문번호생성();
 		String 전문번호2 = 전문번호생성();
 		
+		assertEquals(8+6+7,전문번호1.length());
+		assertEquals(8+6+7,전문번호2.length());
+	    assertEquals("0",전문번호1.substring(14, 15));
+	    assertEquals("0",전문번호2.substring(14, 15));
 		assertFalse(전문번호1.equals(전문번호2));
 
 		전문번호1 = 전문번호생성();
 		전문번호2 = 전문번호생성();
 		
+		assertEquals(8+6+7,전문번호1.length());
+		assertEquals(8+6+7,전문번호2.length());
+	    assertEquals("0",전문번호1.substring(14, 15));
+	    assertEquals("0",전문번호2.substring(14, 15));
 		assertFalse(전문번호1.equals(전문번호2));
 	}
 	
