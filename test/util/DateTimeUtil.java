@@ -33,8 +33,4 @@ public class DateTimeUtil {
 	public static int getTime() {
 		return Integer.parseInt(time06.format(new Date()));
 	}
-
-	public static int getMiliTime() {
-		return Integer.parseInt(getTime09());
-	}
 }
