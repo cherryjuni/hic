@@ -40,6 +40,6 @@ public interface IKibGramEnum {
 	public static final int h응답MESSAGE            = 25;
 	public static final int h원거래요소             = 26;
 	public static final int h은행응답코드           = 27;
-	public static final int hFILLER                = 28;
-	public static final int h해더개수              = 29;
+	public static final int hFILLER                 = 28;
+	public static final int h해더개수               = 29;
 }
