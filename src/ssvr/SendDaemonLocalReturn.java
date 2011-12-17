@@ -11,6 +11,23 @@
  * 요청전문을 전송한 클라이언트에 장애상태를 코드로 리턴한다.
  * 개발서버
  */
+/*
+ * 서버에서만 실행된다.
+ * 방화벽과 로컬네트워크 아이피를 사용하기 때문..
+ * 아래의 아규멘트를 넣고 실행한다
+ * 
+ * 서버에서만 KIBNET과 연결된다.
+ * 로컬에서는 실행은 되지만, KIBNET과 연결될 수 없다 
+ * 로컬에서 테스트하고,
+ * 실제 KIBNET연결이 되지 않을때, 테스트하기 위한 프로그램
+ * 연결되고 KIBNET으로 연결은되지 않지만
+ * KIBNET연결을 시뮬레이션 한다.
+ * 아래의 아규멘트를 넣고 실행한다
+ * 
+ * arg -> 9230 127.0.0.1 50811
+ * 
+ */
+
 package ssvr;
 
 import java.io.*;
@@ -170,18 +187,18 @@ public class SendDaemonLocalReturn {
 	 *************************************************************************/
 	class Client extends Thread {
 		// 로컬소켓
-		Socket lS = null;
+		private Socket lS = null;
 		// 외부소켓
-		Socket xS = null;
+		private Socket xS = null;
 		
 		// 로컬소켓 스트림
-		BufferedReader in   = null;
-		BufferedWriter out  = null;
+		private BufferedReader in   = null;
+		private BufferedWriter out  = null;
 
 		// 외부소켓 스트림
-		BufferedReader xin  = null;   
-		BufferedWriter xout = null;   
-		InputStream is  = null;      //(kkmin,20070117)
+		private BufferedReader xin  = null;   
+		private BufferedWriter xout = null;   
+		private InputStream is  = null;      //(kkmin,20070117)
 
 		private byte[] sToBytes;
 		private String IP   = SendDaemonLocalReturn.nIP;
@@ -214,6 +231,7 @@ public class SendDaemonLocalReturn {
 						rtnStr.append(new String(cTot));
 						
 						totCnt = StringUtil.cInt(StringUtil.CHSTRING(rtnStr.toString().substring(6, 10), " ", "0"));
+						totCnt -= 4;
 						
 						// 전문길이가 전문 맨앞자리에 포함되므로 이미꺼낸 10 byte 는 빼고 꺼낸다.
 						for (i = 0; i < totCnt; i++) {
@@ -230,38 +248,38 @@ public class SendDaemonLocalReturn {
 					/*--------------------------------------------------------------*/
 					
 					
-//					//System.out.println("FW에서 전송된 요청전문 : [" + str + "]");
-//
-//					// 공통헤더 파싱을 위해 바이트 배열로 변환한다.
-//					sToBytes = str.getBytes();
-//
-//					//if( sToBytes.length < 100 ) {
-//					//	System.out.println("요청한 전문의 길이가 너무 작습니다. 전문은 무시되었습니다.["+str+"]");
-//					//	continue;
-//					//}
-//
-//					// 공통헤더를 파싱한다.
-//					String[] localRequestHeader = parseOnlineCommonHeader(str);
-//					
-//					if(localRequestHeader == null) { 
-//						System.out.println("localRequestHeader가 null이므로 소켓종료합니다.");
-//						
-//						try {
-//							// 이 소켓들의 상태를 체크하여 널이거나 이용가능상태가 아닐때만 닫을것.!!!!!
-//							// 내부소켓 종료
-//							in.close();
-//							out.close();
-//							lS.close();
-//							// 외부소켓 종료
+					//System.out.println("FW에서 전송된 요청전문 : [" + str + "]");
+
+					// 공통헤더 파싱을 위해 바이트 배열로 변환한다.
+					sToBytes = str.getBytes();
+
+					//if( sToBytes.length < 100 ) {
+					//	System.out.println("요청한 전문의 길이가 너무 작습니다. 전문은 무시되었습니다.["+str+"]");
+					//	continue;
+					//}
+
+					// 공통헤더를 파싱한다.
+					String[] localRequestHeader = parseOnlineCommonHeader(str);
+					
+					if(localRequestHeader == null) { 
+						System.out.println("localRequestHeader가 null이므로 소켓종료합니다.");
+						
+						try {
+							// 이 소켓들의 상태를 체크하여 널이거나 이용가능상태가 아닐때만 닫을것.!!!!!
+							// 내부소켓 종료
+							in.close();
+							out.close();
+							lS.close();
+							// 외부소켓 종료
 //							xin.close();
 //							xout.close();					
 //							xS.close();
-//
-//							break;
-//						} catch (Exception ex) {
-//							ex.printStackTrace();
-//						}
-//					}
+
+							break;
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
 //					
 //					/* 요청기관코드 변환 */
 //					int orgCode = 00;
@@ -357,7 +375,14 @@ public class SendDaemonLocalReturn {
 //						stsCode = "9";			// 송신오류로 판단(네트웍 연결오류)
 //					}
 					
-					String xRcv = KibGram.createReturnMsg(str.substring(6));
+					System.out.println("===== 로컬에 보내는 데이터 =======");
+					System.out.println("[" + localRequestHeader[2] + "][" + localRequestHeader[2].getBytes().length + "]");
+					System.out.println("===============================");
+					String xRcv = "";
+					if(str.length() > 300) xRcv = KibGram.createReturnMsg(localRequestHeader[2]);
+					System.out.println("[로컬 응답전문--------------------------------------]");
+					System.out.println("["+xRcv+"]["+xRcv.getBytes().length + "]");
+					System.out.println("[--------------------------------------------------]");
 					// 로컬응답을 리턴한다.
 					try{
 						//out.write(localResponseHeader);
@@ -368,9 +393,9 @@ public class SendDaemonLocalReturn {
 					}
 					
 					try{
-						xin.close();
-						xout.close();							
-						xS.close();				
+//						xin.close();
+//						xout.close();							
+//						xS.close();				
 					}catch(Exception e){
 							System.out.println("신용정보사 전문 송수신후 소켓종료중 오류:"+e.getMessage());
 					}						
@@ -385,9 +410,9 @@ public class SendDaemonLocalReturn {
 					out.close();
 					lS.close();
 					// 외부소켓 종료
-					xin.close();
-					xout.close();					
-					xS.close();
+//					xin.close();
+//					xout.close();					
+//					xS.close();
 					System.out.println("통신 또는 전문파싱중 오류가 발생하여 소켓접속을 종료하였습니다");
 				} catch (Exception ex) {
 					System.out.println("통신 또는 전문파싱중 오류가 발생하여 소켓접속 종료중 오류발생함"+ex.getMessage());
@@ -587,11 +612,21 @@ public class SendDaemonLocalReturn {
 	//////////////////////////////////////////////////
 	// KIBNET을 가지 않고 메시지 응답코드 세팅후, 돌려줌
 	//////////////////////////////////////////////////
-	public static class KibGram implements IKibGramEnum {
+	private static class KibGram implements IKibGramEnum {
 
-		private static final int H응답코드_순번 = 12;
+		private static final int H순번_응답코드 = 12;
+		private static final String H_KB0200 = "KB0200"; 
+		private static final int H순번_거래후계좌잔액 = 2;
+		private static final int H순번_이체수수료금액 = 13;
+		
 		private static final int H소켓전문길이_글자수 = 4;
 		private static final String H응답코드_오류없음 = "000";
+		private static final String H신한은행_코드 = "00000088";
+		private static final String H우리은행_코드 = "00000020";
+		private static final int wrAcntVal = 1000000000;
+		private static final int shAcntVal = 1000000000;
+		private static final int 자행이체수수료 = 100;
+		private static final int 타행이체수수료 = 500;
 		
 		private static final int[] headerPosition = {
 			      // index kibnet전문
@@ -686,7 +721,7 @@ public class SendDaemonLocalReturn {
 
 		private KibGram(String msg) {
 			orgGram = msg;
-			sToBytes = orgGram.substring(H소켓전문길이_글자수).getBytes();
+			sToBytes = orgGram.getBytes();
 		}
 
 		public String[] parserKibHeader() throws Exception {
@@ -919,25 +954,29 @@ public class SendDaemonLocalReturn {
 			KibGram kibGram = new KibGram(msg);
 			kibGram.parserKibHeader();
 			kibGram.parserKibBody();
-			return kibGram.makeReturnMsg();
+			String result = kibGram.makeReturnMsg();
+			return kibGram.makeSocketMsg(result);
 		}
 
 		private String makeReturnMsg() {
 			String result = "";
 			
+			header[H순번_응답코드] = H응답코드_오류없음;
+			body[H순번_거래후계좌잔액] = "0001234500000";
+			body[H순번_이체수수료금액] = "00100";
+			
 			for(int i = 0; i < header.length; i++) {
-				if (H응답코드_순번 == i)
-					result += H응답코드_오류없음;
-				else
-					result += header[i];
+				result += header[i];
 			}
 			for(int i = 0; i < body.length; i++) {
 				result += body[i];
 			}
-			
-			result = "0"+(result.getBytes().length+ H소켓전문길이_글자수)+result;
-			
+
 			return result;
+		}
+
+		private String makeSocketMsg(String result) {
+			return "0"+(result.getBytes().length+H소켓전문길이_글자수)+result;
 		}
 
 //		public static int[] getHeaderPositon() {
