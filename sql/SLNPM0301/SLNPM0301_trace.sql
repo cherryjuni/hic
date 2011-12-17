@@ -39,8 +39,8 @@ FROM AUSER.ALOT_LOAN_ONLN_PAY A, -- ALOT_대출_지급_내역
 WHERE
     A.PROC_STAT_CD    = '01' --'04' --'01'   	
   AND
-  A.TRAN_PROC_DT    = '2011-12-14'     	
-  AND A.TRAN_RQST_DTTM <= '20111214141806'     	-- 은행코드 '023' 임 테스트위해 수정
+  A.TRAN_PROC_DT    = '2011-12-17'     	
+  AND A.TRAN_RQST_DTTM <= '20111217141806'     	-- 은행코드 '023' 임 테스트위해 수정
   AND A.PAY_BSN_DIV_CD  = B.BSN_DIV_CD 
 --  AND A.SETL_BANK_CD = B.BANK_CD
   AND DECODE(A.SETL_BANK_CD, '021', '088', '026', '088', '088', '088', '020')  = B.BANK_CD 
@@ -69,6 +69,21 @@ FROM AUSER.ALOT_LOAN_ONLN_PAY A
 where
   A.TRAN_PROC_DT    = '2011-12-06' --'2011-11-28'     	
   AND A.TRAN_RQST_DTTM <= '20111219191510'     	
+;
+
+SELECT
+	SUM(PAY_AMT) PAY_AMT_SUM
+FROM AUSER.ALOT_LOAN_PAY_DESC
+WHERE PAY_NO          = '11121400000004' --?
+AND   PAY_STAT_CD     = '1'
+;
+
+select *
+FROM AUSER.ALOT_LOAN_PAY_DESC
+WHERE
+    RQST_DT = '2011-12-14'
+--    PAY_NO          = '11121400000004' --?
+--AND   PAY_STAT_CD     = '1'
 ;
 --
 -- SLNPM0301Dao.updatePayObj(String statusCd, String payNo, Connection con)
