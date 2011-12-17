@@ -1,0 +1,13 @@
+#!/bin/sh
+
+prefix=`date '+%Y%m%d_%H%M'`
+
+send_id="$(ps -ef | grep 'SendDaemon 9230' |grep -v grep | grep -v tail)"
+
+if [ ! "${send_id}" = "" ]; then
+    echo "Kib Daemon Already Start!!!!!";
+    exit;
+fi;
+
+mv /HIC_APP/daemon/log_dev/kib_9230.log /HIC_APP/daemon/log_dev/kib_9230_${prefix}.log
+nohup java -classpath /HIC_APP/daemon/lib/xutil.jar:/HIC_APP/daemon/class ssvr.SendDaemonLocalReturn 9230 127.0.0.1 50811 >> /HIC_APP/daemon/log_dev/kib_9230.log &
