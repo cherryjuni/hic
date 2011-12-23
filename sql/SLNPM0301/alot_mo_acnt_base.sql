@@ -1,4 +1,46 @@
 
+--create table alot_mo_acnt_base_real_111221 as
+--select * from auser.alot_mo_acnt_base@hiplus_link
+;
+
+
+--create table AUSER.ALOT_MO_ACNT_BASE_20111221 as
+--select * from AUSER.ALOT_MO_ACNT_BASE
+--;
+
+--select * from alot_mo_acnt_base_real_111221;
+
+--ALTER TABLE ALOT_MO_ACNT_BASE_real_111221 ADD(
+--	CONSTRAINT ACNTT_BASE_PK PRIMARY KEY (BSN_DIV_CD, BANK_CD, MO_ACNT_NO));
+
+--alter table alot_mo_acnt_base_REAL_111221 drop CONSTRAINT SYS_C0021617;
+
+--select constraint_name
+--from user_constraints
+--where table_name = 'auser.alot_mo_acnt_base'
+--;
+
+
+-- 모계좌테이블 프라이머리키 수정 쿼리
+--alter table auser.alot_mo_acnt_base drop CONSTRAINT ALOT_MO_ACNT_BASE_PK;
+--ALTER TABLE auser.ALOT_MO_ACNT_BASE ADD(CONSTRAINT ALOT_MO_ACNT_BASE_PK PRIMARY KEY (BSN_DIV_CD, BANK_CD));
+
+-- 추후 우리은행 계좌 추가 후, 수정 할 것.
+--alter table auser.alot_mo_acnt_base drop CONSTRAINT ALOT_MO_ACNT_BASE_PK;
+--ALTER TABLE auser.ALOT_MO_ACNT_BASE ADD(CONSTRAINT ALOT_MO_ACNT_BASE_PK PRIMARY KEY (BSN_DIV_CD, BANK_CD, MO_ACNT_NO));
+
+--ALTER TABLE TABLE명 DROP CONSTRAINT PK명;
+
+-- PK 제거하기
+--Alter TABLE 테이블이름 drop primary key cascade
+ 
+--PK추가 하기
+--ALTER TABLE 테이블이름 ADD CONSTRAINT 인덱스 이름 PRIMARY KEY(field1, field2)
+
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
 --CREATE TABLE alot_mo_acnt_base_20111205 AS (select * from AUSER.ALOT_MO_ACNT_BASE);
 --select * from alot_mo_acnt_base_20111205;
 
@@ -92,6 +134,6 @@ LOGGING
 NOCOMPRESS
 NOPARALLEL ;
 
-ALTER TABLE AUSER.ALOT_MO_ACNT_BASE ADD(
-	PRIMARY KEY (BSN_DIV_CD, BANK_CD, MO_ACNT_NO));
+--ALTER TABLE AUSER.ALOT_MO_ACNT_BASE ADD(PRIMARY KEY (BSN_DIV_CD, BANK_CD, MO_ACNT_NO));
+ALTER TABLE AUSER.ALOT_MO_ACNT_BASE ADD(CONSTRAINT ALOT_MO_ACNT_BASE_PK PRIMARY KEY (BSN_DIV_CD, BANK_CD));
 

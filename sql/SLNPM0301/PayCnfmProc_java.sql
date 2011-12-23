@@ -39,9 +39,10 @@ SELECT
 FROM AUSER.ALOT_LOAN_ONLN_PAY A,
      AUSER.ALOT_MO_ACNT_BASE  B,
      AUSER.ALOT_LOAN_BASE     C
-WHERE A.TRAN_PROC_DT      = '2011-12-17' --?
+WHERE A.TRAN_PROC_DT      = '2011-12-18' --?
   AND A.PROC_STAT_CD    = '03' -- 처리상태코드(미응답)
---  AND A.PROC_STAT_CD    = '01' -- 처리상태코드(미응답)
+--  AND A.PROC_STAT_CD    = '01' -- 처리상태코드(미처리)
+--  AND A.PROC_STAT_CD    = '05' -- 처리상태코드(정상)
   AND A.PAY_BSN_DIV_CD    = B.BSN_DIV_CD                  /*지급업무구분코드 = 업무구분코드 */
   AND DECODE(A.SETL_BANK_CD, '021', '088', '026', '088', '088', '088', '020')  = B.BANK_CD
   AND A.LOAN_NO           = C.LOAN_NO(+)
