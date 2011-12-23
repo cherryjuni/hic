@@ -1,5 +1,5 @@
 
--- VochProcDao.java:142
+-- VochProcQuery.java:108
 SELECT 						
    A.LOAN_PAMT,				
    A.STMP_FEE,					
