@@ -332,6 +332,7 @@ public class ReceiveDaemonTest {
 		trNo += CONST_ONE_SECOND;
 		startTime += CONST_ONE_SECOND;
 		String strTime = simpleDateFormat.format(new Date(trNo));
+		strTime = (strTime.length() == 5 ? "0" : "") + strTime;
 		return  today+strTime+"0"+strTime;
 	}
 	
