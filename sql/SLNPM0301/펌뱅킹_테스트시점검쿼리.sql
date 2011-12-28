@@ -31,11 +31,17 @@ where tran_proc_dt = '2011-12-23'
 ;
 
 
-select * from auser.alot_loan_onln_pay
+select * from auser.alot_loan_onln_pay --@hiplus_link
 where tran_proc_dt = '2011-12-27'
+    and tr_bank_cd = '23'
 ;
 
-select * from auser.alot_loan_pay_desc
+select tr_bank_cd, count(*) from auser.alot_loan_onln_pay --@hiplus_link
+--where tran_proc_dt = '2011-12-27'
+group by tr_bank_cd
+;
+
+select * from auser.alot_loan_pay_desc --@hiplus_link
 where rqst_dt = '2011-12-27'
 ;
 
@@ -72,7 +78,10 @@ where
 --    and
 --    p.pay_no = '11122600000001'
 order by pay_no desc
-    ;
+;
+
+
+select * from BUSER.BVAT_TR_BANK_DESC; --@hiplus_link;
 
 
 select
